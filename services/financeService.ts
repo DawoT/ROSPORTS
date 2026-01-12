@@ -1,4 +1,3 @@
-
 import { BillingType } from '../types';
 
 export const FinanceService = {
@@ -26,5 +25,5 @@ export const FinanceService = {
     if (!cost) return 0;
     const profit = price - cost;
     return (profit / price) * 100;
-  }
+  },
 };

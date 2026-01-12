@@ -1,4 +1,3 @@
-
 import { CashDenomination, CashSession, CashMovement } from '../types';
 
 export const PERU_DENOMINATIONS: CashDenomination[] = [
@@ -17,22 +16,27 @@ export const PERU_DENOMINATIONS: CashDenomination[] = [
 
 export const CashService = {
   calculateTotal: (denominations: CashDenomination[]): number => {
-    return denominations.reduce((acc, d) => acc + (d.value * (d.count || 0)), 0);
+    return denominations.reduce((acc, d) => acc + d.value * (d.count || 0), 0);
   },
 
   /**
    * Calcula el efectivo que DEBERÍA haber basado en apertura, ventas y flujos manuales.
    */
   calculateExpectedCash: (session: CashSession): number => {
-    const netMovements = session.movements.reduce((acc, m) => 
-      m.type === 'income' ? acc + m.amount : acc - m.amount, 0);
+    const netMovements = session.movements.reduce(
+      (acc, m) => (m.type === 'income' ? acc + m.amount : acc - m.amount),
+      0,
+    );
     return session.openingBalance + (session.systemExpected?.cash || 0) + netMovements;
   },
 
   /**
    * Valida si un movimiento es viable (ej: no retirar más de lo que hay en efectivo).
    */
-  validateWithdrawal: (session: CashSession, amount: number): { valid: boolean, error?: string } => {
+  validateWithdrawal: (
+    session: CashSession,
+    amount: number,
+  ): { valid: boolean; error?: string } => {
     const currentEstimated = CashService.calculateExpectedCash(session);
     if (amount > currentEstimated) {
       return { valid: false, error: 'SALDO INSUFICIENTE EN EFECTIVO' };
@@ -46,13 +50,13 @@ export const CashService = {
       node: session.nodeId,
       op: session.userName,
       start: session.startTime,
-      openBal: session.openingBalance
+      openBal: session.openingBalance,
     });
     let hash = 0;
     for (let i = 0; i < data.length; i++) {
-      hash = ((hash << 5) - hash) + data.charCodeAt(i);
+      hash = (hash << 5) - hash + data.charCodeAt(i);
       hash |= 0;
     }
     return 'CERT-' + Math.abs(hash).toString(16).toUpperCase().padStart(8, '0');
-  }
+  },
 };

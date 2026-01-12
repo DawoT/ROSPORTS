@@ -1,4 +1,3 @@
-
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import ProductCard from './ProductCard';
@@ -14,7 +13,7 @@ const mockProduct: Product = {
   id: 'test-1',
   name: 'Velocity Test Pro',
   brand: 'ROSPORTS',
-  price: 499.00,
+  price: 499.0,
   image: 'test.jpg',
   description: 'Test shoe',
   category: 'Running',
@@ -24,41 +23,41 @@ const mockProduct: Product = {
   tractionScore: 9,
   cushioningLevel: 'Plush',
   variants: [
-    { 
-      sku: 'TEST-SKU-1', 
-      barcode: 'BC-001', 
-      size: 38, 
-      color: '#FF0000', 
-      colorName: 'Test Red', 
+    {
+      sku: 'TEST-SKU-1',
+      barcode: 'BC-001',
+      size: 38,
+      color: '#FF0000',
+      colorName: 'Test Red',
       // Fix: Added missing images property
       images: [],
-      inventoryLevels: [{ nodeId: 'N-01', quantity: 10, minStock: 2, reserved: 0 }], 
-      status: 'active' 
+      inventoryLevels: [{ nodeId: 'N-01', quantity: 10, minStock: 2, reserved: 0 }],
+      status: 'active',
     },
-    { 
-      sku: 'TEST-SKU-2', 
-      barcode: 'BC-002', 
-      size: 39, 
-      color: '#FF0000', 
-      colorName: 'Test Red', 
+    {
+      sku: 'TEST-SKU-2',
+      barcode: 'BC-002',
+      size: 39,
+      color: '#FF0000',
+      colorName: 'Test Red',
       // Fix: Added missing images property
       images: [],
-      inventoryLevels: [{ nodeId: 'N-01', quantity: 0, minStock: 2, reserved: 0 }], 
-      status: 'active' 
+      inventoryLevels: [{ nodeId: 'N-01', quantity: 0, minStock: 2, reserved: 0 }],
+      status: 'active',
     },
-    { 
-      sku: 'TEST-SKU-3', 
-      barcode: 'BC-003', 
-      size: 40, 
-      color: '#FF0000', 
-      colorName: 'Test Red', 
+    {
+      sku: 'TEST-SKU-3',
+      barcode: 'BC-003',
+      size: 40,
+      color: '#FF0000',
+      colorName: 'Test Red',
       // Fix: Added missing images property
       images: [],
-      inventoryLevels: [{ nodeId: 'N-01', quantity: 5, minStock: 2, reserved: 0 }], 
-      status: 'active' 
+      inventoryLevels: [{ nodeId: 'N-01', quantity: 5, minStock: 2, reserved: 0 }],
+      status: 'active',
     },
   ],
-  colors: ['#FF0000', '#0000FF']
+  colors: ['#FF0000', '#0000FF'],
 };
 
 describe('ProductCard component: Technical Performance Audit', () => {
@@ -68,16 +67,16 @@ describe('ProductCard component: Technical Performance Audit', () => {
 
   it('debe iniciar en estado PENDING indicando que falta talla y color', () => {
     render(
-      <ProductCard 
-        product={mockProduct} 
-        onAddToCart={mockOnAddToCart} 
-        onViewDetails={mockOnViewDetails} 
-        onQuickView={mockOnQuickView} 
-      />
+      <ProductCard
+        product={mockProduct}
+        onAddToCart={mockOnAddToCart}
+        onViewDetails={mockOnViewDetails}
+        onQuickView={mockOnQuickView}
+      />,
     );
 
     const purchaseButton = screen.getByRole('button', { name: /CONFIGURACIÓN INCOMPLETA/i });
-    
+
     // El motor de auditoría técnica muestra el mensaje en un tooltip al interactuar
     fireEvent.mouseEnter(purchaseButton);
     // Nota: El tooltip se maneja internamente con setShowTooltip en ProductCard
@@ -85,12 +84,12 @@ describe('ProductCard component: Technical Performance Audit', () => {
 
   it('debe actualizar el audit a "PENDING: COLORWAY" cuando solo se selecciona la talla', () => {
     render(
-      <ProductCard 
-        product={mockProduct} 
-        onAddToCart={mockOnAddToCart} 
-        onViewDetails={mockOnViewDetails} 
-        onQuickView={mockOnQuickView} 
-      />
+      <ProductCard
+        product={mockProduct}
+        onAddToCart={mockOnAddToCart}
+        onViewDetails={mockOnViewDetails}
+        onQuickView={mockOnQuickView}
+      />,
     );
 
     const sizeButton = screen.getByText('38');
@@ -102,16 +101,18 @@ describe('ProductCard component: Technical Performance Audit', () => {
 
   it('debe denegar el acceso si se selecciona una talla con stock 0', () => {
     render(
-      <ProductCard 
-        product={mockProduct} 
-        onAddToCart={mockOnAddToCart} 
-        onViewDetails={mockOnViewDetails} 
-        onQuickView={mockOnQuickView} 
-      />
+      <ProductCard
+        product={mockProduct}
+        onAddToCart={mockOnAddToCart}
+        onViewDetails={mockOnViewDetails}
+        onQuickView={mockOnQuickView}
+      />,
     );
 
     // Seleccionar color primero
-    const colorButton = screen.getAllByRole('button').find(b => b.getAttribute('style')?.includes('background-color: rgb(255, 0, 0)'));
+    const colorButton = screen
+      .getAllByRole('button')
+      .find((b) => b.getAttribute('style')?.includes('background-color: rgb(255, 0, 0)'));
     if (colorButton) fireEvent.click(colorButton);
 
     // Seleccionar talla 39 (que tiene stock 0 en el mock)
@@ -124,16 +125,18 @@ describe('ProductCard component: Technical Performance Audit', () => {
 
   it('debe permitir el despliegue (SUCCESS) cuando la configuración es válida y hay stock', async () => {
     render(
-      <ProductCard 
-        product={mockProduct} 
-        onAddToCart={mockOnAddToCart} 
-        onViewDetails={mockOnViewDetails} 
-        onQuickView={mockOnQuickView} 
-      />
+      <ProductCard
+        product={mockProduct}
+        onAddToCart={mockOnAddToCart}
+        onViewDetails={mockOnViewDetails}
+        onQuickView={mockOnQuickView}
+      />,
     );
 
     fireEvent.click(screen.getByText('38'));
-    const colorButton = screen.getAllByRole('button').find(b => b.getAttribute('style')?.includes('background-color: rgb(255, 0, 0)'));
+    const colorButton = screen
+      .getAllByRole('button')
+      .find((b) => b.getAttribute('style')?.includes('background-color: rgb(255, 0, 0)'));
     if (colorButton) fireEvent.click(colorButton);
 
     const purchaseButton = screen.getByRole('button', { name: /CONFIRMAR DESPLIEGUE/i });

@@ -1,4 +1,3 @@
-
 import { CartItem, Customer, Campaign, SaleChannel } from '../types';
 import { MarketingEngine } from './marketingEngine';
 
@@ -15,28 +14,32 @@ export interface PriceSummary {
     loyaltyDiscount: number;
     manualDiscount: number;
     rounding: number;
-  }
+  };
 }
 
 export const PricingEngine = {
   TAX_RATE: 0.18,
 
   calculate: (
-    items: CartItem[], 
-    customer: Customer | null, 
+    items: CartItem[],
+    customer: Customer | null,
     campaigns: Campaign[],
     channel: SaleChannel,
     pointsToRedeem: number = 0,
-    solPerPoint: number = 0.1
+    solPerPoint: number = 0.1,
   ): PriceSummary => {
     // 1. Cálculo Base Bruto
-    const baseAmount = items.reduce((acc, item) => acc + (item.price * item.quantity), 0);
-    
+    const baseAmount = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
     // 2. Evaluación de Campañas Automáticas
-    const { discount: campaignDiscount, appliedCampaigns } = MarketingEngine.evaluateAutomaticCampaigns(items, campaigns, channel);
+    const { discount: campaignDiscount, appliedCampaigns } =
+      MarketingEngine.evaluateAutomaticCampaigns(items, campaigns, channel);
 
     // 3. Descuentos Manuales (Nivel de Item en POS)
-    const manualDiscounts = items.reduce((acc, item) => acc + ((item.manualDiscount || 0) * item.quantity), 0);
+    const manualDiscounts = items.reduce(
+      (acc, item) => acc + (item.manualDiscount || 0) * item.quantity,
+      0,
+    );
 
     // 4. Beneficios CRM (VIP = 5% adicional después de campañas)
     let tierDiscount = 0;
@@ -50,7 +53,7 @@ export const PricingEngine = {
     const actualLoyaltyDiscount = Math.min(loyaltyValue, maxLoyalty);
 
     const totalDiscount = campaignDiscount + tierDiscount + actualLoyaltyDiscount + manualDiscounts;
-    
+
     // 6. Rounding comercial y desgloses
     const rawTotal = Math.max(0, baseAmount - totalDiscount);
     const finalTotal = Math.round(rawTotal * 10) / 10;
@@ -65,14 +68,14 @@ export const PricingEngine = {
       discount: totalDiscount,
       total: finalTotal,
       pointsEarned: Math.floor(finalTotal), // 1 punto por sol neto
-      appliedCampaigns: appliedCampaigns.map(c => c.name),
+      appliedCampaigns: appliedCampaigns.map((c) => c.name),
       breakdown: {
         base: baseAmount,
         campaignDiscount,
         loyaltyDiscount: tierDiscount + actualLoyaltyDiscount,
         manualDiscount: manualDiscounts,
-        rounding: roundingDiff
-      }
+        rounding: roundingDiff,
+      },
     };
-  }
+  },
 };

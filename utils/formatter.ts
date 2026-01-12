@@ -1,10 +1,9 @@
-
 export const TechnicalFormatter = {
   price: (amount: number): string => {
     return new Intl.NumberFormat('es-PE', {
       style: 'currency',
       currency: 'PEN',
-      minimumFractionDigits: 2
+      minimumFractionDigits: 2,
     }).format(amount);
   },
 
@@ -14,7 +13,7 @@ export const TechnicalFormatter = {
       month: 'short',
       year: 'numeric',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     }).format(new Date(dateStr));
   },
 
@@ -24,5 +23,5 @@ export const TechnicalFormatter = {
 
   sku: (sku: string): string => {
     return sku.toUpperCase().replace(/\s+/g, '_');
-  }
+  },
 };

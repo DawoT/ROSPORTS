@@ -1,4 +1,3 @@
-
 export interface Review {
   id: string;
   userId: string;
@@ -61,18 +60,25 @@ export interface Product {
   reviews?: Review[];
   _syncStatus?: 'synced' | 'pending' | 'error';
   _lastUpdated?: string;
-  demandVelocity?: number; 
+  demandVelocity?: number;
 }
 
 export type UserRole = 'admin' | 'customer' | 'sales' | 'finance' | 'logistics' | 'supervisor';
 
-export type Capability = 
-  | 'catalog:read' | 'catalog:write' 
-  | 'inventory:read' | 'inventory:adjust' | 'inventory:rebalance'
-  | 'crm:read' | 'crm:write' 
-  | 'pos:execute' | 'pos:void'
-  | 'audit:read' | 'audit:verify'
-  | 'finance:read' | 'finance:admin'
+export type Capability =
+  | 'catalog:read'
+  | 'catalog:write'
+  | 'inventory:read'
+  | 'inventory:adjust'
+  | 'inventory:rebalance'
+  | 'crm:read'
+  | 'crm:write'
+  | 'pos:execute'
+  | 'pos:void'
+  | 'audit:read'
+  | 'audit:verify'
+  | 'finance:read'
+  | 'finance:admin'
   | 'system:manage'
   | 'system:config'
   | 'ops:monitor'
@@ -113,7 +119,15 @@ export interface User {
   avatar?: string;
   lastLogin?: string;
   createdAt?: string;
-  gear?: { id: string; name: string; kmUsed: number; maxKm: number; purchaseDate: string; image: string; degradationScore: number }[];
+  gear?: {
+    id: string;
+    name: string;
+    kmUsed: number;
+    maxKm: number;
+    purchaseDate: string;
+    image: string;
+    degradationScore: number;
+  }[];
   stats?: { totalKm: string; trainingHours: string; deployments: string };
   athleteTier?: string;
   token?: string;
@@ -206,7 +220,37 @@ export interface StockTransfer {
   receivedBy?: string;
 }
 
-export type ViewState = 'home' | 'shop' | 'dashboard' | 'admin-products' | 'admin-inventory' | 'admin-crm' | 'admin-pos' | 'admin-ledger' | 'auth' | 'checkout' | 'admin-ops' | 'admin-audit' | 'admin-logs' | 'product-telemetry' | 'admin-supply' | 'admin-finance' | 'admin-cash' | 'admin-shipping' | 'admin-rma' | 'admin-vendors' | 'admin-command' | 'admin-marketing' | 'admin-system-health' | 'product-details' | 'athlete-biometrics' | 'admin-inventory-reports' | 'admin-accounting-reports' | 'admin-iam' | 'admin-settings' | 'admin-branches';
+export type ViewState =
+  | 'home'
+  | 'shop'
+  | 'dashboard'
+  | 'admin-products'
+  | 'admin-inventory'
+  | 'admin-crm'
+  | 'admin-pos'
+  | 'admin-ledger'
+  | 'auth'
+  | 'checkout'
+  | 'admin-ops'
+  | 'admin-audit'
+  | 'admin-logs'
+  | 'product-telemetry'
+  | 'admin-supply'
+  | 'admin-finance'
+  | 'admin-cash'
+  | 'admin-shipping'
+  | 'admin-rma'
+  | 'admin-vendors'
+  | 'admin-command'
+  | 'admin-marketing'
+  | 'admin-system-health'
+  | 'product-details'
+  | 'athlete-biometrics'
+  | 'admin-inventory-reports'
+  | 'admin-accounting-reports'
+  | 'admin-iam'
+  | 'admin-settings'
+  | 'admin-branches';
 
 // --- Connectivity & Resiliency ---
 export type NetworkStatus = 'ONLINE' | 'OFFLINE' | 'DEGRADED' | 'MAINTENANCE' | 'CIRCUIT_OPEN';
@@ -231,7 +275,17 @@ export interface NetworkLog {
 
 export interface LiveEvent {
   id: string;
-  type: 'TRANSACTION' | 'SECURITY' | 'INVENTORY' | 'SYSTEM' | 'BIOMETRIC_ALERT' | 'IAM_CHANGE' | 'CONFIG_CHANGE' | 'TRANSFER_ALERT' | 'PAYMENT_ALERT' | 'COURIER_UPDATE';
+  type:
+    | 'TRANSACTION'
+    | 'SECURITY'
+    | 'INVENTORY'
+    | 'SYSTEM'
+    | 'BIOMETRIC_ALERT'
+    | 'IAM_CHANGE'
+    | 'CONFIG_CHANGE'
+    | 'TRANSFER_ALERT'
+    | 'PAYMENT_ALERT'
+    | 'COURIER_UPDATE';
   severity: 'info' | 'warning' | 'critical';
   message: string;
   timestamp: string;
@@ -357,7 +411,15 @@ export type SaleChannel = 'WEB' | 'LOCAL_STORE' | 'SOCIAL_MEDIA' | 'WHATSAPP';
 export type BillingType = 'BOLETA' | 'FACTURA';
 export type PaymentMethod = 'CASH' | 'CREDIT_CARD' | 'DIGITAL_WALLET' | 'BANK_TRANSFER';
 export type WishlistItem = Product;
-export type AppEventType = 'STOCK_LOW' | 'SALE_FINALIZED' | 'MODULE_FAILURE' | 'NETWORK_OUTAGE' | 'DATA_SYNC_SUCCESS' | 'DATA_SYNC_ERROR' | 'BACKEND_PUSH' | 'PAYMENT_ALERT';
+export type AppEventType =
+  | 'STOCK_LOW'
+  | 'SALE_FINALIZED'
+  | 'MODULE_FAILURE'
+  | 'NETWORK_OUTAGE'
+  | 'DATA_SYNC_SUCCESS'
+  | 'DATA_SYNC_ERROR'
+  | 'BACKEND_PUSH'
+  | 'PAYMENT_ALERT';
 
 export interface ElectronicReceiptMetadata {
   hashCPE: string;
@@ -491,7 +553,15 @@ export interface Campaign {
   id: string;
   name: string;
   description: string;
-  type: 'category_discount' | 'fixed_coupon' | 'bogo' | 'flash_sale' | 'percentage' | 'fixed' | 'category' | 'brand';
+  type:
+    | 'category_discount'
+    | 'fixed_coupon'
+    | 'bogo'
+    | 'flash_sale'
+    | 'percentage'
+    | 'fixed'
+    | 'category'
+    | 'brand';
   targetCategory?: string;
   targetBrand?: string;
   discountValue: number;

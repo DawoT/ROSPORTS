@@ -1,4 +1,3 @@
-
 import { Customer, PointMovement, SystemConfig } from '../types';
 
 /**
@@ -6,7 +5,6 @@ import { Customer, PointMovement, SystemConfig } from '../types';
  * Gestiona el ciclo de vida de los puntos de fidelidad.
  */
 export const LoyaltyService = {
-  
   /**
    * Calcula puntos ganados ignorando fletes.
    */
@@ -25,10 +23,10 @@ export const LoyaltyService = {
    * Genera una entrada en el Ledger de Puntos.
    */
   createMovement: (
-    type: PointMovement['type'], 
-    points: number, 
-    ref: string, 
-    currentBalance: number
+    type: PointMovement['type'],
+    points: number,
+    ref: string,
+    currentBalance: number,
   ): PointMovement => {
     const delta = type === 'redeemed' || type === 'expired' ? -points : points;
     return {
@@ -38,7 +36,7 @@ export const LoyaltyService = {
       points: Math.abs(points),
       reference: ref,
       balanceBefore: currentBalance,
-      balanceAfter: currentBalance + delta
+      balanceAfter: currentBalance + delta,
     };
   },
 
@@ -48,9 +46,9 @@ export const LoyaltyService = {
   checkExpirations: (customer: Customer, config: SystemConfig): PointMovement[] => {
     const expirationLimit = new Date();
     expirationLimit.setMonth(expirationLimit.getMonth() - config.marketing.pointsExpirationMonths);
-    
+
     // En un sistema real, buscaríamos movimientos "earned" más viejos que el límite
     // que no hayan sido "consumidos" por un "redeemed".
     return [];
-  }
+  },
 };

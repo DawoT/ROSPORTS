@@ -1,4 +1,3 @@
-
 import { SyncJob, DatabaseHealth } from '../types';
 import { API } from './apiClient';
 import { EventBus } from './eventBusService';
@@ -10,7 +9,7 @@ class DataOrchestrator {
     localChanges: 0,
     lastGlobalSync: new Date().toISOString(),
     integrityScore: 100,
-    status: 'SYNCHRONIZED'
+    status: 'SYNCHRONIZED',
   };
 
   private constructor() {
@@ -30,7 +29,7 @@ class DataOrchestrator {
       ...job,
       id: `JOB-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
       timestamp: new Date().toISOString(),
-      retries: 0
+      retries: 0,
     };
     this.syncQueue.push(newJob);
     this.health.localChanges = this.syncQueue.length;
@@ -45,7 +44,7 @@ class DataOrchestrator {
     const job = this.syncQueue[0];
     try {
       const response = await API.post(`/sync/${job.entity}/${job.action}`, job.payload);
-      
+
       if (response.status === 200) {
         this.syncQueue.shift();
         this.health.localChanges = this.syncQueue.length;
@@ -77,7 +76,7 @@ class DataOrchestrator {
    * Forzar una descarga masiva de datos (Full Rehydration)
    */
   public async forceRehydrate() {
-    console.debug("[DATA_ORCHESTRATOR] Initializing Node Rehydration...");
+    console.debug('[DATA_ORCHESTRATOR] Initializing Node Rehydration...');
     const products = await API.get('/catalog/full');
     const customers = await API.get('/crm/full');
     return { products: products.data, customers: customers.data };

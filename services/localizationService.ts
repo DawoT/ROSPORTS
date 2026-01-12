@@ -1,28 +1,27 @@
-
 const DICTIONARY = {
   es: {
     system: {
       syncing: 'Actualizando catálogo de temporada...',
       secure_gateway: 'CONEXIÓN SEGURA // ROSPORTS',
       terminal_locked: 'SESIÓN PROTEGIDA',
-      integrity_verified: 'PRODUCTO 100% ORIGINAL'
+      integrity_verified: 'PRODUCTO 100% ORIGINAL',
     },
     inventory: {
       control_hub: 'Centro de Logística',
       distributed_stock: 'Stock en Tiendas',
       low_stock_alert: '¡Últimos pares disponibles!',
-      replenish_action: 'Solicitar reingreso de talla'
+      replenish_action: 'Solicitar reingreso de talla',
     },
     pos: {
       terminal_title: 'Caja Rosports',
       finalize_sale: 'Proceder al pago',
-      issue_receipt: 'Emitir Comprobante'
+      issue_receipt: 'Emitir Comprobante',
     },
     auth: {
       access_denied: 'Acceso Restringido: Inicia sesión para continuar',
-      request_access: 'Crear mi cuenta Exclusive'
-    }
-  }
+      request_access: 'Crear mi cuenta Exclusive',
+    },
+  },
 };
 
 export const LocalizationService = {
@@ -34,5 +33,5 @@ export const LocalizationService = {
       else return path;
     }
     return result;
-  }
+  },
 };

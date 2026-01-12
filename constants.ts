@@ -1,4 +1,3 @@
-
 import { Product } from './types';
 
 export const MOCK_PRODUCTS: Product[] = [
@@ -6,10 +5,12 @@ export const MOCK_PRODUCTS: Product[] = [
     id: '1',
     name: 'Velocity X-1 Pro',
     brand: 'NIKE ELITE',
-    price: 489.90,
-    originalPrice: 699.00,
-    image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800',
-    description: 'Ingeniería de precisión con malla Hybrid-Mesh para una transpirabilidad superior. El calzado definitivo para el atleta urbano moderno, ahora en liquidación de temporada.',
+    price: 489.9,
+    originalPrice: 699.0,
+    image:
+      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Ingeniería de precisión con malla Hybrid-Mesh para una transpirabilidad superior. El calzado definitivo para el atleta urbano moderno, ahora en liquidación de temporada.',
     category: 'Running',
     material: 'Hybrid Mesh Elite',
     weight: '190',
@@ -21,24 +22,38 @@ export const MOCK_PRODUCTS: Product[] = [
     colors: ['#ef4444', '#3b82f6', '#050505'],
     tags: ['LIQUIDACIÓN', 'MÁS VENDIDO', 'ELITE'],
     variants: [
-      { 
-        sku: 'VX1-RED-38', barcode: 'BC001', size: 38, color: '#ef4444', colorName: 'Crimson', images: [],
-        inventoryLevels: [{ nodeId: 'N-01', quantity: 12, minStock: 2, reserved: 0 }], status: 'active' 
+      {
+        sku: 'VX1-RED-38',
+        barcode: 'BC001',
+        size: 38,
+        color: '#ef4444',
+        colorName: 'Crimson',
+        images: [],
+        inventoryLevels: [{ nodeId: 'N-01', quantity: 12, minStock: 2, reserved: 0 }],
+        status: 'active',
       },
-      { 
-        sku: 'VX1-BLU-40', barcode: 'BC002', size: 40, color: '#3b82f6', colorName: 'Azure', images: [],
-        inventoryLevels: [{ nodeId: 'N-01', quantity: 8, minStock: 2, reserved: 0 }], status: 'active' 
-      }
-    ]
+      {
+        sku: 'VX1-BLU-40',
+        barcode: 'BC002',
+        size: 40,
+        color: '#3b82f6',
+        colorName: 'Azure',
+        images: [],
+        inventoryLevels: [{ nodeId: 'N-01', quantity: 8, minStock: 2, reserved: 0 }],
+        status: 'active',
+      },
+    ],
   },
   {
     id: '2',
     name: 'Cyber Classic Mid',
     brand: 'ADIDAS NEO',
-    price: 329.00,
-    originalPrice: 480.00,
-    image: 'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=800',
-    description: 'Estilo clásico reinventado con materiales sintéticos de alta durabilidad. El balance perfecto entre moda y performance en una oferta por tiempo limitado.',
+    price: 329.0,
+    originalPrice: 480.0,
+    image:
+      'https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Estilo clásico reinventado con materiales sintéticos de alta durabilidad. El balance perfecto entre moda y performance en una oferta por tiempo limitado.',
     category: 'Lifestyle',
     material: 'Synth-Leather Pro',
     weight: '240',
@@ -50,20 +65,28 @@ export const MOCK_PRODUCTS: Product[] = [
     colors: ['#050505', '#f8fafc'],
     tags: ['VENTA FLASH', 'TRENDING'],
     variants: [
-      { 
-        sku: 'CCM-BLK-41', barcode: 'BC101', size: 41, color: '#050505', colorName: 'Stealth', images: [],
-        inventoryLevels: [{ nodeId: 'N-01', quantity: 20, minStock: 5, reserved: 0 }], status: 'active' 
-      }
-    ]
+      {
+        sku: 'CCM-BLK-41',
+        barcode: 'BC101',
+        size: 41,
+        color: '#050505',
+        colorName: 'Stealth',
+        images: [],
+        inventoryLevels: [{ nodeId: 'N-01', quantity: 20, minStock: 5, reserved: 0 }],
+        status: 'active',
+      },
+    ],
   },
   {
     id: '3',
     name: 'Gravity Pro Runner',
     brand: 'ROSPORTS MASTER',
-    price: 549.00,
-    originalPrice: 720.00,
-    image: 'https://images.unsplash.com/photo-1543508282-6319a3e4621f?auto=format&fit=crop&q=80&w=800',
-    description: 'Diseño propio de la casa ROSPORTS. Máximo retorno de energía en cada paso con suela de carbono integrada. El ícono de nuestra boutique con precio exclusivo.',
+    price: 549.0,
+    originalPrice: 720.0,
+    image:
+      'https://images.unsplash.com/photo-1543508282-6319a3e4621f?auto=format&fit=crop&q=80&w=800',
+    description:
+      'Diseño propio de la casa ROSPORTS. Máximo retorno de energía en cada paso con suela de carbono integrada. El ícono de nuestra boutique con precio exclusivo.',
     category: 'Running',
     material: 'Full Carbon Knit',
     weight: '165',
@@ -75,12 +98,18 @@ export const MOCK_PRODUCTS: Product[] = [
     colors: ['#3b82f6', '#06b6d4'],
     tags: ['PRECIO EXCLUSIVE', 'TECH'],
     variants: [
-      { 
-        sku: 'GPR-BLU-42', barcode: 'BC201', size: 42, color: '#3b82f6', colorName: 'Electric', images: [],
-        inventoryLevels: [{ nodeId: 'N-01', quantity: 5, minStock: 1, reserved: 0 }], status: 'active' 
-      }
-    ]
-  }
+      {
+        sku: 'GPR-BLU-42',
+        barcode: 'BC201',
+        size: 42,
+        color: '#3b82f6',
+        colorName: 'Electric',
+        images: [],
+        inventoryLevels: [{ nodeId: 'N-01', quantity: 5, minStock: 1, reserved: 0 }],
+        status: 'active',
+      },
+    ],
+  },
 ];
 
 export const SIZES = [37, 38, 39, 40, 41, 42, 43, 44, 45];
