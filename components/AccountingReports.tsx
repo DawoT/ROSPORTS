@@ -3,16 +3,7 @@ import {
   FileText,
   Landmark,
   Users,
-  TrendingUp,
   Download,
-  Search,
-  Filter,
-  Calendar,
-  Zap,
-  DollarSign,
-  PieChart,
-  ArrowUpRight,
-  CheckCircle,
   ShieldCheck,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
@@ -70,9 +61,9 @@ interface CommissionEntry {
 }
 
 const AccountingReports: React.FC = () => {
-  const { customers, auditLogs, activeCashSession } = useGlobal();
+  const { customers } = useGlobal();
   const [activeTab, setActiveTab] = useState<AccountTab>('sales-book');
-  const [dateRange, setDateRange] = useState('MAY_2025');
+  const [dateRange] = useState('MAY_2025');
 
   // Integración de todas las órdenes de los clientes para el Libro de Ventas
   // Fix: Explicitly typed salesBookData to help with EnterpriseDataTable generic inference

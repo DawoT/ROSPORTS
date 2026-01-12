@@ -1,5 +1,5 @@
-import React, { useState, useMemo, useRef } from 'react';
-import { Plus, Search, Database, Trash2, Edit3, X, FileSpreadsheet, Activity } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { Plus, Search, Database, Trash2, Edit3, X, Activity } from 'lucide-react';
 import { Product, ProductVariant } from '../types';
 
 interface AdminProductManagerProps {
@@ -18,9 +18,8 @@ const AdminProductManager: React.FC<AdminProductManagerProps> = ({
   const [searchQuery, setSearchQuery] = useState('');
   const [isEditorOpen, setIsEditorOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage] = useState(1);
   const itemsPerPage = 8;
-  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const filteredProducts = useMemo(() => {
     return centralProducts.filter((p) => {
@@ -190,7 +189,7 @@ const ProductEditor: React.FC<{
   onSave: (p: Product) => void;
 }> = ({ product, onClose, onSave }) => {
   const [activeTab, setActiveTab] = useState<'info' | 'variants' | 'media'>('info');
-  const [formData, setFormData] = useState<Product>(
+  const [formData, setFormData] = useState<Product>(() =>
     product
       ? JSON.parse(JSON.stringify(product))
       : {
@@ -210,7 +209,11 @@ const ProductEditor: React.FC<{
         },
   );
 
-  const updateVariant = (index: number, field: keyof ProductVariant, value: any) => {
+  const updateVariant = (
+    index: number,
+    field: keyof ProductVariant,
+    value: ProductVariant[keyof ProductVariant],
+  ) => {
     setFormData((prev) => {
       const newVariants = [...(prev.variants || [])];
       newVariants[index] = { ...newVariants[index], [field]: value };
@@ -241,7 +244,7 @@ const ProductEditor: React.FC<{
       <div
         className='absolute inset-0 bg-main/90 backdrop-blur-xl animate-in fade-in'
         onClick={onClose}
-      />
+       />
       <div className='relative w-full max-w-6xl h-[85vh] glass-card rounded-[3rem] border-content-muted/10 flex flex-col overflow-hidden animate-in zoom-in-95 bg-surface shadow-2xl'>
         <div className='p-8 border-b border-content-muted/10 flex items-center justify-between bg-content-muted/[0.02]'>
           <h3 className='text-2xl font-space font-bold text-content-primary uppercase tracking-tight'>
@@ -256,10 +259,10 @@ const ProductEditor: React.FC<{
         </div>
 
         <div className='px-8 py-4 border-b border-content-muted/10 flex gap-8 bg-surface/50'>
-          {['info', 'variants', 'media'].map((t) => (
+          {(['info', 'variants', 'media'] as const).map((t) => (
             <button
               key={t}
-              onClick={() => setActiveTab(t as any)}
+              onClick={() => setActiveTab(t)}
               className={`text-[10px] font-black uppercase tracking-[0.3em] pb-2 transition-all min-h-[40px] ${activeTab === t ? 'text-blue-600 border-b-2 border-blue-600' : 'text-content-muted hover:text-content-primary'}`}
             >
               {t}
@@ -343,7 +346,7 @@ const ProductEditor: React.FC<{
                       <th className='px-8 py-4 text-[9px] font-black text-content-muted uppercase'>
                         SKU T&eacute;cnico
                       </th>
-                      <th className='px-8 py-4 text-right'></th>
+                      <th className='px-8 py-4 text-right' />
                     </tr>
                   </thead>
                   <tbody className='divide-y divide-content-muted/10'>

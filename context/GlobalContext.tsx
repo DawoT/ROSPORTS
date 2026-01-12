@@ -29,7 +29,6 @@ import { MOCK_PRODUCTS } from '../constants';
 import { SecurityService } from '../services/securityService';
 import { InventoryService, StockTransition } from '../services/inventoryService';
 import { AuthService } from '../services/authService';
-import { EventBus } from '../services/eventBusService';
 import { CommandBus } from '../services/commandBusService';
 import { AIAssistantService } from '../services/aiAssistantService';
 import { API } from '../services/apiClient';
@@ -40,6 +39,17 @@ interface Notification {
   message: string;
   type: 'success' | 'info' | 'error' | 'warning';
   duration?: number;
+}
+
+interface FinalizeOrderParams {
+  total?: number;
+  discount?: number;
+  channel?: SaleChannel;
+  billing?: BillingData;
+  payments?: PaymentItem[];
+  pointsEarned?: number;
+  pointsRedeemed?: number;
+  selectedCustomerId?: string;
 }
 
 interface GlobalContextType {
@@ -91,7 +101,7 @@ interface GlobalContextType {
     targetNodeId?: string,
   ) => void;
   addAuditLog: (action: string, entity: string, entityId: string, details: string) => void;
-  finalizeOrder: (params: any) => void;
+  finalizeOrder: (params: FinalizeOrderParams) => void;
   currentView: ViewState;
   setView: (view: ViewState) => void;
   selectedProduct: Product | null;
@@ -112,7 +122,7 @@ const LocalStorageRepo = {
       return fallback;
     }
   },
-  save: (key: string, val: any) => {
+  save: (key: string, val: unknown) => {
     try {
       localStorage.setItem(`rosports-v21-${key}`, JSON.stringify(val));
     } catch (e) {
@@ -284,6 +294,15 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     },
   ];
 
+  const addNotification = useCallback(
+    (message: string, type: 'success' | 'info' | 'error' | 'warning' = 'success', duration = 4000) => {
+      const id = Date.now();
+      setNotifications((prev) => [...prev, { id, message, type, duration }]);
+      setTimeout(() => setNotifications((p) => p.filter((n) => n.id !== id)), duration);
+    },
+    [],
+  );
+
   useEffect(() => {
     const check = setInterval(() => {
       if (user && !AuthService.isSessionValid(user)) {
@@ -294,7 +313,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       setDbHealth({ ...SyncManager.getHealth() });
     }, 5000);
     return () => clearInterval(check);
-  }, [user]);
+  }, [user, addNotification]);
 
   const setUser = (u: User | null) => {
     if (u) {
@@ -305,12 +324,6 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       setUserState(null);
     }
   };
-
-  const addNotification = useCallback((message: string, type: any = 'success', duration = 4000) => {
-    const id = Date.now();
-    setNotifications((prev) => [...prev, { id, message, type, duration }]);
-    setTimeout(() => setNotifications((p) => p.filter((n) => n.id !== id)), duration);
-  }, []);
 
   const addAuditLog = useCallback(
     (action: string, entity: string, entityId: string, details: string) => {
@@ -421,7 +434,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   };
 
   const finalizeOrder = useCallback(
-    async (params: any) => {
+    async (params: FinalizeOrderParams) => {
       if (cartItems.length === 0) return;
       const orderId = `RS-${Date.now()}`;
 
@@ -501,6 +514,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     LocalStorageRepo.save('cart', cartItems);
     LocalStorageRepo.save('wishlist', wishlistItems);
     LocalStorageRepo.save('current-view', currentView);
+    LocalStorageRepo.save('movements', movements);
   }, [
     products,
     customers,
@@ -511,6 +525,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     cartItems,
     wishlistItems,
     currentView,
+    movements,
   ]);
 
   return (
@@ -581,7 +596,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
                 selectedVariantSku: v.sku,
                 reservationExpiresAt: Date.now() + 1200000,
                 reservationNodeId: 'N-02',
-              } as any,
+              } as CartItem,
             ];
           });
           addNotification(`${p.name} añadido a la bolsa`, 'success');

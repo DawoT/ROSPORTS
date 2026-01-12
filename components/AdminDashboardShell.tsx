@@ -12,9 +12,6 @@ import {
   ChevronRight,
   LayoutDashboard,
   Settings,
-  LogOut,
-  Bell,
-  Search,
   Globe,
   Menu,
   X,
@@ -32,7 +29,6 @@ import { AuthService } from '../services/authService';
 import { EventBus } from '../services/eventBusService';
 
 const AdminDashboardShell: React.FC<any> = ({ children, currentView, setView, user }) => {
-  const { setUser } = useGlobal();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [liveEvents, setLiveEvents] = useState<LiveEvent[]>([]);
   const [isFeedOpen, setIsFeedOpen] = useState(false);

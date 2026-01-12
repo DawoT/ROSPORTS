@@ -1,0 +1,486 @@
+
+> rosports-|-zapatillas-exclusivas-&-moda-urbana@0.0.0 lint
+> eslint . --report-unused-disable-directives --max-warnings 0
+
+
+/app/App.tsx
+   3:10  error  'ViewState' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  64:60  error  Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  79:16  error  Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+
+/app/components/AccountingReports.tsx
+   11:10  error  'TechnicalFormatter' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   13:10  error  'OrderHistoryItem' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  191:51  error  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+
+/app/components/AdminDashboardShell.tsx
+  11:3   error  'Lock' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  26:21  error  'User' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  27:10  error  'useGlobal' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  31:37  error  Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+  61:58  error  Unexpected any. Specify a different type                                     @typescript-eslint/no-explicit-any
+
+/app/components/AthleteBiometricsHub.tsx
+   3:3  error  'Activity' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   4:3  error  'Ruler' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   6:3  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   7:3  error  'TrendingUp' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  11:3  error  'Info' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  12:3  error  'RefreshCw' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+/app/components/AuditLogViewer.tsx
+   5:3  error  'Filter' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  10:3  error  'FileText' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/AuthView.tsx
+   1:27  error  'useMemo' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+   3:3   error  'ShieldCheck' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   9:3   error  'RefreshCw' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  13:3   error  'Shield' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+
+/app/components/BarcodeScannerHUD.tsx
+  23:16  error  'err' is defined but never used. Allowed unused caught errors must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/BoutiqueGallery.tsx
+  2:10  error  'Maximize2' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  2:21  error  'ChevronLeft' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  2:34  error  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:48  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  2:53  error  'Target' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+/app/components/BranchManager.tsx
+    6:3   error  'Phone' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   11:3   error  'Trash2' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   12:3   error  'X' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   13:3   error  'Search' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   14:3   error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   15:3   error  'Globe' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   17:3   error  'Activity' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   21:10  error  'EnterpriseInput' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+   21:43  error  'EnterpriseButton' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  204:77  error  Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+
+/app/components/CRMManager.tsx
+    6:11  error  'UserIcon' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   11:3   error  'CreditCard' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   12:3   error  'Award' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   13:3   error  'ShoppingBag' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   14:3   error  'MapPin' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   16:3   error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   17:3   error  'Database' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   18:3   error  'Info' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+   20:3   error  'Globe' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   21:3   error  'Instagram' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   22:3   error  'MessageCircle' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   23:3   error  'Store' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+   24:3   error  'Zap' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   28:20  error  'DocType' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+   28:46  error  'OrderHistoryItem' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   28:64  error  'SaleChannel' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+  163:36  error  'addNotification' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  233:54  error  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+  400:14  error  'e' is defined but never used. Allowed unused caught errors must match /^_/u                @typescript-eslint/no-unused-vars
+  435:90  error  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+
+/app/components/CashSessionManager.tsx
+   20:55  error  'PaymentItem' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   68:33  error  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+  681:72  error  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+  711:62  error  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+
+/app/components/CheckoutView.tsx
+    5:3   error  'Truck' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   19:10  error  'Customer' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   19:46  error  'PaymentItem' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   47:37  error  'customers' is assigned a value but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   49:10  error  'step' is assigned a value but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   49:16  error  'setStep' is assigned a value but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   54:10  error  'searchDni' is assigned a value but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   54:21  error  'setSearchDni' is assigned a value but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   85:26  error  'setPointsToRedeem' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  336:61  error  Unexpected any. Specify a different type                                                      @typescript-eslint/no-explicit-any
+
+/app/components/CommandCenter.tsx
+   4:3   error  'Shield' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   5:3   error  'Terminal' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   6:3   error  'Zap' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   9:3   error  'Server' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  10:3   error  'Users' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+  11:3   error  'ArrowUpRight' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  12:3   error  'ArrowDownRight' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  13:3   error  'Clock' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+  14:3   error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  15:3   error  'AlertTriangle' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  16:3   error  'Fingerprint' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  17:3   error  'RefreshCw' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  18:3   error  'TrendingUp' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  27:32  error  'movements' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ComparisonHub.tsx
+  9:3  error  'ShieldCheck' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ComparisonSidebar.tsx
+  2:44  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/FilterSidebar.tsx
+   5:3   error  'ChevronDown' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  10:3   error  'Palette' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  11:3   error  'Globe' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  30:3   error  'brands' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+  33:29  error  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+  33:42  error  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+
+/app/components/FinancialDashboard.tsx
+   8:3  error  'Target' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  10:3  error  'FileText' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  12:3  error  'Scale' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+
+/app/components/GlobalSearch.tsx
+  5:3  error  'Package' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  7:3  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  8:3  error  'Target' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  9:3  error  'Binary' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+/app/components/Hero.tsx
+  12:10  error  'useGlobal' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/IdentityGate.tsx
+  4:10  error  'Lock' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  4:42  error  'EyeOff' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  4:50  error  'ShieldCheck' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/InfrastructureTopologyMap.tsx
+  3:10  error  'Activity' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+  6:11  error  'inventoryNodes' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/InventoryConciliation.tsx
+   4:3   error  'Search' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   5:3   error  'Filter' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+  10:3   error  'Package' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+  11:3   error  'ArrowRight' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+  18:24  error  'setSelectedNode' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  60:29  error  Unexpected any. Specify a different type                                                    @typescript-eslint/no-explicit-any
+
+/app/components/InventoryControlCenter.tsx
+   15:10  error  'InventoryNode' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+   15:25  error  'StockMovement' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+   15:49  error  'ProductVariant' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   19:40  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  146:51  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  159:30  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  170:34  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  176:34  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  193:34  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  202:34  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  213:34  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  418:31  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  453:30  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  469:30  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+
+/app/components/InventoryReports.tsx
+    3:3   error  'BarChart3' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+    8:3   error  'Search' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+    9:3   error  'Filter' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   11:3   error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+   14:3   error  'Calendar' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   19:10  error  'TechnicalFormatter' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  123:51  error  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  134:32  error  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  175:32  error  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+  223:36  error  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+
+/app/components/Layout.tsx
+  14:3  error  'Globe' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/LiveSupportAssistant.tsx
+   1:27  error  'useEffect' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+   3:23  error  'MessageSquare' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   3:49  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+   3:54  error  'X' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+   3:57  error  'ShieldCheck' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  14:29  error  Unexpected any. Specify a different type                                         @typescript-eslint/no-explicit-any
+  76:14  error  'e' is defined but never used. Allowed unused caught errors must match /^_/u     @typescript-eslint/no-unused-vars
+
+/app/components/MarketingHub.tsx
+   14:20  error  'SaleChannel' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  305:77  error  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+
+/app/components/Navbar.tsx
+  25:9  error  'currentView' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/OperationalDashboard.tsx
+   1:17  error  'useMemo' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+   8:3   error  'Activity' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  17:11  error  'user' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/OrderHistoryDetails.tsx
+   6:3   error  'Truck' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   8:3   error  'Clock' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   9:3   error  'MapPin' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  13:3   error  'Globe' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  16:3   error  'History' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  19:10  error  'FiscalService' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/OrderLedger.tsx
+    5:3   error  'Filter' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+    6:3   error  'ArrowUpRight' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+   10:3   error  'Instagram' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+   11:3   error  'MessageCircle' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   12:3   error  'TrendingUp' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   13:3   error  'Calendar' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   14:3   error  'Hash' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+   15:3   error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   16:3   error  'AlertCircle' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   19:3   error  'ShieldCheck' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   20:3   error  'Printer' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+   21:3   error  'Mail' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  109:53  error  Unexpected any. Specify a different type                                         @typescript-eslint/no-explicit-any
+
+/app/components/OrderVoidModal.tsx
+  2:10  error  'X' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  2:13  error  'AlertTriangle' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:41  error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+/app/components/POSInterface.tsx
+   17:3   error  'SaleChannel' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   18:3   error  'BillingType' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  277:40  error  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+  325:50  error  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+
+/app/components/PerformanceAnalytics.tsx
+   3:3  error  'TrendingUp' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+   4:3  error  'BarChart3' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+   9:3  error  'ArrowDownRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  12:3  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  13:3  error  'Cpu' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  16:3  error  'RefreshCw' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  18:3  error  'Wallet' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+
+/app/components/PremiumFeatures.tsx
+  2:51  error  'ShieldCheck' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ProductCard.test.tsx
+   1:26  error  'fireEvent' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+   1:37  error  'act' is defined but never used. Allowed unused vars must match /^_/u                            @typescript-eslint/no-unused-vars
+  10:7   error  'mockOnToggleWishlist' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ProductCard.tsx
+  2:43  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  2:48  error  'Sparkles' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ProductDetailsView.tsx
+   3:3   error  'ArrowLeft' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   8:3   error  'Package' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+   9:3   error  'AlertCircle' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  15:3   error  'Info' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  34:75  error  'onBack' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+
+/app/components/ProductTelemetryDeepDive.tsx
+   3:3  error  'BarChart3' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   4:3  error  'TrendingUp' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   7:3  error  'ArrowUpRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  10:3  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  11:3  error  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  13:3  error  'ShoppingBag' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  14:3  error  'PieChart' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+
+/app/components/PromotionalSlider.tsx
+  2:10  error  'ShoppingCart' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:51  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  2:56  error  'Target' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+/app/components/QuickViewModal.tsx
+  1:27  error  'useEffect' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:40  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+/app/components/ReceiptPreview.tsx
+   4:3  error  'Download' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   5:3  error  'Share2' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+  32:5  error  Unexpected console statement. Only these console methods are allowed: warn, error, info  no-console
+
+/app/components/ReturnsManager.tsx
+   3:3   error  'History' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+   5:3   error  'ShieldAlert' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   7:3   error  'Search' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   8:3   error  'Filter' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+  10:3   error  'X' is defined but never used. Allowed unused vars must match /^_/u                         @typescript-eslint/no-unused-vars
+  11:3   error  'MessageSquare' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  13:3   error  'HardDrive' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+  14:3   error  'ClipboardList' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+  15:3   error  'PenTool' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+  23:26  error  'EnterpriseButton' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+  27:24  error  'setFilterStatus' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  28:23  error  'setSearchQuery' is assigned a value but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+/app/components/ReviewSystem.tsx
+  2:16  error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:29  error  'TrendingUp' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+/app/components/SecurityAuditTrail.tsx
+  1:27  error  'useMemo' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/SettingsManager.tsx
+   17:45  error  'TechnicalBadge' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   86:51  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  165:59  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+  233:59  error  Unexpected any. Specify a different type                                          @typescript-eslint/no-explicit-any
+
+/app/components/ShippingManifestManager.tsx
+   4:3   error  'Package' is defined but never used. Allowed unused vars must match /^_/u                @typescript-eslint/no-unused-vars
+   5:3   error  'MapPin' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   6:3   error  'Search' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   7:3   error  'Filter' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+   9:3   error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  19:21  error  'setManifests' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ShopBreadcrumbs.tsx
+  2:10  error  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ShopView.tsx
+    9:3   error  'Activity' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   29:58  error  Unexpected any. Specify a different type                                    @typescript-eslint/no-explicit-any
+   51:35  error  Unexpected any. Specify a different type                                    @typescript-eslint/no-explicit-any
+  116:64  error  Unexpected any. Specify a different type                                    @typescript-eslint/no-explicit-any
+
+/app/components/StoreLocator.tsx
+  2:10  error  'MapPin' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  2:18  error  'Clock' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  2:25  error  'Navigation' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:44  error  'Activity' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+/app/components/SupplyChainManager.tsx
+   1:27  error  'useMemo' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   3:3   error  'Truck' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   4:3   error  'Package' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   5:3   error  'ArrowRight' is defined but never used. Allowed unused vars must match /^_/u          @typescript-eslint/no-unused-vars
+   6:3   error  'Clock' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   9:3   error  'Filter' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  10:3   error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  11:3   error  'AlertCircle' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  12:3   error  'FileText' is defined but never used. Allowed unused vars must match /^_/u            @typescript-eslint/no-unused-vars
+  16:3   error  'Zap' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+  22:18  error  'setOrders' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/SystemHealthMonitor.tsx
+   3:3   error  'Activity' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+   5:3   error  'Zap' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+   7:3   error  'AlertTriangle' is defined but never used. Allowed unused vars must match /^_/u             @typescript-eslint/no-unused-vars
+   8:3   error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+   9:3   error  'RefreshCw' is defined but never used. Allowed unused vars must match /^_/u                 @typescript-eslint/no-unused-vars
+  10:3   error  'Cpu' is defined but never used. Allowed unused vars must match /^_/u                       @typescript-eslint/no-unused-vars
+  11:3   error  'Wifi' is defined but never used. Allowed unused vars must match /^_/u                      @typescript-eslint/no-unused-vars
+  12:3   error  'Database' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+  24:10  error  'isRefreshing' is assigned a value but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  24:24  error  'setIsRefreshing' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/TechnicalErrorFallback.tsx
+  9:52  error  'error' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/TechnicalGallery.tsx
+  2:21  error  'ChevronLeft' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  2:34  error  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:48  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+
+/app/components/UserDashboard.tsx
+    4:3   error  'Settings' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+    7:3   error  'CreditCard' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+    8:3   error  'ShieldCheck' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   19:25  error  'PointMovement' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   27:22  error  Unexpected any. Specify a different type                                         @typescript-eslint/no-explicit-any
+  165:68  error  Unexpected any. Specify a different type                                         @typescript-eslint/no-explicit-any
+
+/app/components/UserManager.tsx
+    1:27  error  'useMemo' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+   15:16  error  'UserRole' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   15:26  error  'Capability' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   81:47  error  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  142:51  error  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  438:77  error  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  473:78  error  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+
+/app/components/VendorPortal.tsx
+   6:3   error  'Filter' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+   8:3   error  'ExternalLink' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  11:3   error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u               @typescript-eslint/no-unused-vars
+  12:3   error  'Truck' is defined but never used. Allowed unused vars must match /^_/u                     @typescript-eslint/no-unused-vars
+  13:3   error  'Package' is defined but never used. Allowed unused vars must match /^_/u                   @typescript-eslint/no-unused-vars
+  14:3   error  'FileText' is defined but never used. Allowed unused vars must match /^_/u                  @typescript-eslint/no-unused-vars
+  19:10  error  'Vendor' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+  22:20  error  'addAuditLog' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  22:33  error  'addNotification' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/WishlistSidebar.tsx
+  2:42  error  'ArrowRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:54  error  'Sparkles' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+/app/context/GlobalContext.tsx
+  200:21  error  'setMovements' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/aiAssistantService.ts
+  51:14  error  'e' is defined but never used. Allowed unused caught errors must match /^_/u  @typescript-eslint/no-unused-vars
+  70:14  error  'e' is defined but never used. Allowed unused caught errors must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/apiClient.ts
+   22:5   error  'body' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+   22:12  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+   62:19  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  118:48  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+
+/app/services/businessLogicEngine.ts
+  39:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/services/cashService.ts
+  1:41  error  'CashMovement' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/commandBusService.ts
+  37:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/services/dataOrchestrator.ts
+  59:14  error  'err' is defined but never used. Allowed unused caught errors must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/eventBusService.ts
+  22:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/services/financeService.ts
+  6:35  error  'billingType' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/fiscalEngine.ts
+  1:28  error  'BillingData' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/integrationService.ts
+  1:10  error  'API' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/intelligenceEngine.ts
+  1:19  error  'User' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/inventoryService.ts
+   1:10  error  'ProductVariant' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  70:60  error  'reason' is defined but never used. Allowed unused args must match /^_/u          @typescript-eslint/no-unused-vars
+
+/app/services/localizationService.ts
+  30:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/services/reportingService.ts
+   1:10  error  'OrderHistoryItem' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  73:23  error  Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+
+/app/services/securityService.ts
+  10:36  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  24:19  error  'logs' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  24:25  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+
+/app/src/App.test.tsx
+  2:10  error  'render' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:18  error  'screen' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  3:8   error  'App' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+
+/app/types.ts
+  336:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/utils/fiscalService.ts
+  1:41  error  'PaymentItem' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/utils/salesEngine.ts
+  1:20  error  'BillingData' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+✖ 324 problems (324 errors, 0 warnings)

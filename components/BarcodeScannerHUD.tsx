@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Scan, X, Zap, Target, Binary, ShieldAlert, CheckCircle } from 'lucide-react';
+import { Zap, Target, Binary, ShieldAlert } from 'lucide-react';
 
 interface BarcodeScannerHUDProps {
   onScan: (barcode: string) => void;
@@ -9,7 +9,7 @@ interface BarcodeScannerHUDProps {
 const BarcodeScannerHUD: React.FC<BarcodeScannerHUDProps> = ({ onScan, onClose }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [hasError, setHasError] = useState(false);
-  const [isScanning, setIsScanning] = useState(true);
+  const [, setIsScanning] = useState(true);
 
   useEffect(() => {
     async function setupCamera() {
@@ -25,8 +25,9 @@ const BarcodeScannerHUD: React.FC<BarcodeScannerHUDProps> = ({ onScan, onClose }
       }
     }
     setupCamera();
+    const currentVideo = videoRef.current;
     return () => {
-      const stream = videoRef.current?.srcObject as MediaStream;
+      const stream = currentVideo?.srcObject as MediaStream;
       stream?.getTracks().forEach((t) => t.stop());
     };
   }, []);

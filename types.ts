@@ -63,6 +63,14 @@ export interface Product {
   demandVelocity?: number;
 }
 
+export interface PurchaseItem {
+  id: string;
+  name: string;
+  qty: number;
+  cost: number;
+  sku: string;
+}
+
 export type UserRole = 'admin' | 'customer' | 'sales' | 'finance' | 'logistics' | 'supervisor';
 
 export type Capability =
@@ -309,7 +317,7 @@ export interface SyncJob {
   id: string;
   entity: 'product' | 'customer' | 'order' | 'stock' | 'user' | 'config' | 'branch' | 'transfer';
   action: 'create' | 'update' | 'delete';
-  payload: any;
+  payload: unknown;
   timestamp: string;
   retries: number;
 }
@@ -587,7 +595,7 @@ export interface PurchaseOrder {
   expectedDate: string;
   totalCost: number;
   currency: 'PEN' | 'USD';
-  items: any[];
+  items: PurchaseItem[];
 }
 
 export interface ShipmentManifest {
@@ -603,7 +611,7 @@ export interface ShipmentManifest {
 
 export interface AppEvent {
   type: AppEventType;
-  payload: any;
+  payload: unknown;
   timestamp: string;
   source: string;
 }

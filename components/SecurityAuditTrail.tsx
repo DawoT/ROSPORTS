@@ -4,7 +4,6 @@ import {
   CheckCircle,
   AlertTriangle,
   Fingerprint,
-  Search,
   Lock,
   Zap,
   Clock,
@@ -100,7 +99,7 @@ const SecurityAuditTrail: React.FC = () => {
               </tr>
             </thead>
             <tbody className='divide-y divide-white/5'>
-              {auditLogs.map((log, i) => (
+              {auditLogs.map((log) => (
                 <tr key={log.id} className='hover:bg-white/[0.01] transition-all group'>
                   <td className='px-8 py-6'>
                     <div className='flex items-center gap-4'>

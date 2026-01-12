@@ -9,7 +9,7 @@ export const FiscalEngine = {
    * Pipeline de Emisión: XML -> Firma -> OSE -> Notificación
    */
   processEmission: async (order: OrderHistoryItem): Promise<ElectronicReceiptMetadata> => {
-    console.debug(`[FISCAL_ENGINE] Iniciando pipeline para ${order.orderId}`);
+    console.info(`[FISCAL_ENGINE] Iniciando pipeline para ${order.orderId}`);
 
     // 1. Generación de Estructura UBL 2.1 (Simulación)
     await new Promise((r) => setTimeout(r, 400));
@@ -34,7 +34,7 @@ export const FiscalEngine = {
   /**
    * Comunicación de Baja (Anulación SUNAT)
    */
-  processVoid: async (order: OrderHistoryItem, reason: string): Promise<boolean> => {
+  processVoid: async (order: OrderHistoryItem): Promise<boolean> => {
     console.warn(`[FISCAL_ENGINE] Solicitando baja de comprobante: ${order.orderId}`);
     // Simulación de envío de resumen de bajas
     await new Promise((r) => setTimeout(r, 1000));
@@ -44,17 +44,17 @@ export const FiscalEngine = {
   /**
    * Lógica de impresión física y apertura de gaveta
    */
-  triggerPhysicalPrint: (order: OrderHistoryItem) => {
+  triggerPhysicalPrint: () => {
     // Comandos ESC/POS estándar
     const ESC = '\u001b';
-    const GS = '\u001d';
-    const DRAWER_KICK = ESC + 'p' + '\u0000' + '\u0019' + '\u00fa';
+    const GS = '\u001d'; // eslint-disable-line @typescript-eslint/no-unused-vars
+    const DRAWER_KICK = ESC + 'p' + '\u0000' + '\u0019' + '\u00fa'; // eslint-disable-line @typescript-eslint/no-unused-vars
 
-    console.log(
+    console.info(
       '%c[HARDWARE] OPENING CASH DRAWER (DRAWER_KICK CMD SENT)',
       'color: #10b981; font-weight: bold;',
     );
-    console.log(
+    console.info(
       '%c[HARDWARE] SENDING THERMAL STREAM TO PORT 9100',
       'color: #3b82f6; font-weight: bold;',
     );
@@ -70,7 +70,7 @@ export const FiscalEngine = {
       console.warn('[MAILER] No email registered for customer. Skipping digital dispatch.');
       return false;
     }
-    console.log(`[MAILER] Dispatching PDF/XML to ${order.billing.email}...`);
+    console.info(`[MAILER] Dispatching PDF/XML to ${order.billing.email}...`);
     await new Promise((r) => setTimeout(r, 500));
     return true;
   },

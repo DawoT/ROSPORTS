@@ -7,22 +7,9 @@ import {
   Truck,
   PlusCircle,
   Trash2,
-  Info,
   ChevronRight,
-  Search,
-  ArrowUpCircle,
-  QrCode,
-  AlertCircle,
-  RefreshCw,
-  TrendingUp,
-  Layers,
-  Box,
-  Store,
   Sparkles,
   Map,
-  CheckCircle,
-  ShieldAlert,
-  Navigation,
   FileCheck,
 } from 'lucide-react';
 import { InventoryNode, StockMovement, Product, ProductVariant, StockTransfer } from '../types';
@@ -32,12 +19,10 @@ import { EnterpriseDataTable, TechnicalBadge, EnterpriseButton } from './Primiti
 const InventoryControlCenter: React.FC<any> = ({
   centralProducts,
   nodes,
-  movements,
   onStockAction,
 }) => {
   const {
     addNotification,
-    executeCommand,
     rebalanceSuggestions,
     runRebalanceAudit,
     addAuditLog,

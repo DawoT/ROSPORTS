@@ -10,7 +10,7 @@ export const IntegrationService = {
    * Validación RENIEC (Simulada para arquitectura)
    */
   validateDNI: async (dni: string) => {
-    console.debug(`[RENIEC_API] Validando identidad: ${dni}`);
+    console.info(`[RENIEC_API] Validando identidad: ${dni}`);
     await new Promise((r) => setTimeout(r, 1200));
 
     // Mock de respuesta exitosa
@@ -32,7 +32,7 @@ export const IntegrationService = {
    * Validación SUNAT (Simulada para arquitectura)
    */
   validateRUC: async (ruc: string) => {
-    console.debug(`[SUNAT_API] Validando contribuyente: ${ruc}`);
+    console.info(`[SUNAT_API] Validando contribuyente: ${ruc}`);
     await new Promise((r) => setTimeout(r, 1500));
 
     if (ruc.length === 11) {
@@ -52,8 +52,8 @@ export const IntegrationService = {
   /**
    * Motor de Pagos (Niubiz / Culqi Bridge)
    */
-  processPayment: async (amount: number, cardData: any) => {
-    console.debug(`[PAYMENT_GATEWAY] Iniciando captura de S/ ${amount}`);
+  processPayment: async (amount: number) => {
+    console.info(`[PAYMENT_GATEWAY] Iniciando captura de S/ ${amount}`);
     await new Promise((r) => setTimeout(r, 2500));
 
     // Simulación de fraude/error aleatorio (5%)
@@ -78,8 +78,8 @@ export const IntegrationService = {
   /**
    * Motor de Courier (Olva / Shalom Bridge)
    */
-  calculateShipping: async (distrito: string, weight: number) => {
-    console.debug(`[COURIER_API] Calculando flete para ${distrito}`);
+  calculateShipping: async (distrito: string) => {
+    console.info(`[COURIER_API] Calculando flete para ${distrito}`);
     await new Promise((r) => setTimeout(r, 800));
 
     // Lógica de zonificación básica
