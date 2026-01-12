@@ -1,33 +1,18 @@
-import React, { useState, useMemo, useRef } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
-  Wallet,
   LogOut,
   Clock,
   Landmark,
   ArrowRight,
   ShieldCheck,
-  AlertCircle,
   History,
-  CheckCircle,
   Calculator,
   Banknote,
   Plus,
   Minus,
-  ReceiptText,
   Printer,
-  Download,
-  User,
   X,
-  ArrowUpCircle,
-  ArrowDownCircle,
-  Info,
   HandCoins,
-  Building,
-  Tag,
-  FileSpreadsheet,
-  Fingerprint,
-  Receipt,
-  TrendingDown,
   TrendingUp,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
@@ -42,7 +27,6 @@ const CashSessionManager: React.FC = () => {
     activeCashSession,
     setActiveCashSession,
     recordCashMovement,
-    customers,
     setCustomers,
   } = useGlobal();
 
@@ -52,14 +36,6 @@ const CashSessionManager: React.FC = () => {
   const [lastClosedSession, setLastClosedSession] = useState<CashSession | null>(null);
 
   const currentTotal = useMemo(() => CashService.calculateTotal(tempDenoms), [tempDenoms]);
-
-  const sessionOrders = useMemo(() => {
-    if (!activeCashSession && !lastClosedSession) return [];
-    const targetSession = activeCashSession || lastClosedSession;
-    if (!targetSession) return [];
-    const allOrders = customers.flatMap((c) => c.purchaseHistory || []);
-    return allOrders.filter((o) => targetSession.receiptsIssued?.includes(o.orderId));
-  }, [customers, activeCashSession, lastClosedSession]);
 
   const handleOpen = () => {
     const session: CashSession = {

@@ -10,16 +10,16 @@ export interface AuditResult {
   targetVariant?: ProductVariant;
 }
 
+const getVariantStock = (v: ProductVariant) => {
+  if (!v || !v.inventoryLevels) return 0;
+  return v.inventoryLevels.reduce((acc, level) => acc + (level.quantity - level.reserved), 0);
+};
+
 export const useInventory = (
   product: Product | null,
   selectedSize: number | null,
   selectedColor: string | null,
 ) => {
-  const getVariantStock = (v: ProductVariant) => {
-    if (!v || !v.inventoryLevels) return 0;
-    return v.inventoryLevels.reduce((acc, level) => acc + (level.quantity - level.reserved), 0);
-  };
-
   const availableSizesForColor = useMemo(() => {
     if (!product || !product.variants || !selectedColor) return SIZES;
     return (
@@ -27,7 +27,7 @@ export const useInventory = (
         .filter((v) => v.color === selectedColor && getVariantStock(v) > 0)
         .map((v) => v.size) || []
     );
-  }, [selectedColor, product?.variants]);
+  }, [selectedColor, product]);
 
   const audit = useMemo((): AuditResult => {
     if (!product) {

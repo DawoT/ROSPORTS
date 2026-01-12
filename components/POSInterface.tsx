@@ -1,38 +1,13 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
-  Search,
   Scan,
   ShoppingCart,
-  UserCheck,
-  UserPlus,
   Trash2,
-  Plus,
-  Minus,
-  CreditCard,
   Banknote,
-  X,
   Smartphone,
-  CheckCircle,
-  Package,
-  SearchCode,
-  QrCode,
-  Tag,
   AlertCircle,
-  Printer,
-  FileText,
-  Wallet,
-  ArrowRight,
-  HandCoins,
-  Info,
-  Landmark,
-  ShieldCheck,
-  ReceiptText,
-  Coins,
-  Layers,
   CreditCard as CardIcon,
-  DollarSign,
   RefreshCw,
-  Mail,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import {
@@ -53,8 +28,6 @@ import ReceiptPreview from './ReceiptPreview';
 const POSInterface: React.FC = () => {
   const {
     products,
-    customers,
-    setCustomers,
     finalizeOrder,
     addNotification,
     user,
@@ -301,7 +274,7 @@ const POSInterface: React.FC = () => {
   );
 };
 
-const POSPaymentOrchestrator: React.FC<any> = ({ total, customer, onClose, onComplete }) => {
+const POSPaymentOrchestrator: React.FC<any> = ({ total, onClose, onComplete }) => {
   const [method, setMethod] = useState<PaymentMethod>('CASH');
   const [received, setReceived] = useState<string>('');
   const change = Math.max(0, (parseFloat(received) || total) - total);

@@ -19,7 +19,7 @@ class CommandBusService {
     const handler = this.handlers.get(cmd.type);
     const transactionId = `TX-${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
 
-    console.debug(`[COMMAND_BUS] Dispatching ${cmd.type}:${cmd.entityId}`, cmd);
+    console.info(`[COMMAND_BUS] Dispatching ${cmd.type}:${cmd.entityId}`, cmd);
 
     if (!handler) {
       return {

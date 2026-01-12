@@ -13,15 +13,15 @@ interface QuickViewModalProps {
 const QuickViewModal: React.FC<QuickViewModalProps> = ({ product, onClose, onAddToCart }) => {
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [selectedColor, setSelectedColor] = useState<string | null>(product?.colors?.[0] || null);
+  const [prevProductId, setPrevProductId] = useState<string | undefined>(product?.id);
   const [showTooltip, setShowTooltip] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
 
-  useEffect(() => {
-    if (product) {
-      setSelectedSize(null);
-      setSelectedColor(product.colors?.[0] || null);
-    }
-  }, [product?.id]);
+  if (product?.id !== prevProductId) {
+    setPrevProductId(product?.id);
+    setSelectedSize(null);
+    setSelectedColor(product?.colors?.[0] || null);
+  }
 
   const { audit, availableSizesForColor } = useInventory(product, selectedSize, selectedColor);
 

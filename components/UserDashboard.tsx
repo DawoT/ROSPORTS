@@ -6,29 +6,15 @@ import {
   Heart,
   CreditCard,
   ShieldCheck,
-  Zap,
-  Activity,
-  Award,
   ChevronRight,
-  Clock,
   LogOut,
-  Globe,
-  Cpu,
   MapPin,
   CheckCircle,
-  Truck,
-  Search,
-  Filter,
-  ChevronLeft,
-  Navigation,
-  Box,
   Gift,
-  Coins,
   History,
   Plus,
   Trash2,
   Edit3,
-  X,
 } from 'lucide-react';
 import { User, Product, PointMovement, OrderHistoryItem, Address } from '../types';
 import { useGlobal } from '../context/GlobalContext';
@@ -50,9 +36,9 @@ const UserDashboard: React.FC<UserDashboardProps> = ({
   onNavigate,
   wishlistItems = [],
 }) => {
-  const { customers, setCustomers, addNotification } = useGlobal();
+  const { customers } = useGlobal();
   const [activeTab, setActiveTab] = useState<DashboardTab>('perfil');
-  const [selectedOrder, setSelectedOrder] = useState<OrderHistoryItem | null>(null);
+  const [, setSelectedOrder] = useState<OrderHistoryItem | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {

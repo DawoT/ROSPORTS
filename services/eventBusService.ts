@@ -27,7 +27,7 @@ class EventBusService {
       source,
     };
 
-    console.debug(`[EVENT_BUS] Publishing: ${type}`, event);
+    console.info(`[EVENT_BUS] Publishing: ${type}`, event);
     this.subscribers.get(type)?.forEach((handler) => handler(event));
   }
 }

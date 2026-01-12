@@ -2,26 +2,13 @@ import React, { useState, useMemo } from 'react';
 import {
   Zap,
   Plus,
-  Search,
-  Tag,
-  Calendar,
-  TrendingUp,
   Trash2,
   Edit3,
-  X,
-  CheckCircle,
-  AlertCircle,
-  ShoppingBag,
   Layers,
   MousePointer2,
   Percent,
-  Briefcase,
-  Info,
-  ArrowRight,
   Globe,
   Store,
-  Lock,
-  Eye,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { Campaign, SaleChannel } from '../types';

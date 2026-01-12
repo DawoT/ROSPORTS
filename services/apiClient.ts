@@ -39,7 +39,7 @@ class APIClient {
       // Inyección de Token Simulada (Enterprise Security)
       const token = localStorage.getItem('rosports-jwt');
       if (token) {
-        console.debug(`[AUTH] Attaching Bearer: ${token.substring(0, 10)}...`);
+        console.info(`[AUTH] Attaching Bearer: ${token.substring(0, 10)}...`);
       }
 
       const latency = Math.floor(Math.random() * 500) + 50;

@@ -76,7 +76,7 @@ class DataOrchestrator {
    * Forzar una descarga masiva de datos (Full Rehydration)
    */
   public async forceRehydrate() {
-    console.debug('[DATA_ORCHESTRATOR] Initializing Node Rehydration...');
+    console.info('[DATA_ORCHESTRATOR] Initializing Node Rehydration...');
     const products = await API.get('/catalog/full');
     const customers = await API.get('/crm/full');
     return { products: products.data, customers: customers.data };

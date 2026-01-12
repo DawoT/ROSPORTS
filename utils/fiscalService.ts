@@ -34,21 +34,21 @@ export const FiscalService = {
    */
   emitElectronicReceipt: async (order: OrderHistoryItem): Promise<BillingData> => {
     // 1. Generación de XML (Simulado)
-    console.debug(`[FISCAL] Generando XML UBL 2.1 para ${order.orderId}...`);
+    console.info(`[FISCAL] Generando XML UBL 2.1 para ${order.orderId}...`);
     await new Promise((r) => setTimeout(r, 500));
 
     // 2. Firma Digital (Simulado)
     const mockHash = Math.random().toString(36).substring(2, 15).toUpperCase();
-    console.debug(`[FISCAL] Comprobante firmado digitalmente. HASH: ${mockHash}`);
+    console.info(`[FISCAL] Comprobante firmado digitalmente. HASH: ${mockHash}`);
     await new Promise((r) => setTimeout(r, 400));
 
     // 3. Envío a OSE / SUNAT (Simulado)
-    console.debug(`[FISCAL] Enviando a OSE para validación...`);
+    console.info(`[FISCAL] Enviando a OSE para validación...`);
     await new Promise((r) => setTimeout(r, 800));
 
     // 4. Envío de Email si existe
     if (order.billing.email) {
-      console.debug(`[FISCAL] Comprobante enviado a: ${order.billing.email}`);
+      console.info(`[FISCAL] Comprobante enviado a: ${order.billing.email}`);
     }
 
     return {
@@ -58,7 +58,7 @@ export const FiscalService = {
     };
   },
 
-  calculateTotals: (items: any[]) => {
+  calculateTotals: (items: { price: number; qty: number }[]) => {
     const total = items.reduce((acc, item) => acc + item.price * item.qty, 0);
     const subtotal = total / 1.18;
     const igv = total - subtotal;
