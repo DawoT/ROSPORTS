@@ -1,4 +1,3 @@
-
 import { AppEvent, AppEventType } from '../types';
 
 type EventHandler = (event: AppEvent) => void;
@@ -25,11 +24,11 @@ class EventBusService {
       type,
       payload,
       timestamp: new Date().toISOString(),
-      source
+      source,
     };
-    
+
     console.debug(`[EVENT_BUS] Publishing: ${type}`, event);
-    this.subscribers.get(type)?.forEach(handler => handler(event));
+    this.subscribers.get(type)?.forEach((handler) => handler(event));
   }
 }
 

@@ -1,4 +1,3 @@
-
 import { Customer } from '../../types';
 import { API } from '../apiClient';
 import { SyncManager } from '../dataOrchestrator';
@@ -15,8 +14,8 @@ export const CustomerRepository = {
     SyncManager.enqueue({
       entity: 'customer',
       action: customer.id.includes('new') ? 'create' : 'update',
-      payload: customer
+      payload: customer,
     });
     return { ...customer, _syncStatus: 'pending' as const };
-  }
+  },
 };

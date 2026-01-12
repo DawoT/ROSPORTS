@@ -1,4 +1,3 @@
-
 import { ModuleHealth, HealthStatus } from '../types';
 import { EventBus } from './eventBusService';
 
@@ -14,9 +13,11 @@ class SystemMonitorService {
       { id: 'AUTH_GATEWAY', label: 'Auth Gateway', status: 'NOMINAL', latency: 12, errors: 0 },
       { id: 'INV_NODE', label: 'Inventory Master', status: 'NOMINAL', latency: 45, errors: 0 },
       { id: 'FISCAL_CORE', label: 'Fiscal Engine', status: 'NOMINAL', latency: 28, errors: 0 },
-      { id: 'CRM_CLOUD', label: 'CRM Cloud Sync', status: 'NOMINAL', latency: 110, errors: 0 }
+      { id: 'CRM_CLOUD', label: 'CRM Cloud Sync', status: 'NOMINAL', latency: 110, errors: 0 },
     ];
-    defaultModules.forEach(m => this.modules.set(m.id, { ...m, lastSync: new Date().toISOString() } as ModuleHealth));
+    defaultModules.forEach((m) =>
+      this.modules.set(m.id, { ...m, lastSync: new Date().toISOString() } as ModuleHealth),
+    );
   }
 
   getHealthReport(): ModuleHealth[] {
@@ -43,7 +44,7 @@ class SystemMonitorService {
   }
 
   getOverallStatus(): HealthStatus {
-    const statuses = Array.from(this.modules.values()).map(m => m.status);
+    const statuses = Array.from(this.modules.values()).map((m) => m.status);
     if (statuses.includes('CRITICAL')) return 'CRITICAL';
     if (statuses.includes('DEGRADED')) return 'DEGRADED';
     return 'NOMINAL';

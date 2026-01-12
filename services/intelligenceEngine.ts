@@ -1,4 +1,3 @@
-
 import { Product, User, AthleteBiometrics } from '../types';
 
 export const IntelligenceEngine = {
@@ -13,11 +12,13 @@ export const IntelligenceEngine = {
    * Sugiere el calzado ideal basado en biometría.
    */
   recommendByBiometrics: (biometrics: AthleteBiometrics, catalog: Product[]): Product[] => {
-    return catalog.filter(p => {
-       if (biometrics.gaitType === 'pronator' && p.tractionScore > 9) return true;
-       if (biometrics.weeklyVolumeKm > 50 && p.cushioningLevel === 'Plush') return true;
-       return false;
-    }).slice(0, 3);
+    return catalog
+      .filter((p) => {
+        if (biometrics.gaitType === 'pronator' && p.tractionScore > 9) return true;
+        if (biometrics.weeklyVolumeKm > 50 && p.cushioningLevel === 'Plush') return true;
+        return false;
+      })
+      .slice(0, 3);
   },
 
   /**
@@ -28,7 +29,7 @@ export const IntelligenceEngine = {
     // Si la velocidad es > 0.8 (alta demanda), subir 5%
     if (demandVelocity > 0.8) return basePrice * 1.05;
     // Si la velocidad es < 0.2 (baja demanda), bajar 10% (Oferta Automática)
-    if (demandVelocity < 0.2) return basePrice * 0.90;
+    if (demandVelocity < 0.2) return basePrice * 0.9;
     return basePrice;
-  }
+  },
 };
