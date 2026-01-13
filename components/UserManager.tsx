@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 // Add AdminActionLog to types import to support explicit generic typing below
-import { User, UserRole, Capability, AdminActionLog } from '../types';
+import { User, AdminActionLog, UserRole } from '../types';
 import { EnterpriseDataTable, TechnicalBadge } from './Primitives';
 import { AuthService } from '../services/authService';
 
@@ -78,7 +78,7 @@ const UserManager: React.FC = () => {
             `Usuario ${u.name} ${newStatus === 'active' ? 'Activado' : 'Suspendido'}`,
             'info',
           );
-          return { ...u, status: newStatus as any };
+          return { ...u, status: newStatus };
         }
         return u;
       }),
@@ -139,7 +139,7 @@ const UserManager: React.FC = () => {
         ].map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as IAMTab)}
             className={`flex-1 min-w-[220px] flex items-center justify-center gap-3 py-5 rounded-[2rem] text-[9px] font-black uppercase tracking-widest transition-all ${activeTab === tab.id ? 'bg-blue-600 text-white shadow-xl' : 'text-content-muted hover:bg-content-muted/5'}`}
           >
             <tab.icon className='w-4 h-4' />
@@ -470,7 +470,7 @@ const UserEditor: React.FC<{
               onSave({
                 ...form,
                 id: form.id || `USR-${Date.now()}`,
-                capabilities: AuthService.getCapabilitiesByRole(form.role as any),
+                capabilities: AuthService.getCapabilitiesByRole(form.role as UserRole),
               } as User)
             }
             className='flex-2 px-12 py-5 bg-blue-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-[0.4em] shadow-xl hover:bg-blue-500 transition-all min-h-[56px]'

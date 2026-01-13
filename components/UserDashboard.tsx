@@ -13,15 +13,16 @@ import {
   Trash2,
   Edit3,
 } from 'lucide-react';
-import { User, Product, PointMovement, OrderHistoryItem, Address } from '../types';
+import { User, Product, OrderHistoryItem, Address } from '../types';
 import { useGlobal } from '../context/GlobalContext';
+import { ViewState } from '../types';
 
 interface UserDashboardProps {
   user: User;
   onLogout: () => void;
   onViewOrders: () => void;
   onViewWishlist: () => void;
-  onNavigate: (view: any) => void;
+  onNavigate: (view: ViewState) => void;
   wishlistItems?: Product[];
 }
 
@@ -159,7 +160,7 @@ const UserDashboard: React.FC<UserDashboardProps> = ({
               Mis <span className='text-gradient'>Pedidos</span>
             </h2>
             <div className='space-y-4'>
-              {(currentCustomer.purchaseHistory || []).map((order: any) => (
+              {(currentCustomer.purchaseHistory || []).map((order) => (
                 <div
                   key={order.orderId}
                   className='glass-card rounded-3xl p-8 border border-content-muted/10 bg-surface flex flex-col md:flex-row justify-between items-center gap-6 group hover:border-brand-blue/30 transition-all'

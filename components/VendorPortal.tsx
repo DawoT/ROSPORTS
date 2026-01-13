@@ -9,10 +9,10 @@ import {
   Mail,
   Star,
 } from 'lucide-react';
-import { Vendor } from '../types';
+import { useGlobal } from '../context/GlobalContext';
 
 const VendorPortal: React.FC = () => {
-  const { vendors, addAuditLog, addNotification } = useGlobal();
+  const { vendors } = useGlobal();
   const [query, setQuery] = useState('');
 
   return (
