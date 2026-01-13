@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import {
   UserCog,
   UserPlus,
@@ -435,7 +435,7 @@ const UserEditor: React.FC<{
               </label>
               <select
                 value={form.role}
-                onChange={(e) => setForm({ ...form, role: e.target.value as any })}
+                onChange={(e) => setForm({ ...form, role: e.target.value as 'admin' | 'customer' | 'seller' | 'manager' })}
                 className='w-full p-5 glass border-content-muted/10 rounded-2xl text-content-primary bg-main/50 text-xs font-bold outline-none focus:border-blue-500 appearance-none'
               >
                 <option value='admin'>ADMINISTRADOR</option>

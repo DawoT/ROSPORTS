@@ -5,18 +5,29 @@ import {
   History,
   Activity,
   Truck,
-  PlusCircle,
-  Trash2,
   ChevronRight,
   Sparkles,
   Map,
-  FileCheck,
 } from 'lucide-react';
-import { InventoryNode, StockMovement, Product, ProductVariant, StockTransfer } from '../types';
+import { InventoryNode, Product, StockTransfer } from '../types';
 import { useGlobal } from '../context/GlobalContext';
 import { EnterpriseDataTable, TechnicalBadge, EnterpriseButton } from './Primitives';
 
-const InventoryControlCenter: React.FC<any> = ({
+interface InventoryControlCenterProps {
+  centralProducts: Product[];
+  nodes: InventoryNode[];
+  onStockAction: (
+    productId: string,
+    sku: string,
+    quantity: number,
+    action: 'add' | 'remove' | 'set' | 'transfer',
+    reason: string,
+    nodeId: string,
+    targetNodeId?: string,
+  ) => void;
+}
+
+const InventoryControlCenter: React.FC<InventoryControlCenterProps> = ({
   centralProducts,
   nodes,
   onStockAction,
@@ -156,7 +167,7 @@ const InventoryControlCenter: React.FC<any> = ({
         {activeTab === 'realtime' && (
           <div className='space-y-8'>
             <div className='flex gap-4 overflow-x-auto pb-2 custom-scrollbar'>
-              {nodes.map((n: any) => (
+              {nodes.map((n) => (
                 <button
                   key={n.id}
                   onClick={() => setSelectedNode(n.id)}
@@ -173,7 +184,7 @@ const InventoryControlCenter: React.FC<any> = ({
                 {
                   key: 'name',
                   label: 'Entidad Técnica',
-                  render: (item: any) => (
+                  render: (item) => (
                     <div className='flex items-center gap-4'>
                       <div className='w-12 h-12 glass rounded-xl p-1 bg-main flex items-center justify-center border border-content-muted/10'>
                         <img src={item.image} className='w-full h-full object-contain' alt='' />
@@ -190,7 +201,7 @@ const InventoryControlCenter: React.FC<any> = ({
                 {
                   key: 'quantity',
                   label: 'Stock Total',
-                  render: (item: any) => (
+                  render: (item) => (
                     <span className='text-xs font-bold text-content-secondary'>
                       {item.quantity} UN
                     </span>
@@ -199,7 +210,7 @@ const InventoryControlCenter: React.FC<any> = ({
                 {
                   key: 'available',
                   label: 'Disponible',
-                  render: (item: any) => (
+                  render: (item) => (
                     <span
                       className={`text-sm font-bold ${item.isLow ? 'text-amber-500' : 'text-emerald-500'}`}
                     >
@@ -210,7 +221,7 @@ const InventoryControlCenter: React.FC<any> = ({
                 {
                   key: 'actions',
                   label: 'Status Hub',
-                  render: (item: any) => (
+                  render: (item) => (
                     <div className='flex items-center justify-end gap-2'>
                       <div
                         className={`w-1.5 h-1.5 rounded-full ${item.available > 0 ? 'bg-emerald-500' : 'bg-red-500'} animate-pulse`}
@@ -415,7 +426,11 @@ const InventoryControlCenter: React.FC<any> = ({
   );
 };
 
-const TransferModal: React.FC<any> = ({ nodes, onClose, onSubmit }) => {
+const TransferModal: React.FC<{
+  nodes: InventoryNode[];
+  onClose: () => void;
+  onSubmit: (data: StockTransfer) => void;
+}> = ({ nodes, onClose, onSubmit }) => {
   const [form, setForm] = useState<Partial<StockTransfer>>({
     originNodeId: nodes[0].id,
     targetNodeId: nodes[1].id,
@@ -450,7 +465,7 @@ const TransferModal: React.FC<any> = ({ nodes, onClose, onSubmit }) => {
               onChange={(e) => setForm({ ...form, originNodeId: e.target.value })}
               className='w-full p-5 glass border-content-muted/10 rounded-2xl text-content-primary bg-main/50 text-xs font-bold outline-none focus:border-blue-500 appearance-none'
             >
-              {nodes.map((n: any) => (
+              {nodes.map((n) => (
                 <option key={n.id} value={n.id}>
                   {n.name}
                 </option>
@@ -466,7 +481,7 @@ const TransferModal: React.FC<any> = ({ nodes, onClose, onSubmit }) => {
               onChange={(e) => setForm({ ...form, targetNodeId: e.target.value })}
               className='w-full p-5 glass border-content-muted/10 rounded-2xl text-content-primary bg-main/50 text-xs font-bold outline-none focus:border-blue-500 appearance-none'
             >
-              {nodes.map((n: any) => (
+              {nodes.map((n) => (
                 <option key={n.id} value={n.id}>
                   {n.name}
                 </option>

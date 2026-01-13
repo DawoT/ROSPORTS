@@ -1,4 +1,4 @@
-import { CartItem, BillingData } from '../types';
+import { CartItem } from '../types';
 
 export const TAX_RATE = 0.18; // IGV Perú
 

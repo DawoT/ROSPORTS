@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { SystemConfig } from '../types';
-import { EnterpriseInput, EnterpriseButton, TechnicalBadge } from './Primitives';
+import { EnterpriseInput, EnterpriseButton } from './Primitives';
 
 type SettingsTab = 'general' | 'fiscal' | 'integrations' | 'store' | 'notifications';
 
@@ -83,7 +83,7 @@ const SettingsManager: React.FC = () => {
         ].map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as SettingsTab)}
             className={`flex-1 min-w-[180px] flex items-center justify-center gap-3 py-5 rounded-[2rem] text-[9px] font-black uppercase tracking-widest transition-all ${activeTab === tab.id ? 'bg-blue-600 text-white shadow-xl' : 'text-content-muted hover:bg-content-muted/5'}`}
           >
             <tab.icon className='w-4 h-4' />
@@ -162,7 +162,8 @@ const SettingsManager: React.FC = () => {
                             ...localConfig.integrations,
                             payment: {
                               ...localConfig.integrations.payment,
-                              provider: e.target.value as any,
+                              provider: e.target
+                                .value as SystemConfig['integrations']['payment']['provider'],
                             },
                           },
                         })
@@ -230,7 +231,8 @@ const SettingsManager: React.FC = () => {
                             ...localConfig.integrations,
                             courier: {
                               ...localConfig.integrations.courier,
-                              provider: e.target.value as any,
+                              provider: e.target
+                                .value as SystemConfig['integrations']['courier']['provider'],
                             },
                           },
                         })

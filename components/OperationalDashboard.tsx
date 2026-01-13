@@ -5,7 +5,6 @@ import {
   Server,
   RefreshCw,
   Globe,
-  Activity,
   ArrowUpRight,
   Wifi,
   Database,

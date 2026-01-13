@@ -9,7 +9,7 @@ import {
   Star,
   Target,
 } from 'lucide-react';
-import { useGlobal } from '../context/GlobalContext';
+
 
 const Hero: React.FC<{ onShopClick: () => void }> = ({ onShopClick }) => {
   return (

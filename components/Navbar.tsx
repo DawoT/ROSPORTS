@@ -17,12 +17,11 @@ import { ViewState } from '../types';
 import { EnterpriseIconButton } from './Primitives';
 
 const Navbar: React.FC<{
-  currentView: ViewState;
   setView: (view: ViewState) => void;
   toggleCart: () => void;
   toggleWishlist: () => void;
   isScrolled: boolean;
-}> = ({ currentView, setView, toggleCart, toggleWishlist, isScrolled }) => {
+}> = ({ setView, toggleCart, toggleWishlist, isScrolled }) => {
   const { user, cartItems, wishlistItems, theme, toggleTheme } = useGlobal();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 

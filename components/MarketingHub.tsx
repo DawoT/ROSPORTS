@@ -11,7 +11,7 @@ import {
   Store,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
-import { Campaign, SaleChannel } from '../types';
+import { Campaign } from '../types';
 
 const MarketingHub: React.FC = () => {
   const { addNotification, addAuditLog } = useGlobal();

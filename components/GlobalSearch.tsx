@@ -2,11 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   Search,
   X,
-  Package,
   ArrowRight,
-  Zap,
-  Target,
-  Binary,
   Sparkles,
   AlertCircle,
 } from 'lucide-react';

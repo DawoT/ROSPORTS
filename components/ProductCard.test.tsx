@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import ProductCard from './ProductCard';
 import { Product } from '../types';
@@ -7,7 +7,6 @@ import { Product } from '../types';
 const mockOnAddToCart = vi.fn();
 const mockOnViewDetails = vi.fn();
 const mockOnQuickView = vi.fn();
-const mockOnToggleWishlist = vi.fn();
 
 const mockProduct: Product = {
   id: 'test-1',

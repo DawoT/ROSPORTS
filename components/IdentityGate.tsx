@@ -1,7 +1,7 @@
 import React from 'react';
 import { useGlobal } from '../context/GlobalContext';
 import { UserRole } from '../types';
-import { Lock, ShieldAlert, Fingerprint, EyeOff, ShieldCheck } from 'lucide-react';
+import { ShieldAlert, Fingerprint } from 'lucide-react';
 
 interface IdentityGateProps {
   children: React.ReactNode;

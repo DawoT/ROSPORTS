@@ -2,13 +2,10 @@ import React from 'react';
 import {
   Filter,
   X,
-  ChevronDown,
   Check,
   Zap,
   DollarSign,
   Ruler,
-  Palette,
-  Globe,
 } from 'lucide-react';
 import { FilterState } from '../services/catalogEngine';
 import { SIZES } from '../constants';

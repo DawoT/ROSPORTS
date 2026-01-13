@@ -1,16 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import {
-  ShieldCheck,
   Lock,
   Mail,
   User as UserIcon,
   ArrowRight,
   Zap,
-  RefreshCw,
   Eye,
   EyeOff,
   Key,
-  Shield,
   Star,
 } from 'lucide-react';
 import { User } from '../types';

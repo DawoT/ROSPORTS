@@ -1,10 +1,7 @@
 import React from 'react';
-import { useGlobal } from '../context/GlobalContext';
-import { Activity, Server } from 'lucide-react';
+import { Server } from 'lucide-react';
 
 const InfrastructureTopologyMap: React.FC = () => {
-  const { inventoryNodes } = useGlobal();
-
   return (
     <div className='glass-card rounded-[3rem] p-12 border-content-muted/10 relative overflow-hidden flex flex-col min-h-[500px] bg-surface shadow-sm'>
       <div className='absolute inset-0 technical-grid opacity-10' />

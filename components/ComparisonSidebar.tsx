@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, BarChart2, Trash2, ArrowRight, Zap, Target, Scale } from 'lucide-react';
+import { X, BarChart2, Trash2, ArrowRight, Target, Scale } from 'lucide-react';
 import { Product } from '../types';
 
 interface ComparisonSidebarProps {

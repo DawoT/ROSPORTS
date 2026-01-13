@@ -1,22 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import {
-  BarChart3,
   Package,
   TrendingDown,
   DollarSign,
   Download,
-  Search,
-  Filter,
   AlertTriangle,
-  CheckCircle,
   Layers,
   Activity,
-  Calendar,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { EnterpriseDataTable, TechnicalBadge } from './Primitives';
 import { ReportingService } from '../services/reportingService';
-import { TechnicalFormatter } from '../utils/formatter';
 
 const InventoryReports: React.FC = () => {
   const { products } = useGlobal();
@@ -131,7 +125,15 @@ const InventoryReports: React.FC = () => {
 
       <div className='min-h-[500px]'>
         {activeTab === 'current' && (
-          <EnterpriseDataTable<any>
+          <EnterpriseDataTable<{
+            id: string;
+            sku: string;
+            name: string;
+            category: string;
+            qty: number;
+            val: number;
+            dos: number;
+          }>
             data={stockData}
             columns={[
               {
@@ -172,7 +174,15 @@ const InventoryReports: React.FC = () => {
         )}
 
         {activeTab === 'critical' && (
-          <EnterpriseDataTable<any>
+          <EnterpriseDataTable<{
+            id: string;
+            sku: string;
+            name: string;
+            node: string;
+            available: number;
+            min: number;
+            status: string;
+          }>
             data={criticalItems}
             columns={[
               {
@@ -220,7 +230,15 @@ const InventoryReports: React.FC = () => {
         {activeTab === 'valuation' && (
           <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
             <div className='lg:col-span-2'>
-              <EnterpriseDataTable<any>
+              <EnterpriseDataTable<{
+                id: string;
+                sku: string;
+                name: string;
+                category: string;
+                qty: number;
+                val: number;
+                dos: number;
+              }>
                 data={stockData.sort((a, b) => b.val - a.val)}
                 columns={[
                   {

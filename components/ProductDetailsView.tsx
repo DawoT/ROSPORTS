@@ -1,18 +1,14 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import {
-  ArrowLeft,
   ShoppingCart,
   Heart,
   ShieldCheck,
   Zap,
-  Package,
-  AlertCircle,
   Check,
   Star,
   Truck,
   Minus,
   Plus,
-  Info,
   Sparkles,
   CheckCircle,
   ArrowRight,

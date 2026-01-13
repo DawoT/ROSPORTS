@@ -1,15 +1,9 @@
 import React, { useMemo } from 'react';
 import {
-  Activity,
-  Ruler,
   ShieldAlert,
-  Zap,
-  TrendingUp,
   ChevronRight,
   Award,
   Footprints,
-  Info,
-  RefreshCw,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { IntelligenceEngine } from '../services/intelligenceEngine';

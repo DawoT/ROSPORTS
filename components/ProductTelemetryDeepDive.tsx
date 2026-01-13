@@ -1,17 +1,10 @@
 import React, { useMemo } from 'react';
 import {
-  BarChart3,
-  TrendingUp,
   DollarSign,
   Package,
-  ArrowUpRight,
   Target,
   Activity,
-  Zap,
-  ChevronRight,
   ArrowLeft,
-  ShoppingBag,
-  PieChart,
 } from 'lucide-react';
 import { Product } from '../types';
 

@@ -3,19 +3,12 @@ import {
   Briefcase,
   Plus,
   Search,
-  Filter,
   Ship,
-  ExternalLink,
   TrendingUp,
   AlertCircle,
-  CheckCircle,
-  Truck,
-  Package,
-  FileText,
   Mail,
   Star,
 } from 'lucide-react';
-import { useGlobal } from '../context/GlobalContext';
 import { Vendor } from '../types';
 
 const VendorPortal: React.FC = () => {

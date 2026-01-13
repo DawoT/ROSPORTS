@@ -333,7 +333,7 @@ export interface Command {
   type: string;
   entity: string;
   entityId: string;
-  payload: any;
+  payload: unknown;
   metadata?: {
     reason?: string;
     nodeId?: string;

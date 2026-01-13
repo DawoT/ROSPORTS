@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
 import {
   Truck,
-  Package,
-  MapPin,
-  Search,
-  Filter,
   ArrowRight,
-  CheckCircle,
   Clock,
   ExternalLink,
   Globe,
@@ -16,7 +11,7 @@ import {
 import { ShipmentManifest } from '../types';
 
 const ShippingManifestManager: React.FC = () => {
-  const [manifests, setManifests] = useState<ShipmentManifest[]>([
+  const [manifests] = useState<ShipmentManifest[]>([
     {
       id: 'SM-101',
       orderId: 'RS-WEB-2291',

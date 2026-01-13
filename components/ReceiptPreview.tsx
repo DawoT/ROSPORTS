@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import {
   Printer,
-  Download,
-  Share2,
   X,
   CheckCircle,
   FileCode,
