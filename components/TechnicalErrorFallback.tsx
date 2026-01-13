@@ -6,7 +6,7 @@ interface Props {
   resetErrorBoundary: () => void;
 }
 
-const TechnicalErrorFallback: React.FC<Props> = ({ error, resetErrorBoundary }) => {
+const TechnicalErrorFallback: React.FC<Props> = ({ resetErrorBoundary }) => {
   return (
     <div className='p-12 glass-card rounded-[3rem] border-red-500/20 bg-red-500/5 space-y-8 text-center animate-in zoom-in'>
       <div className='w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center mx-auto'>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layers, Target, Cpu, Droplets, Sparkles, ShieldCheck } from 'lucide-react';
+import { Layers, Target, Cpu, Droplets, Sparkles } from 'lucide-react';
 import { Product } from '../types';
 
 const PremiumFeatures: React.FC<{ product: Product }> = ({ product }) => {

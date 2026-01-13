@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Shield,
   Terminal,
@@ -9,11 +9,9 @@ import {
   Wifi,
   Database,
 } from 'lucide-react';
-import { useGlobal } from '../context/GlobalContext';
 import { API } from '../services/apiClient';
 
 const OperationalDashboard: React.FC = () => {
-  const { user } = useGlobal();
   const [latency, setLatency] = useState(12);
   const [logs, setLogs] = useState(API.getNetworkLogs());
 

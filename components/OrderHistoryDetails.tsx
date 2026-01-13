@@ -11,7 +11,6 @@ import {
   Download,
 } from 'lucide-react';
 import { OrderHistoryItem } from '../types';
-import { FiscalService } from '../utils/fiscalService';
 
 interface OrderHistoryDetailsProps {
   order: OrderHistoryItem;

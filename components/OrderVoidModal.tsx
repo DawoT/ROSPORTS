@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, AlertTriangle, ShieldAlert, CheckCircle, RefreshCw } from 'lucide-react';
+import { ShieldAlert, RefreshCw } from 'lucide-react';
 import { OrderHistoryItem } from '../types';
 import { useGlobal } from '../context/GlobalContext';
 import { FiscalEngine } from '../services/fiscalEngine';

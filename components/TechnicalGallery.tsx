@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Maximize2, ChevronLeft, ChevronRight, Zap } from 'lucide-react';
+import { Maximize2 } from 'lucide-react';
 
 interface TechnicalGalleryProps {
   images: string[];
