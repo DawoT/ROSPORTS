@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@google/genai": "^1.35.0",
+    "happy-dom": "^20.1.0",
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3"
