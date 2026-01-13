@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Filter,
-  X,
-  Check,
-  Zap,
-  DollarSign,
-  Ruler,
-} from 'lucide-react';
+import { Filter, X, Check, Zap, DollarSign, Ruler } from 'lucide-react';
 import { FilterState } from '../services/catalogEngine';
 import { SIZES } from '../constants';
 

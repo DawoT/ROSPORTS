@@ -4,15 +4,7 @@ import CartSidebar from './CartSidebar';
 import WishlistSidebar from './WishlistSidebar';
 import { useGlobal } from '../context/GlobalContext';
 import { ViewState } from '../types';
-import {
-  CheckCircle,
-  Info,
-  X,
-  Zap,
-  ShieldCheck,
-  Sparkles,
-  ChevronRight,
-} from 'lucide-react';
+import { CheckCircle, Info, X, Zap, ShieldCheck, Sparkles, ChevronRight } from 'lucide-react';
 
 interface LayoutProps {
   children: React.ReactNode;

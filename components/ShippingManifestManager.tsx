@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Truck,
-  ArrowRight,
-  Clock,
-  ExternalLink,
-  Globe,
-  Navigation,
-  Box,
-} from 'lucide-react';
+import { Truck, ArrowRight, Clock, ExternalLink, Globe, Navigation, Box } from 'lucide-react';
 import { ShipmentManifest } from '../types';
 
 const ShippingManifestManager: React.FC = () => {

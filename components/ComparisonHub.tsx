@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  X,
-  Zap,
-  Target,
-  Scale,
-  Droplets,
-  Info,
-  ArrowRight,
-  BarChart3,
-} from 'lucide-react';
+import { X, Zap, Target, Scale, Droplets, Info, ArrowRight, BarChart3 } from 'lucide-react';
 import { Product } from '../types';
 import { TechnicalFormatter } from '../utils/formatter';
 

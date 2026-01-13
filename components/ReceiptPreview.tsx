@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Printer,
-  X,
-  CheckCircle,
-  FileCode,
-  Mail,
-  Zap,
-  RefreshCw,
-  Scissors,
-} from 'lucide-react';
+import { Printer, X, CheckCircle, FileCode, Mail, Zap, RefreshCw, Scissors } from 'lucide-react';
 import { OrderHistoryItem } from '../types';
 import { FiscalService } from '../utils/fiscalService';
 

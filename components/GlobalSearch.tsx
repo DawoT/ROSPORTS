@@ -1,11 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import {
-  Search,
-  X,
-  ArrowRight,
-  Sparkles,
-  AlertCircle,
-} from 'lucide-react';
+import { Search, X, ArrowRight, Sparkles, AlertCircle } from 'lucide-react';
 import { Product } from '../types';
 import { GoogleGenAI } from '@google/genai';
 

@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Store,
-  Warehouse,
-  MapPin,
-  User,
-  Clock,
-  Plus,
-  Edit3,
-  ShieldCheck,
-} from 'lucide-react';
+import { Store, Warehouse, MapPin, User, Clock, Plus, Edit3, ShieldCheck } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { InventoryNode } from '../types';
 import { TechnicalBadge } from './Primitives';

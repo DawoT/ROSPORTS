@@ -1,14 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Briefcase,
-  Plus,
-  Search,
-  Ship,
-  TrendingUp,
-  AlertCircle,
-  Mail,
-  Star,
-} from 'lucide-react';
+import { Briefcase, Plus, Search, Ship, TrendingUp, AlertCircle, Mail, Star } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 
 const VendorPortal: React.FC = () => {

@@ -12,7 +12,7 @@ import {
   SearchCode,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
-import { Customer, CustomerSegment, } from '../types';
+import { Customer, CustomerSegment } from '../types';
 import { IntegrationService } from '../services/integrationService';
 
 // Added missing CustomerDetailView component to fix 'Cannot find name' error
@@ -423,9 +423,7 @@ const CustomerEditor: React.FC<{
               <div className='flex gap-3'>
                 <select
                   value={formData.docType}
-                  onChange={(e) =>
-                    setFormData({ ...formData, docType: e.target.value as DocType })
-                  }
+                  onChange={(e) => setFormData({ ...formData, docType: e.target.value as DocType })}
                   className='w-24 p-5 glass border-content-muted/10 rounded-2xl text-content-primary bg-main/50 text-xs font-bold outline-none focus:border-purple-500 appearance-none'
                 >
                   <option>DNI</option>

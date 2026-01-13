@@ -1,10 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-  ShieldAlert,
-  ChevronRight,
-  Award,
-  Footprints,
-} from 'lucide-react';
+import { ShieldAlert, ChevronRight, Award, Footprints } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { IntelligenceEngine } from '../services/intelligenceEngine';
 

@@ -1,11 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Plus,
-  Search,
-  TrendingUp,
-  Ship,
-  Navigation,
-} from 'lucide-react';
+import { Plus, Search, TrendingUp, Ship, Navigation } from 'lucide-react';
 import { PurchaseOrder } from '../types';
 import { FinanceService } from '../services/financeService';
 

@@ -24,13 +24,7 @@ import { FiscalEngine } from '../services/fiscalEngine';
 import ReceiptPreview from './ReceiptPreview';
 
 const POSInterface: React.FC = () => {
-  const {
-    products,
-    finalizeOrder,
-    addNotification,
-    user,
-    activeCashSession,
-  } = useGlobal();
+  const { products, finalizeOrder, addNotification, user, activeCashSession } = useGlobal();
 
   const [posCart, setPosCart] = useState<CartItem[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -276,11 +270,7 @@ interface POSPaymentOrchestratorProps {
   total: number;
   customer: Customer | null;
   onClose: () => void;
-  onComplete: (
-    method: string,
-    billing: BillingData,
-    payments: PaymentItem[],
-  ) => Promise<void>;
+  onComplete: (method: string, billing: BillingData, payments: PaymentItem[]) => Promise<void>;
 }
 
 const POSPaymentOrchestrator: React.FC<POSPaymentOrchestratorProps> = ({

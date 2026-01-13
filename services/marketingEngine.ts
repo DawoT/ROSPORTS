@@ -71,22 +71,21 @@ export const MarketingEngine = {
           .filter((i) => i.brand === camp.targetBrand)
           .reduce((acc, i) => acc + i.price * i.quantity * (camp.discountValue / 100), 0);
 
-      case 'bogo':
+      case 'bogo': {
         // Lógica 2x1 o 3x2 (El producto de menor valor es el descuento)
-        {
-          const relevantItems = items.flatMap((item) => Array(item.quantity).fill(item.price));
-          if (camp.discountValue === 2 && relevantItems.length >= 2) {
-            // 2x1
-            const sorted = relevantItems.sort((a, b) => a - b);
-            return sorted[0];
-          }
-          if (camp.discountValue === 3 && relevantItems.length >= 3) {
-            // 3x2
-            const sorted = relevantItems.sort((a, b) => a - b);
-            return sorted[0];
-          }
-          return 0;
+        const relevantItems = items.flatMap((item) => Array(item.quantity).fill(item.price));
+        if (camp.discountValue === 2 && relevantItems.length >= 2) {
+          // 2x1
+          const sorted = relevantItems.sort((a, b) => a - b);
+          return sorted[0];
         }
+        if (camp.discountValue === 3 && relevantItems.length >= 3) {
+          // 3x2
+          const sorted = relevantItems.sort((a, b) => a - b);
+          return sorted[0];
+        }
+        return 0;
+      }
 
       default:
         return 0;

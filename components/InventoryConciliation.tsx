@@ -1,11 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import {
-  ClipboardCheck,
-  AlertTriangle,
-  CheckCircle,
-  RefreshCw,
-  Scan,
-} from 'lucide-react';
+import { ClipboardCheck, AlertTriangle, CheckCircle, RefreshCw, Scan } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { InventoryService } from '../services/inventoryService';
 
