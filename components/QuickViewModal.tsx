@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { X, ShoppingCart, ShieldCheck, Zap, Check } from 'lucide-react';
+import React, { useState } from 'react';
+import { X, ShoppingCart, ShieldCheck, Check } from 'lucide-react';
 import { Product } from '../types';
 import { SIZES } from '../constants';
 import { useInventory } from '../hooks/useInventory';

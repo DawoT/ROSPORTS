@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, CheckCircle, TrendingUp, ThumbsUp, MessageSquare, ShieldCheck } from 'lucide-react';
+import { Star, ThumbsUp, MessageSquare, ShieldCheck } from 'lucide-react';
 import { Review } from '../types';
 import { TechnicalFormatter } from '../utils/formatter';
 

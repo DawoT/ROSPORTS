@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { ShoppingCart, Heart, Eye, Check, Zap, Sparkles, ShieldCheck } from 'lucide-react';
+import { ShoppingCart, Heart, Eye, Check, ShieldCheck } from 'lucide-react';
 import { Product } from '../types';
 import { SIZES } from '../constants';
 import { useInventory } from '../hooks/useInventory';

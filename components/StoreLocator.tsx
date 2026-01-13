@@ -1,5 +1,5 @@
 import React from 'react';
-import { MapPin, Clock, Navigation, Globe, Activity, Store, Zap } from 'lucide-react';
+import { Globe, Store, Zap } from 'lucide-react';
 
 const TIENDAS = [
   {

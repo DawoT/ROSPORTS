@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Heart, ShoppingCart, Trash2, ArrowRight, Sparkles } from 'lucide-react';
+import { X, Heart, ShoppingCart, Trash2 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 
 interface WishlistSidebarProps {

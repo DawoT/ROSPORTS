@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronRight, Home, Globe } from 'lucide-react';
+import { Home, Globe } from 'lucide-react';
 import { ViewState } from '../types';
 
 interface BreadcrumbsProps {
