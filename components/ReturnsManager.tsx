@@ -1,18 +1,9 @@
 import React, { useState, useMemo } from 'react';
 import {
-  History,
   RotateCcw,
-  ShieldAlert,
   CheckCircle,
-  Search,
-  Filter,
   Plus,
-  X,
-  MessageSquare,
   AlertCircle,
-  HardDrive,
-  ClipboardList,
-  PenTool,
   Camera,
   Sparkles,
   RefreshCw,
@@ -24,7 +15,7 @@ import { TechnicalBadge, EnterpriseButton } from './Primitives';
 
 const ReturnsManager: React.FC = () => {
   const { rmaCases, setRMACases, addAuditLog, addNotification } = useGlobal();
-  const [filterStatus, setFilterStatus] = useState<RMACase['status'] | 'all'>('all');
+  const [filterStatus] = useState<RMACase['status'] | 'all'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);

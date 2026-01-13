@@ -1,25 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import {
-  Truck,
-  Package,
-  ArrowRight,
-  Clock,
   Plus,
   Search,
-  Filter,
-  CheckCircle,
-  AlertCircle,
-  FileText,
   TrendingUp,
   Ship,
   Navigation,
-  Zap,
 } from 'lucide-react';
 import { PurchaseOrder } from '../types';
 import { FinanceService } from '../services/financeService';
 
 const SupplyChainManager: React.FC = () => {
-  const [orders, setOrders] = useState<PurchaseOrder[]>([
+  const [orders] = useState<PurchaseOrder[]>([
     {
       id: 'PO-2025-001',
       provider: 'NIKE GLOBAL DISTRIBUTION',

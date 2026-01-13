@@ -20,7 +20,7 @@ const BarcodeScannerHUD: React.FC<BarcodeScannerHUDProps> = ({ onScan, onClose }
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
         }
-      } catch (err) {
+      } catch {
         setHasError(true);
       }
     }

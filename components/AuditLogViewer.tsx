@@ -2,12 +2,10 @@ import React, { useMemo, useState } from 'react';
 import {
   Shield,
   Search,
-  Filter,
   Clock,
   User,
   HardDrive,
   AlertCircle,
-  FileText,
   ArrowDownCircle,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';

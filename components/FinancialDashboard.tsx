@@ -5,11 +5,8 @@ import {
   BarChart3,
   PieChart,
   ArrowUpRight,
-  Target,
   ShieldCheck,
-  FileText,
   Zap,
-  Scale,
   Wallet,
   Briefcase,
 } from 'lucide-react';

@@ -3,17 +3,12 @@ import {
   X,
   Receipt,
   Package,
-  Truck,
   CheckCircle,
-  Clock,
-  MapPin,
   User,
   FileText,
   Smartphone,
-  Globe,
   Printer,
   Download,
-  History,
 } from 'lucide-react';
 import { OrderHistoryItem } from '../types';
 import { FiscalService } from '../utils/fiscalService';

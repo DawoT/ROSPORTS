@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { useGlobal } from '../context/GlobalContext';
 import {
   CreditCard,
-  Truck,
   MapPin,
   ShieldCheck,
   ArrowLeft,
@@ -16,7 +15,7 @@ import {
   Landmark,
   Info,
 } from 'lucide-react';
-import { Customer, SaleChannel, BillingData, PaymentItem, Campaign, Address } from '../types';
+import { SaleChannel, BillingData, Campaign, Address } from '../types';
 import { PricingEngine } from '../services/pricingEngine';
 import { IntegrationService } from '../services/integrationService';
 import { MarketingEngine } from '../services/marketingEngine';
@@ -44,14 +43,12 @@ interface CheckoutViewProps {
 }
 
 const CheckoutView: React.FC<CheckoutViewProps> = ({ onBack }) => {
-  const { cartItems, finalizeOrder, customers, addNotification, systemConfig, activePromos, user } =
+  const { cartItems, finalizeOrder, addNotification, systemConfig, activePromos, user } =
     useGlobal();
-  const [step, setStep] = useState<'details' | 'payment'>('details');
   const [isSuccess, setIsSuccess] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
   const [saleChannel] = useState<SaleChannel>('WEB');
-  const [searchDni, setSearchDni] = useState('');
 
   // Datos del Cliente (Pre-llenados si hay sesión)
   const [billingForm, setBillingForm] = useState<BillingData>({
@@ -82,7 +79,7 @@ const CheckoutView: React.FC<CheckoutViewProps> = ({ onBack }) => {
   // Marketing & Loyalty
   const [couponCode, setCouponCode] = useState('');
   const [appliedCoupon, setAppliedCoupon] = useState<Campaign | null>(null);
-  const [pointsToRedeem, setPointsToRedeem] = useState(0);
+  const [pointsToRedeem] = useState(0);
 
   useEffect(() => {
     const fetchShipping = async () => {
@@ -333,7 +330,7 @@ const CheckoutView: React.FC<CheckoutViewProps> = ({ onBack }) => {
                 ].map((m) => (
                   <button
                     key={m.id}
-                    onClick={() => setPaymentMethod(m.id as any)}
+                    onClick={() => setPaymentMethod(m.id as 'card' | 'transfer' | 'yape')}
                     className={`p-6 rounded-3xl border flex flex-col items-center gap-4 text-center transition-all ${
                       paymentMethod === m.id
                         ? 'bg-brand-blue border-brand-blue text-white shadow-xl'

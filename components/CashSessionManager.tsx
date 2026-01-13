@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { CashService, PERU_DENOMINATIONS } from '../services/cashService';
-import { CashSession, CashDenomination, CashMovement, PaymentItem } from '../types';
+import { CashSession, CashDenomination, CashMovement } from '../types';
 
 const CashSessionManager: React.FC = () => {
   const {
@@ -65,7 +65,13 @@ const CashSessionManager: React.FC = () => {
     addNotification('Sesión fiscal iniciada', 'success');
   };
 
-  const handleAddMovement = (m: any) => {
+  const handleAddMovement = (m: {
+    type: 'income' | 'expense';
+    amount: number;
+    concept: string;
+    authorizedBy: string;
+    customerId?: string;
+  }) => {
     if (!activeCashSession) return;
 
     if (m.type === 'expense') {
@@ -678,12 +684,24 @@ const CashSessionManager: React.FC = () => {
   return null;
 };
 
-const CashMovementModal: React.FC<{ onClose: () => void; onSubmit: (m: any) => void }> = ({
-  onClose,
-  onSubmit,
-}) => {
+const CashMovementModal: React.FC<{
+  onClose: () => void;
+  onSubmit: (m: {
+    type: 'income' | 'expense';
+    amount: number;
+    concept: string;
+    authorizedBy: string;
+    customerId?: string;
+  }) => void;
+}> = ({ onClose, onSubmit }) => {
   const { customers } = useGlobal();
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<{
+    type: 'income' | 'expense';
+    amount: string;
+    concept: string;
+    authorizedBy: string;
+    customerId: string;
+  }>({
     type: 'expense',
     amount: '',
     concept: '',
@@ -708,7 +726,9 @@ const CashMovementModal: React.FC<{ onClose: () => void; onSubmit: (m: any) => v
             {['income', 'expense'].map((t) => (
               <button
                 key={t}
-                onClick={() => setForm({ ...form, type: t as any, concept: '', customerId: '' })}
+                onClick={() =>
+                  setForm({ ...form, type: t as 'income' | 'expense', concept: '', customerId: '' })
+                }
                 className={`flex-1 py-4 rounded-xl text-[10px] font-black uppercase transition-all ${form.type === t ? 'bg-white text-black' : 'text-slate-500'}`}
               >
                 {t}

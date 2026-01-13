@@ -1,21 +1,14 @@
 import React, { useMemo } from 'react';
 import {
-  TrendingUp,
-  BarChart3,
   Users,
   DollarSign,
   Package,
   ArrowUpRight,
-  ArrowDownRight,
   Activity,
   Calendar,
-  Zap,
-  Cpu,
   Target,
   Globe,
-  RefreshCw,
   ShoppingBag,
-  Wallet,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { ReportingService } from '../services/reportingService';

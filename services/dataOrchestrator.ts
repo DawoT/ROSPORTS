@@ -56,7 +56,7 @@ class DataOrchestrator {
         EventBus.publish('DATA_SYNC_SUCCESS', { jobId: job.id }, 'DataOrchestrator');
         this.processQueue(); // Procesar el siguiente
       }
-    } catch (err) {
+    } catch {
       console.warn(`[SYNC_FAILURE] Job ${job.id} failed. Retrying later...`);
       job.retries += 1;
       this.health.status = 'PENDING_PUSH'; // O 'CONFLICT' si retries > 5

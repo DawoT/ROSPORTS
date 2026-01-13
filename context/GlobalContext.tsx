@@ -197,7 +197,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>(() =>
     LocalStorageRepo.get('wishlist', []),
   );
-  const [movements, setMovements] = useState<StockMovement[]>(() =>
+  const [movements] = useState<StockMovement[]>(() =>
     LocalStorageRepo.get('movements', []),
   );
   const [rmaCases, setRMACases] = useState<RMACase[]>(() => LocalStorageRepo.get('rma-cases', []));

@@ -14,8 +14,6 @@ import {
   Product,
   Customer,
   CartItem,
-  SaleChannel,
-  BillingType,
   BillingData,
   OrderHistoryItem,
   PaymentMethod,
@@ -274,7 +272,22 @@ const POSInterface: React.FC = () => {
   );
 };
 
-const POSPaymentOrchestrator: React.FC<any> = ({ total, onClose, onComplete }) => {
+interface POSPaymentOrchestratorProps {
+  total: number;
+  customer: Customer | null;
+  onClose: () => void;
+  onComplete: (
+    method: string,
+    billing: BillingData,
+    payments: PaymentItem[],
+  ) => Promise<void>;
+}
+
+const POSPaymentOrchestrator: React.FC<POSPaymentOrchestratorProps> = ({
+  total,
+  onClose,
+  onComplete,
+}) => {
   const [method, setMethod] = useState<PaymentMethod>('CASH');
   const [received, setReceived] = useState<string>('');
   const change = Math.max(0, (parseFloat(received) || total) - total);
@@ -322,7 +335,7 @@ const POSPaymentOrchestrator: React.FC<any> = ({ total, onClose, onComplete }) =
             ].map((m) => (
               <button
                 key={m.id}
-                onClick={() => setMethod(m.id as any)}
+                onClick={() => setMethod(m.id as PaymentMethod)}
                 className={`w-full p-6 rounded-2xl border text-left flex items-center gap-4 transition-all min-h-[60px] ${method === m.id ? 'bg-brand-blue border-brand-blue text-white shadow-lg' : 'glass border-content-muted/10 text-content-muted hover:border-brand-blue/40'}`}
               >
                 <m.icon className='w-5 h-5' />

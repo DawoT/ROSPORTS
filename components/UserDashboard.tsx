@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import {
   User as UserIcon,
-  Settings,
   Package,
   Heart,
-  CreditCard,
-  ShieldCheck,
   ChevronRight,
   LogOut,
   MapPin,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GlobalProvider, useGlobal } from './context/GlobalContext';
-import { ViewState, Product } from './types';
+import { Product } from './types';
 import Layout from './components/Layout';
 import PromotionalSlider from './components/PromotionalSlider';
 import ProductCard from './components/ProductCard';
@@ -62,7 +62,7 @@ const AppContent: React.FC = () => {
     setSelectedProduct,
   } = useGlobal();
 
-  const [quickViewProduct, setQuickViewProduct] = useState<any>(null);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
   const [telemetryProduct, setTelemetryProduct] = useState<Product | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -77,7 +77,7 @@ const AppContent: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    let timer: any;
+    let timer: NodeJS.Timeout;
     const resetTimer = () => {
       if (user && user.role !== 'customer' && !user.isLocked) {
         clearTimeout(timer);

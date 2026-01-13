@@ -3,22 +3,15 @@ import {
   Store,
   Warehouse,
   MapPin,
-  Phone,
   User,
   Clock,
   Plus,
   Edit3,
-  Trash2,
-  X,
-  Search,
-  CheckCircle,
-  Globe,
   ShieldCheck,
-  Activity,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { InventoryNode } from '../types';
-import { EnterpriseInput, TechnicalBadge, EnterpriseButton } from './Primitives';
+import { TechnicalBadge } from './Primitives';
 
 const BranchManager: React.FC = () => {
   const { inventoryNodes, addAuditLog, addNotification } = useGlobal();
@@ -201,7 +194,9 @@ const BranchEditor: React.FC<{
               </label>
               <select
                 value={form.type}
-                onChange={(e) => setForm({ ...form, type: e.target.value as any })}
+                onChange={(e) =>
+                  setForm({ ...form, type: e.target.value as 'store' | 'warehouse' })
+                }
                 className='w-full p-5 glass border-content-muted/10 rounded-2xl text-content-primary bg-main/50 text-xs font-bold outline-none focus:border-blue-500 appearance-none'
               >
                 <option value='store'>TIENDA (RETAIL)</option>

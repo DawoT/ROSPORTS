@@ -2,23 +2,11 @@ import React, { useMemo, useState } from 'react';
 import {
   FileSpreadsheet,
   Search,
-  Filter,
-  ArrowUpRight,
   Download,
   Globe,
   Store,
-  Instagram,
-  MessageCircle,
-  TrendingUp,
-  Calendar,
-  Hash,
-  CheckCircle,
-  AlertCircle,
   XCircle,
   Eye,
-  ShieldCheck,
-  Printer,
-  Mail,
   Clock,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';

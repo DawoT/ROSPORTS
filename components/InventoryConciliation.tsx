@@ -1,21 +1,17 @@
 import React, { useState, useMemo } from 'react';
 import {
   ClipboardCheck,
-  Search,
-  Filter,
   AlertTriangle,
   CheckCircle,
   RefreshCw,
   Scan,
-  Package,
-  ArrowRight,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { InventoryService } from '../services/inventoryService';
 
 const InventoryConciliation: React.FC = () => {
   const { products, handleStockUpdate, addNotification } = useGlobal();
-  const [selectedNode, setSelectedNode] = useState('N-02');
+  const [selectedNode] = useState('N-02');
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [isApplying, setIsApplying] = useState(false);
 
@@ -57,7 +53,7 @@ const InventoryConciliation: React.FC = () => {
           d.productId,
           d.variant.sku,
           diff,
-          adjustmentType as any,
+          adjustmentType as 'add' | 'remove' | 'set',
           'Conteo Cíclico Verificado',
           selectedNode,
         );

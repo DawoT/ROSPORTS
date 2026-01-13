@@ -11,7 +11,6 @@ import {
   Zap,
   ShieldCheck,
   Sparkles,
-  Globe,
   ChevronRight,
 } from 'lucide-react';
 

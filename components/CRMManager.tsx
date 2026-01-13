@@ -8,24 +8,12 @@ import {
   X,
   Fingerprint,
   Activity,
-  CreditCard,
-  Award,
-  ShoppingBag,
-  MapPin,
   RefreshCw,
-  CheckCircle,
-  Database,
-  Info,
   ExternalLink,
-  Globe,
-  Instagram,
-  MessageCircle,
-  Store,
-  Zap,
   SearchCode,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
-import { Customer, DocType, CustomerSegment, OrderHistoryItem, SaleChannel } from '../types';
+import { Customer, CustomerSegment, } from '../types';
 import { IntegrationService } from '../services/integrationService';
 
 // Added missing CustomerDetailView component to fix 'Cannot find name' error
@@ -160,7 +148,7 @@ const CustomerDetailView: React.FC<{ customer: Customer; onClose: () => void }> 
 };
 
 const CRMManager: React.FC = () => {
-  const { customers, setCustomers, addNotification } = useGlobal();
+  const { customers, setCustomers } = useGlobal();
   const [searchQuery, setSearchQuery] = useState('');
   const [segmentFilter, setSegmentFilter] = useState<CustomerSegment | 'all'>('all');
   const [isEditorOpen, setIsEditorOpen] = useState(false);
@@ -230,7 +218,7 @@ const CRMManager: React.FC = () => {
           {['all', 'vip', 'frequent', 'new', 'inactive'].map((seg) => (
             <button
               key={seg}
-              onClick={() => setSegmentFilter(seg as any)}
+              onClick={() => setSegmentFilter(seg as CustomerSegment | 'all')}
               className={`px-6 py-5 rounded-2xl text-[9px] font-black uppercase tracking-widest transition-all shrink-0 min-h-[48px] ${segmentFilter === seg ? 'bg-purple-600 text-white shadow-lg shadow-purple-600/20' : 'glass border-content-muted/10 text-content-muted hover:text-content-primary hover:bg-main'}`}
             >
               {seg}
@@ -391,13 +379,17 @@ const CustomerEditor: React.FC<{
       } else if (formData.docType === 'RUC') {
         const res = await IntegrationService.validateRUC(formData.docNumber);
         if (res.success) {
-          setFormData({ ...formData, fullName: res.data.razonSocial, address: res.data.direccion });
+          setFormData({
+            ...formData,
+            fullName: res.data.razonSocial,
+            address: res.data.direccion,
+          });
           addNotification('Contribuyente verificado con SUNAT', 'success');
         } else {
           addNotification(res.message!, 'error');
         }
       }
-    } catch (e) {
+    } catch {
       addNotification('Falla en enlace con API externa', 'error');
     } finally {
       setIsValidating(false);
@@ -432,7 +424,9 @@ const CustomerEditor: React.FC<{
               <div className='flex gap-3'>
                 <select
                   value={formData.docType}
-                  onChange={(e) => setFormData({ ...formData, docType: e.target.value as any })}
+                  onChange={(e) =>
+                    setFormData({ ...formData, docType: e.target.value as DocType })
+                  }
                   className='w-24 p-5 glass border-content-muted/10 rounded-2xl text-content-primary bg-main/50 text-xs font-bold outline-none focus:border-purple-500 appearance-none'
                 >
                   <option>DNI</option>

@@ -6,7 +6,6 @@ import {
   Scale,
   Droplets,
   Info,
-  ShieldCheck,
   ArrowRight,
   BarChart3,
 } from 'lucide-react';

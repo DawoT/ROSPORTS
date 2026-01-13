@@ -6,7 +6,6 @@ import {
   LayoutGrid,
   Search,
   Zap,
-  Activity,
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { useCatalog } from '../hooks/useCatalog';
@@ -26,7 +25,7 @@ const ShopView: React.FC = () => {
   } = useGlobal();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isCompareHubOpen, setIsCompareHubOpen] = useState(false);
-  const [comparisonItems, setComparisonItems] = useState<any[]>([]);
+  const [comparisonItems, setComparisonItems] = useState<Product[]>([]);
 
   const {
     products,
@@ -48,7 +47,7 @@ const ShopView: React.FC = () => {
     [allProducts],
   );
 
-  const handleToggleCompare = (p: any) => {
+  const handleToggleCompare = (p: Product) => {
     setComparisonItems((prev) => {
       const exists = prev.find((i) => i.id === p.id);
       if (exists) return prev.filter((i) => i.id !== p.id);
@@ -113,7 +112,16 @@ const ShopView: React.FC = () => {
           <div className='relative group'>
             <select
               value={sortOption}
-              onChange={(e) => setSortOption(e.target.value as any)}
+              onChange={(e) =>
+                setSortOption(
+                  e.target.value as
+                    | 'relevance'
+                    | 'price_low'
+                    | 'price_high'
+                    | 'newest'
+                    | 'best_sellers',
+                )
+              }
               className='appearance-none bg-surface backdrop-blur-xl border border-content-muted/10 px-10 py-5 rounded-2xl text-[10px] font-black uppercase tracking-widest outline-none focus:border-blue-500 cursor-pointer pr-16 text-content-primary'
             >
               <option value='relevance'>RECOMENDADOS</option>

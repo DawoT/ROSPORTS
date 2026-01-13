@@ -8,7 +8,6 @@ import {
   FileSpreadsheet,
   Package,
   History,
-  Lock,
   ChevronRight,
   LayoutDashboard,
   Settings,
@@ -24,11 +23,22 @@ import {
   MapPin,
 } from 'lucide-react';
 import { ViewState, User, Capability, LiveEvent } from '../types';
-import { useGlobal } from '../context/GlobalContext';
 import { AuthService } from '../services/authService';
 import { EventBus } from '../services/eventBusService';
 
-const AdminDashboardShell: React.FC<any> = ({ children, currentView, setView, user }) => {
+interface AdminDashboardShellProps {
+  children: React.ReactNode;
+  currentView: ViewState;
+  setView: (view: ViewState) => void;
+  user: User;
+}
+
+const AdminDashboardShell: React.FC<AdminDashboardShellProps> = ({
+  children,
+  currentView,
+  setView,
+  user,
+}) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [liveEvents, setLiveEvents] = useState<LiveEvent[]>([]);
   const [isFeedOpen, setIsFeedOpen] = useState(false);
@@ -58,7 +68,7 @@ const AdminDashboardShell: React.FC<any> = ({ children, currentView, setView, us
     };
   }, []);
 
-  const menuItems: { id: ViewState; label: string; icon: any; cap: Capability }[] = [
+  const menuItems: { id: ViewState; label: string; icon: React.ElementType; cap: Capability }[] = [
     { id: 'admin-command', label: 'Panel Maestro', icon: Cpu, cap: 'system:manage' },
     { id: 'admin-system-health', label: 'Estado de la Tienda', icon: Activity, cap: 'ops:monitor' },
     { id: 'admin-branches', label: 'Nuestras Sedes', icon: MapPin, cap: 'system:config' },

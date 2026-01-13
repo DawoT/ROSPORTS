@@ -1,0 +1,205 @@
+
+/app/components/AccountingReports.tsx
+   11:10  error  'TechnicalFormatter' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   13:10  error  'OrderHistoryItem' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+  191:51  error  Unexpected any. Specify a different type                                              @typescript-eslint/no-explicit-any
+
+/app/components/BoutiqueGallery.tsx
+  2:10  error  'Maximize2' is defined but never used. Allowed unused vars must match /^_/u     @typescript-eslint/no-unused-vars
+  2:21  error  'ChevronLeft' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  2:34  error  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:48  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  2:53  error  'Target' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+/app/components/CRMManager.tsx
+  6:11  error  'UserIcon' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/CashSessionManager.tsx
+   68:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  681:72  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  711:62  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/components/CommandCenter.tsx
+  14:0  error  Parsing error: Unknown keyword or identifier. Did you mean 'const'?
+
+/app/components/FilterSidebar.tsx
+   5:3   error  'ChevronDown' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  10:3   error  'Palette' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  11:3   error  'Globe' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  30:3   error  'brands' is defined but never used. Allowed unused args must match /^_/u       @typescript-eslint/no-unused-vars
+  33:29  error  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+  33:42  error  Unexpected any. Specify a different type                                       @typescript-eslint/no-explicit-any
+
+/app/components/InfrastructureTopologyMap.tsx
+  5:0  error  Parsing error: Unknown keyword or identifier. Did you mean 'const'?
+
+/app/components/InventoryControlCenter.tsx
+   16:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  143:51  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  156:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  167:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  173:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  190:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  199:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  210:34  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  415:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  450:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  466:30  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/components/InventoryReports.tsx
+  117:51  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  128:32  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  169:32  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  217:36  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/components/LiveSupportAssistant.tsx
+  76:13  error  Parsing error: Identifier expected
+
+/app/components/MarketingHub.tsx
+  305:77  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/components/Navbar.tsx
+  25:2  error  Parsing error: Property or signature expected
+
+/app/components/OperationalDashboard.tsx
+   1:17  error  'useMemo' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+  16:11  error  'user' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/OrderHistoryDetails.tsx
+  14:10  error  'FiscalService' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/OrderLedger.tsx
+  97:53  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/components/OrderVoidModal.tsx
+  2:10  error  'X' is defined but never used. Allowed unused vars must match /^_/u              @typescript-eslint/no-unused-vars
+  2:13  error  'AlertTriangle' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:41  error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+/app/components/PremiumFeatures.tsx
+  2:51  error  'ShieldCheck' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ProductCard.tsx
+  2:43  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  2:48  error  'Sparkles' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ProductDetailsView.tsx
+  30:75  error  'onBack' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/PromotionalSlider.tsx
+  2:10  error  'ShoppingCart' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:51  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+  2:56  error  'Target' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+/app/components/QuickViewModal.tsx
+  1:27  error  'useEffect' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:40  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u        @typescript-eslint/no-unused-vars
+
+/app/components/ReceiptPreview.tsx
+  30:5  error  Unexpected console statement. Only these console methods are allowed: warn, error, info  no-console
+
+/app/components/ReturnsManager.tsx
+  14:26  error  'EnterpriseButton' is defined but never used. Allowed unused vars must match /^_/u         @typescript-eslint/no-unused-vars
+  19:23  error  'setSearchQuery' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ReviewSystem.tsx
+  2:16  error  'CheckCircle' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:29  error  'TrendingUp' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+
+/app/components/SecurityAuditTrail.tsx
+  1:27  error  'useMemo' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/ShopBreadcrumbs.tsx
+  2:10  error  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/StoreLocator.tsx
+  2:10  error  'MapPin' is defined but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  2:18  error  'Clock' is defined but never used. Allowed unused vars must match /^_/u       @typescript-eslint/no-unused-vars
+  2:25  error  'Navigation' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:44  error  'Activity' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+/app/components/SupplyChainManager.tsx
+  1:27  error  'useMemo' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/TechnicalErrorFallback.tsx
+  9:52  error  'error' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/TechnicalGallery.tsx
+  2:21  error  'ChevronLeft' is defined but never used. Allowed unused vars must match /^_/u   @typescript-eslint/no-unused-vars
+  2:34  error  'ChevronRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:48  error  'Zap' is defined but never used. Allowed unused vars must match /^_/u           @typescript-eslint/no-unused-vars
+
+/app/components/UserDashboard.tsx
+   16:25  error  'PointMovement' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   24:22  error  Unexpected any. Specify a different type                                         @typescript-eslint/no-explicit-any
+  162:68  error  Unexpected any. Specify a different type                                         @typescript-eslint/no-explicit-any
+
+/app/components/UserManager.tsx
+   15:16  error  'UserRole' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+   15:26  error  'Capability' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+   81:47  error  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  142:51  error  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+  473:78  error  Unexpected any. Specify a different type                                      @typescript-eslint/no-explicit-any
+
+/app/components/VendorPortal.tsx
+  12:10  error  'Vendor' is defined but never used. Allowed unused vars must match /^_/u                    @typescript-eslint/no-unused-vars
+  15:20  error  'addAuditLog' is assigned a value but never used. Allowed unused vars must match /^_/u      @typescript-eslint/no-unused-vars
+  15:33  error  'addNotification' is assigned a value but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/components/WishlistSidebar.tsx
+  2:42  error  'ArrowRight' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  2:54  error  'Sparkles' is defined but never used. Allowed unused vars must match /^_/u    @typescript-eslint/no-unused-vars
+
+/app/services/aiAssistantService.ts
+  51:14  error  'e' is defined but never used. Allowed unused caught errors must match /^_/u  @typescript-eslint/no-unused-vars
+  70:14  error  'e' is defined but never used. Allowed unused caught errors must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/apiClient.ts
+   22:5   error  'body' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+   22:12  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+   62:19  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  118:48  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+
+/app/services/businessLogicEngine.ts
+  39:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/services/cashService.ts
+  1:41  error  'CashMovement' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/commandBusService.ts
+  37:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/services/eventBusService.ts
+  22:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/services/financeService.ts
+  6:35  error  'billingType' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/fiscalEngine.ts
+  1:28  error  'BillingData' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/integrationService.ts
+  1:10  error  'API' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/intelligenceEngine.ts
+  1:19  error  'User' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/inventoryService.ts
+  1:10  error  'ProductVariant' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+/app/services/localizationService.ts
+  30:17  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/app/services/reportingService.ts
+   1:10  error  'OrderHistoryItem' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+  73:23  error  Unexpected any. Specify a different type                                            @typescript-eslint/no-explicit-any
+
+/app/services/securityService.ts
+  10:36  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+  24:19  error  'logs' is defined but never used. Allowed unused args must match /^_/u  @typescript-eslint/no-unused-vars
+  24:25  error  Unexpected any. Specify a different type                                @typescript-eslint/no-explicit-any
+
+/app/utils/fiscalService.ts
+  1:41  error  'PaymentItem' is defined but never used. Allowed unused vars must match /^_/u  @typescript-eslint/no-unused-vars
+
+✖ 105 problems (105 errors, 0 warnings)

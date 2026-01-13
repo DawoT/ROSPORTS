@@ -1,21 +1,8 @@
 import React, { useMemo } from 'react';
 import {
   Activity,
-  Shield,
-  Terminal,
-  Zap,
   Globe,
   Cpu,
-  Server,
-  Users,
-  ArrowUpRight,
-  ArrowDownRight,
-  Clock,
-  CheckCircle,
-  AlertTriangle,
-  Fingerprint,
-  RefreshCw,
-  TrendingUp,
   DollarSign,
   Package,
   Map as MapIcon,
@@ -24,7 +11,7 @@ import {
 import { useGlobal } from '../context/GlobalContext';
 
 const CommandCenter: React.FC = () => {
-  const { customers, products, movements, auditLogs } = useGlobal();
+  const { customers, products, auditLogs } = useGlobal();
 
   const totalGMV = useMemo(
     () =>

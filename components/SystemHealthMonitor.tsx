@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Activity,
   Shield,
-  Zap,
   Server,
-  AlertTriangle,
-  CheckCircle,
-  RefreshCw,
-  Cpu,
-  Wifi,
-  Database,
   Lock,
   Unlock,
 } from 'lucide-react';
@@ -21,7 +13,6 @@ import { API } from '../services/apiClient';
 const SystemHealthMonitor: React.FC = () => {
   const [report, setReport] = useState<ModuleHealth[]>(SystemMonitor.getHealthReport());
   const [networkStatus, setNetworkStatus] = useState<NetworkStatus>(API.getStatus());
-  const [isRefreshing, setIsRefreshing] = useState(false);
 
   useEffect(() => {
     const timer = setInterval(() => {

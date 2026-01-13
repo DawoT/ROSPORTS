@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { GoogleGenAI, Modality } from '@google/genai';
-import { Mic, MicOff, MessageSquare, RefreshCw, Zap, X, ShieldCheck } from 'lucide-react';
+import { Mic, MicOff, RefreshCw } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { ROSPORTS_TOOLS } from '../services/aiAssistantService';
 
@@ -73,7 +73,7 @@ const LiveSupportAssistant: React.FC = () => {
       });
 
       sessionRef.current = await sessionPromise;
-    } catch (e) {
+    } catch () {
       setIsConnecting(false);
     }
   };

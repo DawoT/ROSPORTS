@@ -8,9 +8,7 @@ import {
 } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { EnterpriseDataTable, TechnicalBadge } from './Primitives';
-import { TechnicalFormatter } from '../utils/formatter';
 import { ReportingService } from '../services/reportingService';
-import { OrderHistoryItem } from '../types';
 
 type AccountTab = 'sales-book' | 'cash-audit' | 'commissions';
 
@@ -188,7 +186,7 @@ const AccountingReports: React.FC = () => {
         ].map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id as any)}
+            onClick={() => setActiveTab(tab.id as AccountTab)}
             className={`flex-1 min-w-[200px] flex items-center justify-center gap-3 py-5 rounded-[2rem] text-[9px] font-black uppercase tracking-widest transition-all ${activeTab === tab.id ? 'bg-emerald-600 text-white shadow-xl' : 'text-content-muted hover:bg-content-muted/5'}`}
           >
             <tab.icon className='w-4 h-4' />
