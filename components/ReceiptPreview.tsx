@@ -27,7 +27,7 @@ const ReceiptPreview: React.FC<ReceiptPreviewProps> = ({ order, onClose }) => {
     setPaperCut(false);
 
     // Simulación de pipeline de hardware ESC/POS
-    console.debug('[ESC/POS] Inyectando datos en buffer serial...');
+    console.info('[ESC/POS] Inyectando datos en buffer serial...');
 
     setTimeout(() => {
       setPrinting(false);

@@ -1,4 +1,4 @@
-import { OrderHistoryItem, BillingData, ElectronicReceiptMetadata } from '../types';
+import { OrderHistoryItem, ElectronicReceiptMetadata } from '../types';
 
 /**
  * ROSPORTS FISCAL ENGINE V2.0
@@ -46,9 +46,9 @@ export const FiscalEngine = {
    */
   triggerPhysicalPrint: () => {
     // Comandos ESC/POS estándar
-    const ESC = '\u001b';
-    const GS = '\u001d'; // eslint-disable-line @typescript-eslint/no-unused-vars
-    const DRAWER_KICK = ESC + 'p' + '\u0000' + '\u0019' + '\u00fa'; // eslint-disable-line @typescript-eslint/no-unused-vars
+    // const ESC = '\u001b';
+    // const GS = '\u001d';
+    // const DRAWER_KICK = ESC + 'p' + '\u0000' + '\u0019' + '\u00fa';
 
     console.info(
       '%c[HARDWARE] OPENING CASH DRAWER (DRAWER_KICK CMD SENT)',

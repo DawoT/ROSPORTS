@@ -1,4 +1,3 @@
-import { API } from './apiClient';
 import { EventBus } from './eventBusService';
 
 /**

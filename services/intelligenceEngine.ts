@@ -1,4 +1,4 @@
-import { Product, User, AthleteBiometrics } from '../types';
+import { Product, AthleteBiometrics } from '../types';
 
 export const IntelligenceEngine = {
   /**

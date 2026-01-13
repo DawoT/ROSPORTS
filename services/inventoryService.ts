@@ -1,4 +1,4 @@
-import { ProductVariant, StockLevel } from '../types';
+import { StockLevel } from '../types';
 
 export type StockTransition =
   | 'RESERVE'
