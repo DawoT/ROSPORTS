@@ -19,7 +19,7 @@ class APIClient {
   private async request<T>(
     method: 'GET' | 'POST' | 'PUT' | 'DELETE',
     endpoint: string,
-    body?: any,
+    _body?: unknown,
   ): Promise<APIResponse<T>> {
     if (this.circuitStatus === 'CIRCUIT_OPEN') {
       console.warn('[CIRCUIT_BREAKER] Request blocked to prevent cascade failure.');
@@ -59,7 +59,7 @@ class APIClient {
         traceId,
         timestamp: new Date().toISOString(),
       };
-    } catch (err: any) {
+    } catch (err: unknown) {
       this.consecutiveErrors++;
       if (this.consecutiveErrors >= this.breakThreshold) {
         this.circuitStatus = 'CIRCUIT_OPEN';
@@ -79,7 +79,7 @@ class APIClient {
       return {
         data: null,
         status: 500,
-        message: err.message,
+        message: err instanceof Error ? err.message : 'Unknown error',
         traceId,
         timestamp: new Date().toISOString(),
       };
@@ -115,7 +115,7 @@ class APIClient {
   public async get<T>(endpoint: string) {
     return this.request<T>('GET', endpoint);
   }
-  public async post<T>(endpoint: string, body: any) {
+  public async post<T>(endpoint: string, body: unknown) {
     return this.request<T>('POST', endpoint, body);
   }
 }

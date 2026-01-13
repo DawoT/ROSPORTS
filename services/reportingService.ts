@@ -1,4 +1,4 @@
-import { OrderHistoryItem, Product, Customer } from '../types';
+import { Product, Customer } from '../types';
 
 export const ReportingService = {
   /**
@@ -70,12 +70,12 @@ export const ReportingService = {
       .filter(Boolean);
   },
 
-  exportToCSV: (data: any[], filename: string) => {
+  exportToCSV: (data: Record<string, unknown>[], filename: string) => {
     if (data.length === 0) return;
     const headers = Object.keys(data[0]).join(',');
     const rows = data.map((obj) =>
       Object.values(obj)
-        .map((val) => `"${val}"`)
+        .map((val) => `"${String(val)}"`)
         .join(','),
     );
     const csvContent = [headers, ...rows].join('\n');

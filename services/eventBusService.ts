@@ -19,7 +19,7 @@ class EventBusService {
   /**
    * Despacha un evento a todos los suscriptores interesados.
    */
-  publish(type: AppEventType, payload: any, source: string = 'system') {
+  publish(type: AppEventType, payload: unknown, source: string = 'system') {
     const event: AppEvent = {
       type,
       payload,

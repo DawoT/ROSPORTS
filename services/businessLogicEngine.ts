@@ -36,7 +36,7 @@ export const BusinessLogicEngine = {
     return product.price > 400 && product.status === 'active';
   },
 
-  calculateAthleteTier: (stats: any): string => {
+  calculateAthleteTier: (stats: { totalKm?: string } | undefined): string => {
     const km = parseFloat(stats?.totalKm || '0');
     if (km > 1000) return 'ELITE PLATINUM';
     if (km > 500) return 'GOLD PERFORMANCE';
