@@ -48,7 +48,7 @@ export const AIAssistantService = {
         },
       });
       return JSON.parse(response.text || '{}');
-    } catch (e) {
+    } catch (_e) {
       return {
         confidence: 0,
         detectedFaults: [],
@@ -67,7 +67,7 @@ export const AIAssistantService = {
         config: { responseMimeType: 'application/json' },
       });
       return JSON.parse(response.text || '[]');
-    } catch (e) {
+    } catch (_e) {
       return [];
     }
   },

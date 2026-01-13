@@ -1,4 +1,4 @@
-import { BillingData, OrderHistoryItem, PaymentItem } from '../types';
+import { BillingData, OrderHistoryItem } from '../types';
 
 export const FiscalService = {
   generateOrderId: (type: 'BOLETA' | 'FACTURA', channel: string): string => {

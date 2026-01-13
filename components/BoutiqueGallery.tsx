@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Maximize2, ChevronLeft, ChevronRight, Zap, Target, Search } from 'lucide-react';
+import { Search } from 'lucide-react';
 
 interface BoutiqueGalleryProps {
   images: string[];

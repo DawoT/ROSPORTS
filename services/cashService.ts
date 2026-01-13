@@ -1,4 +1,4 @@
-import { CashDenomination, CashSession, CashMovement } from '../types';
+import { CashDenomination, CashSession } from '../types';
 
 export const PERU_DENOMINATIONS: CashDenomination[] = [
   { value: 200, label: 'S/ 200', count: 0 },

@@ -27,7 +27,7 @@ interface ProductDetailsViewProps {
   onBack: () => void;
 }
 
-const ProductDetailsView: React.FC<ProductDetailsViewProps> = ({ product, onBack }) => {
+const ProductDetailsView: React.FC<ProductDetailsViewProps> = ({ product }) => {
   const { addToCart, toggleWishlist, wishlistItems, products, setView, setSelectedProduct } =
     useGlobal();
   const [selectedSize, setSelectedSize] = useState<number | null>(null);

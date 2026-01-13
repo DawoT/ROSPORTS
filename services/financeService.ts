@@ -3,7 +3,7 @@ import { BillingType } from '../types';
 export const FinanceService = {
   EXCHANGE_RATE: 3.75, // PEN per USD
 
-  calculateTaxes: (total: number, billingType: BillingType) => {
+  calculateTaxes: (total: number, _billingType: BillingType) => {
     // En Perú el IGV es 18% incluido en el PVP
     const base = total / 1.18;
     const tax = total - base;
