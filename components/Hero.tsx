@@ -10,7 +10,6 @@ import {
   Target,
 } from 'lucide-react';
 
-
 const Hero: React.FC<{ onShopClick: () => void }> = ({ onShopClick }) => {
   return (
     <section className='relative min-h-screen flex items-center pt-20 pb-32 overflow-hidden px-6 lg:px-20 bg-main'>

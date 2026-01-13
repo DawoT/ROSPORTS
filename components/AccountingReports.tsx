@@ -1,11 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import {
-  FileText,
-  Landmark,
-  Users,
-  Download,
-  ShieldCheck,
-} from 'lucide-react';
+import { FileText, Landmark, Users, Download, ShieldCheck } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { EnterpriseDataTable, TechnicalBadge } from './Primitives';
 import { ReportingService } from '../services/reportingService';

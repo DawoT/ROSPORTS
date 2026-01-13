@@ -31,8 +31,7 @@ export const LocalizationService = {
     for (const key of keys) {
       if (result && typeof result === 'object' && result !== null && key in result) {
         result = (result as Record<string, unknown>)[key];
-      }
-      else return path;
+      } else return path;
     }
     return typeof result === 'string' ? result : path;
   },

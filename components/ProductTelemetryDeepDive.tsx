@@ -1,11 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-  DollarSign,
-  Package,
-  Target,
-  Activity,
-  ArrowLeft,
-} from 'lucide-react';
+import { DollarSign, Package, Target, Activity, ArrowLeft } from 'lucide-react';
 import { Product } from '../types';
 
 interface ProductTelemetryDeepDiveProps {

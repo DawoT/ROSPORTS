@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Shield,
-  Server,
-  Lock,
-  Unlock,
-} from 'lucide-react';
+import { Shield, Server, Lock, Unlock } from 'lucide-react';
 import { SystemMonitor } from '../services/systemMonitorService';
 import { ModuleHealth, HealthStatus, NetworkStatus } from '../types';
 import { EnterpriseDataTable, TechnicalBadge } from './Primitives';

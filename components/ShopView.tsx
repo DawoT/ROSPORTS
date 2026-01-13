@@ -1,12 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import {
-  SlidersHorizontal,
-  ChevronDown,
-  Box,
-  LayoutGrid,
-  Search,
-  Zap,
-} from 'lucide-react';
+import { SlidersHorizontal, ChevronDown, Box, LayoutGrid, Search, Zap } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { useCatalog } from '../hooks/useCatalog';
 import FilterSidebar from './FilterSidebar';

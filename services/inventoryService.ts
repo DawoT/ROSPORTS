@@ -67,7 +67,7 @@ export const InventoryService = {
    * Calcula el ajuste necesario entre el stock en sistema y el conteo físico.
    * Utilizado por el componente de conciliación de inventario.
    */
-  createStockAdjustment: (current: number, actual: number, ) => {
+  createStockAdjustment: (current: number, actual: number) => {
     const diff = actual - current;
     if (diff === 0) return { adjustmentType: 'none', diff: 0 };
     return {

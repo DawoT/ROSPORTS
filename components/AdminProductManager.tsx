@@ -244,7 +244,7 @@ const ProductEditor: React.FC<{
       <div
         className='absolute inset-0 bg-main/90 backdrop-blur-xl animate-in fade-in'
         onClick={onClose}
-       />
+      />
       <div className='relative w-full max-w-6xl h-[85vh] glass-card rounded-[3rem] border-content-muted/10 flex flex-col overflow-hidden animate-in zoom-in-95 bg-surface shadow-2xl'>
         <div className='p-8 border-b border-content-muted/10 flex items-center justify-between bg-content-muted/[0.02]'>
           <h3 className='text-2xl font-space font-bold text-content-primary uppercase tracking-tight'>

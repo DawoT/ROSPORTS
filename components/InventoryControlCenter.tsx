@@ -32,13 +32,8 @@ const InventoryControlCenter: React.FC<InventoryControlCenterProps> = ({
   nodes,
   onStockAction,
 }) => {
-  const {
-    addNotification,
-    rebalanceSuggestions,
-    runRebalanceAudit,
-    addAuditLog,
-    user,
-  } = useGlobal();
+  const { addNotification, rebalanceSuggestions, runRebalanceAudit, addAuditLog, user } =
+    useGlobal();
   const [activeTab, setActiveTab] = useState<
     'realtime' | 'movements' | 'manual' | 'transfers' | 'rebalance'
   >('realtime');

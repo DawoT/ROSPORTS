@@ -197,9 +197,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [wishlistItems, setWishlistItems] = useState<WishlistItem[]>(() =>
     LocalStorageRepo.get('wishlist', []),
   );
-  const [movements] = useState<StockMovement[]>(() =>
-    LocalStorageRepo.get('movements', []),
-  );
+  const [movements] = useState<StockMovement[]>(() => LocalStorageRepo.get('movements', []));
   const [rmaCases, setRMACases] = useState<RMACase[]>(() => LocalStorageRepo.get('rma-cases', []));
   const [currentView, setView] = useState<ViewState>(() =>
     LocalStorageRepo.get('current-view', 'home'),
@@ -295,7 +293,11 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   ];
 
   const addNotification = useCallback(
-    (message: string, type: 'success' | 'info' | 'error' | 'warning' = 'success', duration = 4000) => {
+    (
+      message: string,
+      type: 'success' | 'info' | 'error' | 'warning' = 'success',
+      duration = 4000,
+    ) => {
       const id = Date.now();
       setNotifications((prev) => [...prev, { id, message, type, duration }]);
       setTimeout(() => setNotifications((p) => p.filter((n) => n.id !== id)), duration);

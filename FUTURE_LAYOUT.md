@@ -1,13 +1,15 @@
 # Future Layout Recommendation
 
 ## Current State
-*   Source files mixed in root (`/app/*.tsx`).
-*   Components flat or loosely grouped.
-*   Services and Utils in root folders.
+
+- Source files mixed in root (`/app/*.tsx`).
+- Components flat or loosely grouped.
+- Services and Utils in root folders.
 
 ## Target Architecture (Phase 2 Refactor)
 
 ### Directory Structure
+
 ```
 src/
 ├── assets/          # Static assets
@@ -29,11 +31,13 @@ src/
 ```
 
 ### Configuration Changes
-*   **Vite:** Update `root` to `src` or configure aliases.
-*   **TSConfig:** Set `baseUrl` to `./src` and paths `@/*` to `./src/*`.
-*   **ESLint:** Scope rules to `src/`.
+
+- **Vite:** Update `root` to `src` or configure aliases.
+- **TSConfig:** Set `baseUrl` to `./src` and paths `@/*` to `./src/*`.
+- **ESLint:** Scope rules to `src/`.
 
 ### Migration Strategy
+
 1.  **Move**: Move all source files to `src/`.
 2.  **Alias**: Setup `@/` alias to avoid relative path hell (`../../../`).
 3.  **Modularize**: Break down `types.ts` (currently monolithic) into domain files.
