@@ -27,11 +27,13 @@ const DICTIONARY = {
 export const LocalizationService = {
   t: (path: string, lang: 'es' = 'es'): string => {
     const keys = path.split('.');
-    let result: any = DICTIONARY[lang];
+    let result: unknown = DICTIONARY[lang];
     for (const key of keys) {
-      if (result && result[key]) result = result[key];
+      if (result && typeof result === 'object' && result !== null && key in result) {
+        result = (result as Record<string, unknown>)[key];
+      }
       else return path;
     }
-    return result;
+    return typeof result === 'string' ? result : path;
   },
 };

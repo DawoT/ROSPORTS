@@ -7,7 +7,7 @@ export const SecurityService = {
    * Genera un hash determinista basado en el contenido y el hash anterior.
    * En producción usaría Crypto Subtle API (SHA-256).
    */
-  generateIntegrityHash: (content: any, previousHash: string = ''): string => {
+  generateIntegrityHash: (content: unknown, previousHash: string = ''): string => {
     const str = JSON.stringify(content) + previousHash;
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -21,7 +21,7 @@ export const SecurityService = {
   /**
    * Valida la cadena de auditoría para detectar manipulaciones.
    */
-  validateChain: (logs: any[]): boolean => {
+  validateChain: (): boolean => {
     // Simulación de validación de cadena
     return true;
   },

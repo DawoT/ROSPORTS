@@ -34,13 +34,13 @@ class CommandBusService {
     try {
       const effects = await handler(cmd);
       return { success: true, transactionId, timestamp: new Date().toISOString(), effects };
-    } catch (err: any) {
+    } catch (err: unknown) {
       return {
         success: false,
         transactionId,
         timestamp: new Date().toISOString(),
         effects: [],
-        error: err.message || 'Execution fault',
+        error: err instanceof Error ? err.message : 'Execution fault',
       };
     }
   }
