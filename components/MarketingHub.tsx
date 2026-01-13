@@ -302,7 +302,9 @@ const CampaignEditor: React.FC<{
               </label>
               <select
                 value={form.type}
-                onChange={(e) => setForm({ ...form, type: e.target.value as any })}
+                onChange={(e) =>
+                  setForm({ ...form, type: e.target.value as Campaign['type'] })
+                }
                 className='w-full p-5 glass border-content-muted/10 rounded-2xl text-content-primary bg-main/50 text-xs font-bold appearance-none outline-none focus:border-purple-500'
               >
                 <option value='percentage'>DESCUENTO PORCENTUAL (%)</option>

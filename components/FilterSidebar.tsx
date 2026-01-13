@@ -24,11 +24,11 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({
   onClose,
   filters,
   setFilters,
-  brands,
+  brands: _brands,
   categories,
 }) => {
-  const toggleItem = (list: any[], item: any) =>
-    list.includes(item) ? list.filter((i) => i !== item) : [...list, item];
+  const toggleItem = (list: (string | number)[], item: string | number) =>
+    list.includes(item as never) ? list.filter((i) => i !== item) : [...list, item];
 
   return (
     <>
