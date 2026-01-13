@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { GoogleGenAI, Modality } from '@google/genai';
+import { GoogleGenAI, Modality, Session } from '@google/genai';
 import { Mic, MicOff, RefreshCw } from 'lucide-react';
 import { useGlobal } from '../context/GlobalContext';
 import { ROSPORTS_TOOLS } from '../services/aiAssistantService';
@@ -11,7 +11,7 @@ const LiveSupportAssistant: React.FC = () => {
   const [status, setStatus] = useState<'esperando' | 'escuchando' | 'respondiendo' | 'procesando'>(
     'esperando',
   );
-  const sessionRef = useRef<any>(null);
+  const sessionRef = useRef<Session | null>(null);
 
   const startSession = async () => {
     setIsConnecting(true);
@@ -73,7 +73,7 @@ const LiveSupportAssistant: React.FC = () => {
       });
 
       sessionRef.current = await sessionPromise;
-    } catch () {
+    } catch {
       setIsConnecting(false);
     }
   };
