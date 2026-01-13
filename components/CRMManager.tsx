@@ -3,7 +3,6 @@ import {
   Users,
   UserPlus,
   Search,
-  User as UserIcon,
   Edit3,
   X,
   Fingerprint,

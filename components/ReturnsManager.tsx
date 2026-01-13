@@ -11,12 +11,12 @@ import {
 import { useGlobal } from '../context/GlobalContext';
 import { RMACase } from '../types';
 import { AIAssistantService } from '../services/aiAssistantService';
-import { TechnicalBadge, EnterpriseButton } from './Primitives';
+import { TechnicalBadge } from './Primitives';
 
 const ReturnsManager: React.FC = () => {
   const { rmaCases, setRMACases, addAuditLog, addNotification } = useGlobal();
   const [filterStatus] = useState<RMACase['status'] | 'all'>('all');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
 
