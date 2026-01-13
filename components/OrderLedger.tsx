@@ -94,7 +94,7 @@ const OrderLedger: React.FC = () => {
           {['ALL', 'WEB', 'LOCAL_STORE', 'WHATSAPP'].map((ch) => (
             <button
               key={ch}
-              onClick={() => setFilterChannel(ch as any)}
+              onClick={() => setFilterChannel(ch as SaleChannel | 'ALL')}
               className={`px-6 md:px-8 py-3 md:py-5 rounded-xl md:rounded-2xl text-[8px] md:text-[9px] font-black uppercase tracking-widest transition-all shrink-0 min-h-[44px] ${filterChannel === ch ? 'bg-blue-600 text-white shadow-lg' : 'glass border-content-muted/10 text-content-muted hover:text-content-primary hover:bg-main'}`}
             >
               {ch}
