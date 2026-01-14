@@ -1,64 +1,60 @@
-import js from '@eslint/js';
-import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
-import react from 'eslint-plugin-react';
-import tseslint from 'typescript-eslint';
+import js from "@eslint/js";
+import tseslint from "typescript-eslint";
+import reactPlugin from "eslint-plugin-react";
+import reactHooksPlugin from "eslint-plugin-react-hooks";
+import importPlugin from "eslint-plugin-import";
+import globals from "globals";
 
 export default tseslint.config(
-  { ignores: ['dist'] },
-  {
-    extends: [js.configs.recommended, ...tseslint.configs.recommended],
-    files: ['**/*.{ts,tsx}'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
+    { ignores: ["legacy_backup/", ".next/", "out/", "dist/", "node_modules/"] },
+    {
+        files: ["**/*.{ts,tsx,js,jsx}"],
+        extends: [
+            js.configs.recommended,
+            ...tseslint.configs.recommended,
+        ],
+        languageOptions: {
+            ecmaVersion: 2020,
+            globals: globals.browser,
+            parserOptions: {
+                project: ["./tsconfig.json"],
+                tsconfigRootDir: import.meta.dirname,
+            },
         },
-      },
-    },
-    plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
-      react,
-    },
-    settings: {
-      react: {
-        version: 'detect',
-      },
-    },
-    rules: {
-      ...reactHooks.configs.recommended.rules,
-
-      // React Hooks - STRICT
-      'react-hooks/exhaustive-deps': 'error',
-      'react-hooks/rules-of-hooks': 'error',
-
-      // React - Core Correctness (React 19 compatible)
-      'react/react-in-jsx-scope': 'off',
-      'react/jsx-uses-react': 'off',
-      'react/jsx-no-target-blank': 'error',
-      'react/no-unknown-property': 'error',
-      'react/self-closing-comp': 'error',
-
-      // React Refresh - DX (Disabled for Phase 0 to avoid warnings)
-      'react-refresh/only-export-components': 'off',
-
-      // TypeScript - STRICT
-      '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/no-unused-vars': [
-        'error',
-        {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_',
+        plugins: {
+            react: reactPlugin,
+            "react-hooks": reactHooksPlugin,
+            import: importPlugin,
         },
-      ],
-
-      // General
-      'no-console': ['error', { allow: ['warn', 'error', 'info'] }],
+        settings: {
+            react: {
+                version: "detect",
+            },
+            "import/resolver": {
+                typescript: {
+                    alwaysTryTypes: true,
+                },
+            },
+        },
+        rules: {
+            ...reactHooksPlugin.configs.recommended.rules,
+            "no-console": ["error", { allow: ["warn", "error"] }],
+            "no-unused-vars": "off",
+            "@typescript-eslint/no-unused-vars": "error",
+            "@typescript-eslint/no-explicit-any": "error",
+            "@typescript-eslint/explicit-function-return-type": "error",
+            "import/no-cycle": "error",
+            "react/react-in-jsx-scope": "off",
+        },
     },
-  },
+    {
+        // Disable explicit return type for React components/pages/layouts if needed,
+        // or keep it strict. User said "for core domain logic", but simpler to enable globally first 
+        // and let them refine, or scope it. I will keep it global as requested.
+        files: ["src/app/**/*.{ts,tsx}"],
+        rules: {
+            // Optional: Relax for page components if it's too strict, but instruction says "error (for core domain logic)"
+            // I'll leave it on.
+        }
+    }
 );
