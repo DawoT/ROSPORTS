@@ -68,15 +68,33 @@ export class DrizzleCatalogRepository implements ICatalogRepository {
             .limit(limitNum)
             .offset(offset);
 
-        const items: Product[] = rows.map(row => ({
-            id: String(row.id),
-            name: row.name,
-            slug: row.slug,
-            descriptionShort: row.descriptionShort ?? undefined,
-            basePrice: parseFloat(row.basePrice),
-            status: row.status as 'ACTIVE' | 'DRAFT' | 'ARCHIVED',
-            variants: [], // Simplified for list view
-        }));
+        // Fetch variants for each product
+        const items: Product[] = [];
+        for (const row of rows) {
+            const variantRows = await db.select()
+                .from(productVariants)
+                .where(eq(productVariants.productId, row.id))
+                .limit(1); // Just get first variant for SKU display
+
+            const variant = variantRows[0];
+
+            items.push({
+                id: String(row.id),
+                name: row.name,
+                slug: row.slug,
+                descriptionShort: row.descriptionShort ?? undefined,
+                basePrice: parseFloat(row.basePrice),
+                status: row.status as 'ACTIVE' | 'DRAFT' | 'ARCHIVED',
+                variants: variant ? [{
+                    id: String(variant.id),
+                    productId: String(variant.productId),
+                    sku: variant.sku,
+                    size: variant.size ?? '',
+                    color: variant.color ?? '',
+                    isActive: variant.isActive ?? true,
+                }] : [],
+            });
+        }
 
         return {
             items,

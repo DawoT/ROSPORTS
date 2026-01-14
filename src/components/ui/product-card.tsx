@@ -49,7 +49,7 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
     };
 
     return (
-        <div className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow hover:shadow-md">
+        <div className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg">
             {/* Image Container */}
             <div className="relative aspect-square overflow-hidden bg-gray-100">
                 <img
@@ -59,24 +59,24 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
                 />
                 {/* Status Badge */}
                 {product.status === 'ACTIVE' && (
-                    <span className="absolute top-2 left-2 rounded-full bg-green-500 px-2 py-1 text-xs font-medium text-white">
+                    <span className="absolute top-3 left-3 rounded-full bg-green-500 px-3 py-1 text-xs font-semibold text-white shadow-sm">
                         Disponible
                     </span>
                 )}
             </div>
 
             {/* Content */}
-            <div className="flex flex-1 flex-col p-4">
+            <div className="flex flex-1 flex-col p-5">
                 {/* SKU */}
-                <p className="text-xs text-gray-500 mb-1">SKU: {sku}</p>
+                <p className="text-xs text-gray-400 mb-2 font-mono">SKU: {sku}</p>
 
                 {/* Name */}
-                <h3 className="text-sm font-medium text-gray-900 line-clamp-2 mb-2">
+                <h3 className="text-base font-semibold text-gray-900 line-clamp-2 mb-3 min-h-[2.5rem]">
                     {product.name}
                 </h3>
 
                 {/* Price */}
-                <p className="text-lg font-bold text-gray-900 mt-auto">
+                <p className="text-xl font-bold text-blue-600 mb-4">
                     {formattedPrice}
                 </p>
 
@@ -84,7 +84,7 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
                 <button
                     onClick={handleAddToCart}
                     disabled={isPending || !variantId}
-                    className="mt-3 flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300"
+                    className="mt-auto flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:bg-gray-300"
                 >
                     {isPending ? (
                         <>
