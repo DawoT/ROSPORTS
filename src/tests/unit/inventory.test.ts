@@ -1,9 +1,9 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { ReserveStockUseCase } from '@/core/use-cases/inventory/reserve-stock.use-case';
 import { StockInsufficientError } from '@/lib/errors';
 import { MockInventoryRepository } from '@/infrastructure/adapters/mock-inventory.repository';
 
-// 3. Test Suite (Refactored for Phase 4)
+// 3. Test Suite (Refactored for Phase 4.5 - Strict Imports)
 describe('ReserveStockUseCase (Integration with Mock Repo)', () => {
   let useCase: ReserveStockUseCase;
   let mockRepo: MockInventoryRepository;
@@ -14,6 +14,7 @@ describe('ReserveStockUseCase (Integration with Mock Repo)', () => {
       'SKU-123': 10,
       'SKU-LOW': 1
     });
+    // CRITICAL: We are testing the real imported class, not a local mock
     useCase = new ReserveStockUseCase(mockRepo);
   });
 
