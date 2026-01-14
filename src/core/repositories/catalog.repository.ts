@@ -1,4 +1,22 @@
-import { Product } from "@/core/domain/types";
+import { Product } from '@/core/domain/types';
+
+/**
+ * Search result structure for paginated product lists.
+ */
+export interface ProductSearchResult {
+  items: Product[];
+  total: number;
+  page: number;
+  totalPages: number;
+}
+
+/**
+ * Stock availability status for a variant.
+ */
+export interface StockStatus {
+  quantityAvailable: number;
+  isInStock: boolean;
+}
 
 /**
  * Interface for Catalog Data Access (Port).
@@ -15,28 +33,23 @@ export interface ICatalogRepository {
    * Find a product by its internal ID.
    * @param id The product ID.
    */
-  findById(id: string): Promise<Product | null>;
+  findById?(id: string): Promise<Product | null>;
 
   /**
    * Search for products based on filters.
-   * @param filters - Pagination and filtering criteria
+   * @param query - Search query string (optional)
+   * @param page - Page number (1-indexed)
+   * @param limit - Items per page
    */
-  searchProducts(filters: {
-    page: number;
-    limit: number;
-    query?: string;
-    minPrice?: number;
-    maxPrice?: number;
-    category?: string;
-    brand?: string;
-  }): Promise<{ items: Product[]; total: number }>;
+  searchProducts(
+    query?: string,
+    page?: number,
+    limit?: number
+  ): Promise<ProductSearchResult>;
 
   /**
    * Get the current stock status for a specific variant.
-   * @param sku - The Stock Keeping Unit
-   * @returns 'IN_STOCK' | 'OUT_OF_STOCK' | 'LOW_STOCK'
+   * @param variantId - The variant ID
    */
-  getStockStatus(
-    sku: string,
-  ): Promise<"IN_STOCK" | "OUT_OF_STOCK" | "LOW_STOCK">;
+  getStockStatus(variantId: string): Promise<StockStatus>;
 }
