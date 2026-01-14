@@ -1,68 +1,50 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { IInventoryRepository } from "@/core/repositories/inventory.repository";
-import { StockInsufficientError } from "@/lib/errors";
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { ReserveStockUseCase } from '@/core/use-cases/inventory/reserve-stock.use-case';
+import { StockInsufficientError } from '@/lib/errors';
+import { MockInventoryRepository } from '@/infrastructure/adapters/mock-inventory.repository';
 
-// 1. Mock Implementations
-const mockInventoryRepo = {
-  getQuantityOnHand: vi.fn(),
-  reserveStock: vi.fn(),
-  commitReservation: vi.fn(),
-  releaseReservation: vi.fn(),
-} as unknown as IInventoryRepository;
-
-// 2. Hypothetical Use Case (Inline for TDD, normally in src/core/use-cases)
-class ReserveStockUseCase {
-  constructor(private repo: IInventoryRepository) {}
-
-  async execute(
-    sku: string,
-    quantity: number,
-    sessionId: string,
-  ): Promise<boolean> {
-    const available = await this.repo.getQuantityOnHand(sku);
-    if (available < quantity) {
-      throw new StockInsufficientError(sku, quantity, available);
-    }
-    return this.repo.reserveStock(sku, quantity, sessionId);
-  }
-}
-
-// 3. Test Suite
-describe("ReserveStockUseCase (TDD)", () => {
+// 3. Test Suite (Refactored for Phase 4)
+describe('ReserveStockUseCase (Integration with Mock Repo)', () => {
   let useCase: ReserveStockUseCase;
+  let mockRepo: MockInventoryRepository;
 
   beforeEach(() => {
-    vi.clearAllMocks();
-    useCase = new ReserveStockUseCase(mockInventoryRepo);
+    // Setup Mock Repo with initial state
+    mockRepo = new MockInventoryRepository({
+      'SKU-123': 10,
+      'SKU-LOW': 1
+    });
+    useCase = new ReserveStockUseCase(mockRepo);
   });
 
-  it("should reserve stock successfull when inventory is sufficient", async () => {
-    // Arrange
-    vi.mocked(mockInventoryRepo.getQuantityOnHand).mockResolvedValue(10);
-    vi.mocked(mockInventoryRepo.reserveStock).mockResolvedValue(true);
-
+  it('should reserve stock successfully when inventory is sufficient', async () => {
     // Act
-    const result = await useCase.execute("SKU-123", 2, "session-abc");
+    const result = await useCase.execute({
+      variantId: 'SKU-123',
+      quantity: 2,
+      productId: 'prod_1'
+    }, 'session-abc');
 
     // Assert
     expect(result).toBe(true);
-    expect(mockInventoryRepo.getQuantityOnHand).toHaveBeenCalledWith("SKU-123");
-    expect(mockInventoryRepo.reserveStock).toHaveBeenCalledWith(
-      "SKU-123",
-      2,
-      "session-abc",
-    );
+
+    // Check internal state of mock repo
+    const remaining = await mockRepo.getQuantityOnHand('SKU-123');
+    expect(remaining).toBe(8); // 10 - 2
   });
 
-  it("should throw StockInsufficientError when inventory is low", async () => {
-    // Arrange
-    vi.mocked(mockInventoryRepo.getQuantityOnHand).mockResolvedValue(1); // Only 1 available
-
+  it('should throw StockInsufficientError when inventory is low', async () => {
     // Act & Assert
-    await expect(useCase.execute("SKU-123", 5, "session-abc")).rejects.toThrow(
-      StockInsufficientError,
-    );
+    await expect(useCase.execute({
+      variantId: 'SKU-LOW',
+      quantity: 5,
+      productId: 'prod_2'
+    }, 'session-abc'))
+      .rejects
+      .toThrow(StockInsufficientError);
 
-    expect(mockInventoryRepo.reserveStock).not.toHaveBeenCalled();
+    // Verify stock did not change
+    const remaining = await mockRepo.getQuantityOnHand('SKU-LOW');
+    expect(remaining).toBe(1);
   });
 });
