@@ -103,6 +103,11 @@ export async function placeOrderAction(
         redirect(`/checkout/success/${result.orderId}`);
 
     } catch (error) {
+        // IMPORTANT: Next.js redirect() throws a special error that must be re-thrown
+        if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+            throw error;
+        }
+
         if (error instanceof StockInsufficientError) {
             return {
                 success: false,
@@ -110,6 +115,8 @@ export async function placeOrderAction(
             };
         }
 
+        // Log unexpected errors (in production, use a proper logger)
+        // eslint-disable-next-line no-console
         console.error('Checkout Error:', error);
 
         return {
