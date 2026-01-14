@@ -1,3 +1,4 @@
+# ERD
 erDiagram
 
     %% ======================================================================================
@@ -128,7 +129,7 @@ erDiagram
         bigint from_location_id FK
         bigint to_location_id FK
         bigint user_id FK
-        string movement_type
+        string movement_type "SALE, PURCHASE, ADJUSTMENT, TRANSFER"
         int quantity
         string reference_doc
         text notes
@@ -139,9 +140,9 @@ erDiagram
         bigint id PK
         bigint variant_id FK
         bigint location_id FK
-        int snapshot_quantity
-        int discrepancy
-        string snapshot_type
+        int snapshot_quantity "Physical Count Result"
+        int discrepancy "Difference vs System"
+        string snapshot_type "CYCLIC_COUNT, FULL_AUDIT"
         bigint triggered_by FK
         timestamp snapshot_at
     }
@@ -312,7 +313,7 @@ erDiagram
     payments {
         bigint id PK
         bigint order_id FK
-        string idempotency_key "UNIQUE"
+        string idempotency_key "UNIQUE CONSTRAINT"
         string method
         decimal amount
         string transaction_id
@@ -357,7 +358,28 @@ erDiagram
     cash_sessions ||--o{ payments : "aggregates cash"
 
     %% ======================================================================================
-    %% 5. ELECTRONIC INVOICING (SUNAT)
+    %% 5. LOGISTICS & SHIPPING (NEW MODULE)
+    %% ======================================================================================
+
+    shipments {
+        bigint id PK
+        bigint order_id FK
+        string courier_name "Olva, Shalom, Rappi"
+        string tracking_code
+        string service_level
+        decimal cost_actual
+        string label_url
+        string status "LABEL_CREATED, PICKED_UP, IN_TRANSIT, DELIVERED, FAILED"
+        timestamp estimated_delivery
+        timestamp shipped_at
+        timestamp delivered_at
+    }
+    
+    %% Relationships
+    orders ||--o{ shipments : "dispatched via"
+
+    %% ======================================================================================
+    %% 6. ELECTRONIC INVOICING (SUNAT)
     %% ======================================================================================
 
     electronic_documents {
@@ -421,7 +443,7 @@ erDiagram
     electronic_documents ||--o| voided_documents : "can be voided"
 
     %% ======================================================================================
-    %% 6. SYSTEM CONFIG & REPORTING (BI)
+    %% 7. SYSTEM CONFIG & REPORTING (BI)
     %% ======================================================================================
 
     system_settings {
@@ -446,7 +468,7 @@ erDiagram
     }
 
     %% ======================================================================================
-    %% 7. NOTIFICATIONS & MARKETING
+    %% 8. NOTIFICATIONS & MARKETING
     %% ======================================================================================
 
     promotions {
@@ -514,7 +536,7 @@ erDiagram
     notification_templates ||--o{ notifications : "formats"
 
     %% ======================================================================================
-    %% 8. SECURITY & LOGS
+    %% 9. SECURITY & LOGS
     %% ======================================================================================
 
     users {
