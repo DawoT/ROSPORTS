@@ -3,22 +3,21 @@
 import Link from 'next/link';
 import { ShoppingBag } from 'lucide-react';
 import { CheckoutForm } from '@/components/checkout/checkout-form';
-
-// For the Walking Skeleton, we'll use mock cart data
-// In Phase 9, this will be replaced with real cart state from context/DB
-const MOCK_CART_ITEMS = [
-    {
-        variantId: '1',
-        productId: '1',
-        productName: 'Nike Air Max 270 - Talla 42',
-        quantity: 1,
-        unitPrice: 459.90,
-    },
-];
+import { useCart } from '@/context/cart-context';
 
 export default function CheckoutPage(): React.JSX.Element {
-    // In a real implementation, cart items would come from context or cookies
-    const cartItems = MOCK_CART_ITEMS;
+    // Get real cart items from context
+    const { items } = useCart();
+
+    // Map cart items to checkout format
+    const cartItems = items.map(item => ({
+        variantId: item.sku, // Use SKU for inventory lookup (not numeric ID)
+        productId: item.productId,
+        productName: item.productName,
+        sku: item.sku,
+        quantity: item.quantity,
+        unitPrice: item.unitPrice,
+    }));
 
     if (cartItems.length === 0) {
         return (

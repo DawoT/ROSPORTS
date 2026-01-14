@@ -6,9 +6,10 @@ import { placeOrderAction, CheckoutActionState } from '@/interface-adapters/acti
 import { Loader2 } from 'lucide-react';
 
 interface CartItemForCheckout {
-    variantId: string;
+    variantId: string; // This is actually the SKU for consistency
     productId: string;
     productName: string;
+    sku: string;
     quantity: number;
     unitPrice: number;
 }
@@ -18,7 +19,7 @@ interface CheckoutFormProps {
 }
 
 export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Element {
-    const { setCartCount } = useCart();
+    const { clearCart } = useCart();
     const [state, formAction, isPending] = useActionState<CheckoutActionState | null, FormData>(
         placeOrderAction,
         null
@@ -33,9 +34,9 @@ export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Elemen
 
     useEffect(() => {
         if (state?.success) {
-            setCartCount(0);
+            clearCart();
         }
-    }, [state, setCartCount]);
+    }, [state, clearCart]);
 
     return (
         <form action={formAction} className="grid grid-cols-1 lg:grid-cols-2 gap-8">

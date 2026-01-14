@@ -1,5 +1,5 @@
 import { db } from '../database/connection';
-import { customers, orders, orderItems, productVariants, products } from '../database/schema';
+import { customers, orders, orderItems, productVariants, products, inventoryStock } from '../database/schema';
 import { eq, sql } from 'drizzle-orm';
 import { IOrderRepository, CustomerInput, OrderItemInput } from '@/core/repositories/order.repository';
 import { Order, CartItem } from '@/core/domain/types';
@@ -35,6 +35,7 @@ export class DrizzleOrderRepository implements IOrderRepository {
             }
 
             // 2. Fetch variant prices and calculate totals
+            // IMPORTANT: variantId here is actually the SKU (for inventory lookup consistency)
             let subtotal = 0;
             const orderItemsData: Array<{
                 variantId: number;
@@ -46,8 +47,7 @@ export class DrizzleOrderRepository implements IOrderRepository {
             }> = [];
 
             for (const item of items) {
-                const variantId = parseInt(item.variantId);
-
+                // Look up variant by SKU (not by numeric ID)
                 const [variant] = await tx.select({
                     id: productVariants.id,
                     sku: productVariants.sku,
@@ -55,10 +55,10 @@ export class DrizzleOrderRepository implements IOrderRepository {
                     productId: productVariants.productId,
                 })
                     .from(productVariants)
-                    .where(eq(productVariants.id, variantId));
+                    .where(eq(productVariants.sku, item.variantId));
 
                 if (!variant) {
-                    throw new Error(`Variant ${item.variantId} not found`);
+                    throw new Error(`Variant with SKU ${item.variantId} not found`);
                 }
 
                 // Get product for name and base price
@@ -109,16 +109,15 @@ export class DrizzleOrderRepository implements IOrderRepository {
                 });
             }
 
-            // 5. Deduct stock (commit the sale)
-            for (const item of items) {
-                const variantId = parseInt(item.variantId);
-
+            // 5. Deduct stock (commit the sale) - using variant ID from lookup
+            for (const itemData of orderItemsData) {
                 await tx.execute(sql`
           UPDATE inventory_stock 
-          SET quantity_on_hand = quantity_on_hand - ${item.quantity},
+          SET quantity_on_hand = quantity_on_hand - ${itemData.quantity},
+              quantity_reserved = GREATEST(quantity_reserved - ${itemData.quantity}, 0),
               version = version + 1,
               last_updated_at = NOW()
-          WHERE variant_id = ${variantId}
+          WHERE variant_id = ${itemData.variantId}
         `);
             }
 
