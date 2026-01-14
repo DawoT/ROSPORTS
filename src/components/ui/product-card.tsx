@@ -12,7 +12,7 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
     const [isPending, startTransition] = useTransition();
-    const { incrementCart } = useCart();
+    const { addItem, openCart } = useCart();
 
     // Get the first variant's SKU or default
     const firstVariant = product.variants?.[0];
@@ -33,15 +33,25 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
 
         startTransition(async () => {
             const formData = new FormData();
-            formData.append('variantId', variantId);
+            // Pass SKU for inventory lookup (the repository expects SKU)
+            formData.append('variantId', sku);
             formData.append('productId', product.id);
             formData.append('quantity', '1');
 
             const result = await addToCartAction(null, formData);
 
             if (result.success) {
-                incrementCart();
-                alert('¡Añadido al carrito!');
+                // Add to local cart state
+                addItem({
+                    variantId,
+                    productId: product.id,
+                    productName: product.name,
+                    sku,
+                    quantity: 1,
+                    unitPrice: product.basePrice,
+                });
+                // Open cart sidebar
+                openCart();
             } else {
                 alert(result.message || 'Error adding to cart');
             }
