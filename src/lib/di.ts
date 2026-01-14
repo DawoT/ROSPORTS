@@ -1,8 +1,10 @@
 import { IInventoryRepository } from '@/core/repositories/inventory.repository';
 import { ICatalogRepository } from '@/core/repositories/catalog.repository';
+import { IOrderRepository } from '@/core/repositories/order.repository';
 import { MockInventoryRepository } from '@/infrastructure/adapters/mock-inventory.repository';
 import { DrizzleInventoryRepository } from '@/infrastructure/adapters/drizzle-inventory.repository';
 import { DrizzleCatalogRepository } from '@/infrastructure/adapters/drizzle-catalog.repository';
+import { DrizzleOrderRepository } from '@/infrastructure/adapters/drizzle-order.repository';
 
 /**
  * Simple Dependency Injection Container.
@@ -11,6 +13,7 @@ import { DrizzleCatalogRepository } from '@/infrastructure/adapters/drizzle-cata
 
 let inventoryRepoInstance: IInventoryRepository | null = null;
 let catalogRepoInstance: ICatalogRepository | null = null;
+let orderRepoInstance: IOrderRepository | null = null;
 
 export function getInventoryRepository(): IInventoryRepository {
     if (inventoryRepoInstance) return inventoryRepoInstance;
@@ -38,8 +41,17 @@ export function getCatalogRepository(): ICatalogRepository {
     return catalogRepoInstance;
 }
 
+export function getOrderRepository(): IOrderRepository {
+    if (orderRepoInstance) return orderRepoInstance;
+
+    orderRepoInstance = new DrizzleOrderRepository();
+
+    return orderRepoInstance;
+}
+
 // Reset functions for testing
 export function resetRepositories(): void {
     inventoryRepoInstance = null;
     catalogRepoInstance = null;
+    orderRepoInstance = null;
 }

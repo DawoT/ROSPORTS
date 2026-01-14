@@ -1,4 +1,4 @@
-import { pgTable, serial, text, decimal, boolean, timestamp, jsonb, bigint, integer, bigserial } from 'drizzle-orm/pg-core';
+import { pgTable, serial, text, decimal, boolean, timestamp, bigint, integer, bigserial } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 /**
@@ -10,9 +10,8 @@ export const products = pgTable('products', {
     slug: text('slug').notNull().unique(),
     descriptionShort: text('description_short'),
     descriptionLong: text('description_long'),
-    // Using decimal with ample precision for currency
     basePrice: decimal('base_price', { precision: 10, scale: 2 }).notNull(),
-    status: text('status').notNull().default('DRAFT'), // ACTIVE, DRAFT, ARCHIVED
+    status: text('status').notNull().default('DRAFT'),
     createdAt: timestamp('created_at').defaultNow(),
     updatedAt: timestamp('updated_at').defaultNow(),
 });
@@ -43,20 +42,62 @@ export const locations = pgTable('locations', {
 
 /**
  * Inventory Stock Table
- * Using Optimistic Locking via 'version' column
  */
 export const inventoryStock = pgTable('inventory_stock', {
     id: bigserial('id', { mode: 'number' }).primaryKey(),
     locationId: integer('location_id').references(() => locations.id),
     variantId: bigint('variant_id', { mode: 'number' }).references(() => productVariants.id),
-
     quantityOnHand: integer('quantity_on_hand').notNull().default(0),
     quantityReserved: integer('quantity_reserved').notNull().default(0),
-
-    // Optimistic Lock Version
     version: bigint('version', { mode: 'number' }).notNull().default(0),
-
     lastUpdatedAt: timestamp('last_updated_at').defaultNow(),
+});
+
+/**
+ * Customers Table
+ */
+export const customers = pgTable('customers', {
+    id: bigserial('id', { mode: 'number' }).primaryKey(),
+    email: text('email').notNull().unique(),
+    firstName: text('first_name').notNull(),
+    lastName: text('last_name'),
+    phone: text('phone'),
+    address: text('address'),
+    city: text('city'),
+    createdAt: timestamp('created_at').defaultNow(),
+});
+
+/**
+ * Orders Table
+ */
+export const orders = pgTable('orders', {
+    id: bigserial('id', { mode: 'number' }).primaryKey(),
+    orderNumber: text('order_number').notNull().unique(),
+    customerId: bigint('customer_id', { mode: 'number' }).references(() => customers.id),
+    status: text('status').notNull().default('PENDING'), // PENDING, PAID, SHIPPED, DELIVERED, CANCELLED
+    paymentStatus: text('payment_status').notNull().default('UNPAID'), // UNPAID, PAID, REFUNDED
+    subtotal: decimal('subtotal', { precision: 10, scale: 2 }).notNull(),
+    taxTotal: decimal('tax_total', { precision: 10, scale: 2 }).notNull().default('0'),
+    shippingCost: decimal('shipping_cost', { precision: 10, scale: 2 }).notNull().default('0'),
+    totalAmount: decimal('total_amount', { precision: 10, scale: 2 }).notNull(),
+    shippingAddress: text('shipping_address'),
+    notes: text('notes'),
+    createdAt: timestamp('created_at').defaultNow(),
+    updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+/**
+ * Order Items Table
+ */
+export const orderItems = pgTable('order_items', {
+    id: bigserial('id', { mode: 'number' }).primaryKey(),
+    orderId: bigint('order_id', { mode: 'number' }).references(() => orders.id),
+    variantId: bigint('variant_id', { mode: 'number' }).references(() => productVariants.id),
+    productName: text('product_name').notNull(),
+    sku: text('sku').notNull(),
+    quantity: integer('quantity').notNull(),
+    unitPrice: decimal('unit_price', { precision: 10, scale: 2 }).notNull(),
+    totalPrice: decimal('total_price', { precision: 10, scale: 2 }).notNull(),
 });
 
 /**
@@ -82,5 +123,28 @@ export const inventoryRelations = relations(inventoryStock, ({ one }) => ({
     location: one(locations, {
         fields: [inventoryStock.locationId],
         references: [locations.id],
+    }),
+}));
+
+export const customersRelations = relations(customers, ({ many }) => ({
+    orders: many(orders),
+}));
+
+export const ordersRelations = relations(orders, ({ one, many }) => ({
+    customer: one(customers, {
+        fields: [orders.customerId],
+        references: [customers.id],
+    }),
+    items: many(orderItems),
+}));
+
+export const orderItemsRelations = relations(orderItems, ({ one }) => ({
+    order: one(orders, {
+        fields: [orderItems.orderId],
+        references: [orders.id],
+    }),
+    variant: one(productVariants, {
+        fields: [orderItems.variantId],
+        references: [productVariants.id],
     }),
 }));
