@@ -1,4 +1,14 @@
-import { pgTable, serial, text, decimal, boolean, timestamp, bigint, integer, bigserial } from 'drizzle-orm/pg-core';
+import {
+    pgTable,
+    serial,
+    text,
+    decimal,
+    boolean,
+    timestamp,
+    bigint,
+    integer,
+    bigserial,
+} from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 /**

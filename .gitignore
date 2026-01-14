@@ -17,6 +17,17 @@
 npm-debug.log*
 yarn-debug.log*
 error.log*
+*-debug.log
+*-debug-*.log
+test-output*.log
+*.log
+# testing
+/coverage
+/test-results
+/playwright-report
+*.txt
+!README.md
+!SECURITY.md
 
 # local env files
 .env*.local

@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode, useCallback } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 
 export interface CartItem {
     variantId: string;
@@ -33,6 +33,27 @@ interface CartProviderProps {
 export function CartProvider({ children }: CartProviderProps): React.JSX.Element {
     const [isOpen, setIsOpen] = useState(false);
     const [items, setItems] = useState<CartItem[]>([]);
+    const [isHydrated, setIsHydrated] = useState(false);
+
+    // Load from localStorage on mount
+    useEffect(() => {
+        const saved = localStorage.getItem('ro-cart');
+        if (saved) {
+            try {
+                setItems(JSON.parse(saved));
+            } catch (e) {
+                console.error('Failed to parse cart from localStorage', e);
+            }
+        }
+        setIsHydrated(true);
+    }, []);
+
+    // Save to localStorage on change
+    useEffect(() => {
+        if (isHydrated) {
+            localStorage.setItem('ro-cart', JSON.stringify(items));
+        }
+    }, [items, isHydrated]);
 
     const cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
 

@@ -44,6 +44,7 @@ export function Navbar(): React.JSX.Element {
                     {/* Cart Button */}
                     <button
                         onClick={toggleCart}
+                        data-testid="cart-trigger"
                         className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors"
                         aria-label="Open cart"
                     >

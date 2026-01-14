@@ -18,9 +18,7 @@ export interface ProductActionState<T = unknown> {
 /**
  * Server Action: Get product details by slug.
  */
-export async function getProductBySlugAction(
-    slug: string
-): Promise<ProductActionState<Product>> {
+export async function getProductBySlugAction(slug: string): Promise<ProductActionState<Product>> {
     try {
         const repo = getCatalogRepository();
         const useCase = new GetProductDetailsUseCase(repo);

@@ -1,8 +1,12 @@
 'use client';
 
 import { useActionState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { useCart } from '@/context/cart-context';
-import { placeOrderAction, CheckoutActionState } from '@/interface-adapters/actions/checkout.actions';
+import {
+    placeOrderAction,
+    CheckoutActionState,
+} from '@/interface-adapters/actions/checkout.actions';
 import { Loader2 } from 'lucide-react';
 
 interface CartItemForCheckout {
@@ -20,26 +24,28 @@ interface CheckoutFormProps {
 
 export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Element {
     const { clearCart } = useCart();
+    const router = useRouter();
     const [state, formAction, isPending] = useActionState<CheckoutActionState | null, FormData>(
         placeOrderAction,
         null
     );
 
     // Calculate totals on client for display
-    const subtotal = cartItems.reduce((sum, item) => sum + (item.unitPrice * item.quantity), 0);
+    const subtotal = cartItems.reduce((sum, item) => sum + item.unitPrice * item.quantity, 0);
     const formattedSubtotal = new Intl.NumberFormat('es-PE', {
         style: 'currency',
         currency: 'PEN',
     }).format(subtotal);
 
     useEffect(() => {
-        if (state?.success) {
+        if (state?.success && state.orderId) {
             clearCart();
+            router.push(`/checkout/success/${state.orderId}`);
         }
-    }, [state, clearCart]);
+    }, [state, clearCart, router]);
 
     return (
-        <form action={formAction} className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <form action={formAction} noValidate className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Left Column: Customer Form */}
             <div className="bg-white rounded-lg shadow-sm p-6">
                 <h2 className="text-xl font-semibold mb-6">Información de Envío</h2>
@@ -53,7 +59,10 @@ export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Elemen
                 <div className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div>
-                            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label
+                                htmlFor="firstName"
+                                className="block text-sm font-medium text-gray-700 mb-1"
+                            >
                                 Nombre *
                             </label>
                             <input
@@ -64,11 +73,16 @@ export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Elemen
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             />
                             {state?.errors?.firstName && (
-                                <p className="mt-1 text-sm text-red-500">{state.errors.firstName[0]}</p>
+                                <p className="mt-1 text-sm text-red-500">
+                                    {state.errors.firstName[0]}
+                                </p>
                             )}
                         </div>
                         <div>
-                            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                            <label
+                                htmlFor="lastName"
+                                className="block text-sm font-medium text-gray-700 mb-1"
+                            >
                                 Apellido
                             </label>
                             <input
@@ -81,7 +95,10 @@ export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Elemen
                     </div>
 
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label
+                            htmlFor="email"
+                            className="block text-sm font-medium text-gray-700 mb-1"
+                        >
                             Email *
                         </label>
                         <input
@@ -97,7 +114,10 @@ export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Elemen
                     </div>
 
                     <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label
+                            htmlFor="phone"
+                            className="block text-sm font-medium text-gray-700 mb-1"
+                        >
                             Teléfono
                         </label>
                         <input
@@ -109,7 +129,10 @@ export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Elemen
                     </div>
 
                     <div>
-                        <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label
+                            htmlFor="address"
+                            className="block text-sm font-medium text-gray-700 mb-1"
+                        >
                             Dirección *
                         </label>
                         <input
@@ -125,7 +148,10 @@ export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Elemen
                     </div>
 
                     <div>
-                        <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label
+                            htmlFor="city"
+                            className="block text-sm font-medium text-gray-700 mb-1"
+                        >
                             Ciudad *
                         </label>
                         <input
@@ -141,7 +167,10 @@ export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Elemen
                     </div>
 
                     <div>
-                        <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">
+                        <label
+                            htmlFor="notes"
+                            className="block text-sm font-medium text-gray-700 mb-1"
+                        >
                             Notas (opcional)
                         </label>
                         <textarea
@@ -160,7 +189,10 @@ export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Elemen
 
                 <div className="space-y-4 mb-6">
                     {cartItems.map((item, index) => (
-                        <div key={index} className="flex justify-between items-center py-2 border-b border-gray-100">
+                        <div
+                            key={index}
+                            className="flex justify-between items-center py-2 border-b border-gray-100"
+                        >
                             <div>
                                 <p className="font-medium text-gray-900">{item.productName}</p>
                                 <p className="text-sm text-gray-500">Cantidad: {item.quantity}</p>
@@ -194,11 +226,13 @@ export function CheckoutForm({ cartItems }: CheckoutFormProps): React.JSX.Elemen
                 <input
                     type="hidden"
                     name="cartItems"
-                    value={JSON.stringify(cartItems.map(item => ({
-                        variantId: item.variantId,
-                        productId: item.productId,
-                        quantity: item.quantity,
-                    })))}
+                    value={JSON.stringify(
+                        cartItems.map((item) => ({
+                            variantId: item.variantId,
+                            productId: item.productId,
+                            quantity: item.quantity,
+                        }))
+                    )}
                 />
 
                 <button

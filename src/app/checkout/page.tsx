@@ -10,7 +10,7 @@ export default function CheckoutPage(): React.JSX.Element {
     const { items } = useCart();
 
     // Map cart items to checkout format
-    const cartItems = items.map(item => ({
+    const cartItems = items.map((item) => ({
         variantId: item.sku, // Use SKU for inventory lookup (not numeric ID)
         productId: item.productId,
         productName: item.productName,
@@ -24,9 +24,7 @@ export default function CheckoutPage(): React.JSX.Element {
             <main className="min-h-screen bg-gray-50 py-12">
                 <div className="container mx-auto px-4 text-center">
                     <ShoppingBag className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                    <h1 className="text-2xl font-bold text-gray-900 mb-2">
-                        Tu carrito está vacío
-                    </h1>
+                    <h1 className="text-2xl font-bold text-gray-900 mb-2">Tu carrito está vacío</h1>
                     <p className="text-gray-600 mb-6">
                         Agrega productos antes de proceder al checkout.
                     </p>
@@ -46,11 +44,16 @@ export default function CheckoutPage(): React.JSX.Element {
             <div className="container mx-auto px-4">
                 {/* Header */}
                 <div className="mb-8">
-                    <Link href="/" className="text-blue-600 hover:underline text-sm mb-2 inline-block">
+                    <Link
+                        href="/"
+                        className="text-blue-600 hover:underline text-sm mb-2 inline-block"
+                    >
                         ← Volver a la tienda
                     </Link>
                     <h1 className="text-3xl font-bold text-gray-900">Checkout</h1>
-                    <p className="text-gray-600 mt-1">Completa tu información para finalizar la compra</p>
+                    <p className="text-gray-600 mt-1">
+                        Completa tu información para finalizar la compra
+                    </p>
                 </div>
 
                 {/* Checkout Form */}

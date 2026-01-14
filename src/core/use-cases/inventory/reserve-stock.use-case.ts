@@ -4,7 +4,7 @@ import { AddToCartDTO } from '@/interface-adapters/dtos/cart.dto';
 
 // Ensure the class is exported for Use Case usage
 export class ReserveStockUseCase {
-    constructor(private readonly inventoryRepo: IInventoryRepository) { }
+    constructor(private readonly inventoryRepo: IInventoryRepository) {}
 
     /**
      * Executes the stock reservation logic.

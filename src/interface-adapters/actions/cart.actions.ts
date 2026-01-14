@@ -24,8 +24,8 @@ export async function addToCartAction(
 ): Promise<ActionState> {
     // 1. Parse and Validate Input
     const rawData = {
-        variantId: formData.get('variantId'),
-        productId: formData.get('productId'),
+        variantId: formData.get('variantId') || undefined,
+        productId: formData.get('productId') || undefined,
         quantity: Number(formData.get('quantity')),
     };
 

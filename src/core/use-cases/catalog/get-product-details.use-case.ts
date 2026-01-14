@@ -3,7 +3,7 @@ import { Product } from '@/core/domain/types';
 import { ProductNotFoundError, InvalidOperationError } from '@/lib/errors';
 
 export class GetProductDetailsUseCase {
-    constructor(private readonly catalogRepo: ICatalogRepository) { }
+    constructor(private readonly catalogRepo: ICatalogRepository) {}
 
     /**
      * Retrieves product details and verifies status.

@@ -1,7 +1,12 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import pg from 'pg';
-import { products, productVariants, locations, inventoryStock } from '../src/infrastructure/database/schema';
+import {
+    products,
+    productVariants,
+    locations,
+    inventoryStock,
+} from '../src/infrastructure/database/schema';
 
 const { Pool } = pg;
 
@@ -17,12 +22,15 @@ async function seed(): Promise<void> {
     try {
         // 1. Insert Location
         console.log('Creating location...');
-        const [location] = await db.insert(locations).values({
-            name: 'Almacén Principal',
-            code: 'WH-001',
-            address: 'Lima, Perú',
-            isActive: true,
-        }).returning();
+        const [location] = await db
+            .insert(locations)
+            .values({
+                name: 'Almacén Principal',
+                code: 'WH-001',
+                address: 'Lima, Perú',
+                isActive: true,
+            })
+            .returning();
 
         console.log(`✅ Location created: ${location.code}`);
 
@@ -34,7 +42,8 @@ async function seed(): Promise<void> {
                 name: 'Nike Air Max 270',
                 slug: 'nike-air-max-270',
                 descriptionShort: 'Zapatillas running con cámara de aire visible',
-                descriptionLong: 'Las Nike Air Max 270 ofrecen comodidad excepcional con su unidad Air de gran tamaño. Perfectas para el día a día.',
+                descriptionLong:
+                    'Las Nike Air Max 270 ofrecen comodidad excepcional con su unidad Air de gran tamaño. Perfectas para el día a día.',
                 basePrice: '459.90',
                 status: 'ACTIVE',
             },
@@ -42,7 +51,8 @@ async function seed(): Promise<void> {
                 name: 'Adidas Ultraboost 22',
                 slug: 'adidas-ultraboost-22',
                 descriptionShort: 'Máxima amortiguación para corredores',
-                descriptionLong: 'La tecnología Boost proporciona retorno de energía incomparable. Ideal para entrenamientos intensos.',
+                descriptionLong:
+                    'La tecnología Boost proporciona retorno de energía incomparable. Ideal para entrenamientos intensos.',
                 basePrice: '529.00',
                 status: 'ACTIVE',
             },
@@ -50,7 +60,8 @@ async function seed(): Promise<void> {
                 name: 'Puma RS-X',
                 slug: 'puma-rs-x',
                 descriptionShort: 'Estilo retro con tecnología moderna',
-                descriptionLong: 'Diseño llamativo inspirado en los 80s con la comodidad y durabilidad de hoy.',
+                descriptionLong:
+                    'Diseño llamativo inspirado en los 80s con la comodidad y durabilidad de hoy.',
                 basePrice: '389.00',
                 status: 'ACTIVE',
             },
@@ -63,13 +74,16 @@ async function seed(): Promise<void> {
             // 3. Create variants for each product
             const sizes = ['40', '41', '42', '43', '44'];
             for (const size of sizes) {
-                const [variant] = await db.insert(productVariants).values({
-                    productId: product.id,
-                    sku: `${product.slug.toUpperCase().replace(/-/g, '-')}-${size}`,
-                    size: size,
-                    color: 'Negro',
-                    isActive: true,
-                }).returning();
+                const [variant] = await db
+                    .insert(productVariants)
+                    .values({
+                        productId: product.id,
+                        sku: `${product.slug.toUpperCase().replace(/-/g, '-')}-${size}`,
+                        size: size,
+                        color: 'Negro',
+                        isActive: true,
+                    })
+                    .returning();
 
                 // 4. Add inventory for each variant
                 await db.insert(inventoryStock).values({
@@ -85,7 +99,6 @@ async function seed(): Promise<void> {
 
         console.log('\n🎉 Seed completed successfully!');
         console.log(`📦 Created ${productData.length} products with variants and inventory.`);
-
     } catch (error) {
         console.error('❌ Seed failed:', error);
         throw error;

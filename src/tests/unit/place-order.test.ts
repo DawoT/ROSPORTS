@@ -34,9 +34,7 @@ describe('PlaceOrderUseCase', () => {
             address: 'Test Address',
             city: 'Lima',
         },
-        items: [
-            { variantId: 'NIKE-AIR-MAX-270-42', quantity: 1 },
-        ],
+        items: [{ variantId: 'NIKE-AIR-MAX-270-42', quantity: 1 }],
         shippingAddress: 'Test Address, Lima',
         sessionId: 'session-123',
     };
@@ -71,9 +69,7 @@ describe('PlaceOrderUseCase', () => {
         const useCase = new PlaceOrderUseCase(orderRepo, inventoryRepo);
 
         // Act & Assert
-        await expect(useCase.execute(baseInput))
-            .rejects
-            .toThrow(StockInsufficientError);
+        await expect(useCase.execute(baseInput)).rejects.toThrow(StockInsufficientError);
 
         // Order should NOT be created
         expect(orderRepo.createOrder).not.toHaveBeenCalled();
@@ -86,9 +82,7 @@ describe('PlaceOrderUseCase', () => {
         const useCase = new PlaceOrderUseCase(orderRepo, inventoryRepo);
 
         // Act & Assert
-        await expect(useCase.execute(baseInput))
-            .rejects
-            .toThrow(StockInsufficientError);
+        await expect(useCase.execute(baseInput)).rejects.toThrow(StockInsufficientError);
     });
 
     it('should validate all items before creating order', async () => {
@@ -109,9 +103,9 @@ describe('PlaceOrderUseCase', () => {
         };
 
         // Act & Assert
-        await expect(useCase.execute(inputWithMultipleItems))
-            .rejects
-            .toThrow(StockInsufficientError);
+        await expect(useCase.execute(inputWithMultipleItems)).rejects.toThrow(
+            StockInsufficientError
+        );
 
         // Order should NOT be created
         expect(orderRepo.createOrder).not.toHaveBeenCalled();
@@ -133,9 +127,9 @@ describe('PlaceOrderUseCase', () => {
         };
 
         // Act & Assert
-        await expect(useCase.execute(inputWithHighQuantity))
-            .rejects
-            .toThrow(StockInsufficientError);
+        await expect(useCase.execute(inputWithHighQuantity)).rejects.toThrow(
+            StockInsufficientError
+        );
 
         // Verify the error contains correct metadata
         try {

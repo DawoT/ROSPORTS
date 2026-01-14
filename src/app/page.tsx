@@ -22,14 +22,13 @@ export default async function HomePage(): Promise<React.JSX.Element> {
             {/* Products Section */}
             <section className="py-12">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-8">
-                        Productos Destacados
-                    </h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-8">Productos Destacados</h2>
 
                     {!result.success ? (
                         <div className="rounded-lg bg-red-50 p-4 text-center">
                             <p className="text-red-600">
-                                {result.message || 'Error loading products. Please try again later.'}
+                                {result.message ||
+                                    'Error loading products. Please try again later.'}
                             </p>
                         </div>
                     ) : result.data && result.data.items.length > 0 ? (

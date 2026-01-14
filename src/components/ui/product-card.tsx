@@ -2,6 +2,7 @@
 
 import { useTransition } from 'react';
 import { ShoppingBag, Loader2 } from 'lucide-react';
+import Link from 'next/link';
 import { Product } from '@/core/domain/types';
 import { addToCartAction } from '@/interface-adapters/actions/cart.actions';
 import { useCart } from '@/context/cart-context';
@@ -59,9 +60,14 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
     };
 
     return (
-        <div className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg">
-            {/* Image Container */}
-            <div className="relative aspect-square overflow-hidden bg-gray-100">
+        <div
+            data-testid="product-card"
+            className="group relative flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition-all hover:shadow-lg"
+        >
+            <Link
+                href={`/product/${product.slug}`}
+                className="block relative aspect-square overflow-hidden bg-gray-100"
+            >
                 <img
                     src="https://placehold.co/400x400/e2e8f0/64748b?text=Product"
                     alt={product.name}
@@ -73,7 +79,7 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
                         Disponible
                     </span>
                 )}
-            </div>
+            </Link>
 
             {/* Content */}
             <div className="flex flex-1 flex-col p-5">
@@ -81,14 +87,14 @@ export function ProductCard({ product }: ProductCardProps): React.JSX.Element {
                 <p className="text-xs text-gray-400 mb-2 font-mono">SKU: {sku}</p>
 
                 {/* Name */}
-                <h3 className="text-base font-semibold text-gray-900 line-clamp-2 mb-3 min-h-[2.5rem]">
-                    {product.name}
-                </h3>
+                <Link href={`/product/${product.slug}`} className="block">
+                    <h3 className="text-base font-semibold text-gray-900 line-clamp-2 mb-3 min-h-[2.5rem] hover:text-blue-600 transition-colors">
+                        {product.name}
+                    </h3>
+                </Link>
 
                 {/* Price */}
-                <p className="text-xl font-bold text-blue-600 mb-4">
-                    {formattedPrice}
-                </p>
+                <p className="text-xl font-bold text-blue-600 mb-4">{formattedPrice}</p>
 
                 {/* Add to Cart Button */}
                 <button

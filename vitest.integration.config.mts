@@ -6,17 +6,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export default defineConfig({
-    plugins: [],
     resolve: {
         alias: {
-            "@": path.resolve(__dirname, "./src")
-        }
+            '@': path.resolve(__dirname, './src'),
+        },
     },
     test: {
-        environment: 'jsdom',
-        setupFiles: ['./src/tests/setup.ts'],
+        environment: 'node',
         globals: true,
-        include: ['src/tests/**/*.test.{ts,tsx}'],
+        include: ['src/tests/integration/**/*.test.{ts,tsx}'],
         exclude: ['legacy_backup/**/*', 'node_modules/**/*'],
+        pool: 'forks', // Force separate processes for integration tests
+        setupFiles: [],
+        testTimeout: 30000,
     },
-})
+});

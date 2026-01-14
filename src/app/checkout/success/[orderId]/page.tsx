@@ -5,7 +5,9 @@ interface SuccessPageProps {
     params: Promise<{ orderId: string }>;
 }
 
-export default async function CheckoutSuccessPage({ params }: SuccessPageProps): Promise<React.JSX.Element> {
+export default async function CheckoutSuccessPage({
+    params,
+}: SuccessPageProps): Promise<React.JSX.Element> {
     const { orderId } = await params;
 
     return (
@@ -19,11 +21,10 @@ export default async function CheckoutSuccessPage({ params }: SuccessPageProps):
                 </div>
 
                 {/* Success Message */}
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                    ¡Gracias por tu compra!
-                </h1>
+                <h1 className="text-3xl font-bold text-gray-900 mb-2">¡Gracias por tu compra!</h1>
                 <p className="text-gray-600 mb-8">
-                    Tu orden ha sido procesada exitosamente. Recibirás un email de confirmación pronto.
+                    Tu orden ha sido procesada exitosamente. Recibirás un email de confirmación
+                    pronto.
                 </p>
 
                 {/* Order Details */}
@@ -36,7 +37,9 @@ export default async function CheckoutSuccessPage({ params }: SuccessPageProps):
                     <div className="space-y-3 text-sm">
                         <div className="flex justify-between py-2 border-b border-gray-100">
                             <span className="text-gray-600">Número de Orden</span>
-                            <span className="font-mono font-medium text-gray-900">ORD-{orderId.padStart(6, '0')}</span>
+                            <span className="font-mono font-medium text-gray-900">
+                                ORD-{orderId.padStart(6, '0')}
+                            </span>
                         </div>
                         <div className="flex justify-between py-2 border-b border-gray-100">
                             <span className="text-gray-600">Estado</span>
@@ -46,7 +49,9 @@ export default async function CheckoutSuccessPage({ params }: SuccessPageProps):
                         </div>
                         <div className="flex justify-between py-2">
                             <span className="text-gray-600">Fecha</span>
-                            <span className="text-gray-900">{new Date().toLocaleDateString('es-PE')}</span>
+                            <span className="text-gray-900">
+                                {new Date().toLocaleDateString('es-PE')}
+                            </span>
                         </div>
                     </div>
                 </div>

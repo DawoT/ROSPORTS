@@ -1,21 +1,30 @@
 import { db } from '../database/connection';
-import { customers, orders, orderItems, productVariants, products, inventoryStock } from '../database/schema';
-import { eq, sql } from 'drizzle-orm';
-import { IOrderRepository, CustomerInput, OrderItemInput } from '@/core/repositories/order.repository';
+import { customers, orders, orderItems, productVariants, products } from '../database/schema';
+import { eq } from 'drizzle-orm';
+import {
+    IOrderRepository,
+    CustomerInput,
+    OrderItemInput,
+} from '@/core/repositories/order.repository';
 import { Order, CartItem } from '@/core/domain/types';
 
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import * as schema from '../database/schema';
+
 export class DrizzleOrderRepository implements IOrderRepository {
+    constructor(private readonly database: NodePgDatabase<typeof schema> = db) {}
 
     async createOrder(
         customer: CustomerInput,
         items: OrderItemInput[],
         shippingAddress: string
     ): Promise<string> {
-        return await db.transaction(async (tx) => {
+        return await this.database.transaction(async (tx) => {
             // 1. Find or create customer
             let customerId: number;
 
-            const existingCustomer = await tx.select()
+            const existingCustomer = await tx
+                .select()
                 .from(customers)
                 .where(eq(customers.email, customer.email))
                 .limit(1);
@@ -23,14 +32,17 @@ export class DrizzleOrderRepository implements IOrderRepository {
             if (existingCustomer.length > 0) {
                 customerId = existingCustomer[0].id;
             } else {
-                const [newCustomer] = await tx.insert(customers).values({
-                    email: customer.email,
-                    firstName: customer.firstName,
-                    lastName: customer.lastName,
-                    phone: customer.phone,
-                    address: customer.address,
-                    city: customer.city,
-                }).returning();
+                const [newCustomer] = await tx
+                    .insert(customers)
+                    .values({
+                        email: customer.email,
+                        firstName: customer.firstName,
+                        lastName: customer.lastName,
+                        phone: customer.phone,
+                        address: customer.address,
+                        city: customer.city,
+                    })
+                    .returning();
                 customerId = newCustomer.id;
             }
 
@@ -47,25 +59,40 @@ export class DrizzleOrderRepository implements IOrderRepository {
             }> = [];
 
             for (const item of items) {
-                // Look up variant by SKU (not by numeric ID)
-                const [variant] = await tx.select({
-                    id: productVariants.id,
-                    sku: productVariants.sku,
-                    priceOverride: productVariants.priceOverride,
-                    productId: productVariants.productId,
-                })
-                    .from(productVariants)
-                    .where(eq(productVariants.sku, item.variantId));
+                // Resolution Logic: handle both SKU and numeric ID
+                let variant;
+                if (isNaN(Number(item.variantId))) {
+                    [variant] = await tx
+                        .select({
+                            id: productVariants.id,
+                            sku: productVariants.sku,
+                            priceOverride: productVariants.priceOverride,
+                            productId: productVariants.productId,
+                        })
+                        .from(productVariants)
+                        .where(eq(productVariants.sku, item.variantId));
+                } else {
+                    [variant] = await tx
+                        .select({
+                            id: productVariants.id,
+                            sku: productVariants.sku,
+                            priceOverride: productVariants.priceOverride,
+                            productId: productVariants.productId,
+                        })
+                        .from(productVariants)
+                        .where(eq(productVariants.id, Number(item.variantId)));
+                }
 
                 if (!variant) {
-                    throw new Error(`Variant with SKU ${item.variantId} not found`);
+                    throw new Error(`Variant with ID/SKU ${item.variantId} not found`);
                 }
 
                 // Get product for name and base price
-                const [product] = await tx.select({
-                    name: products.name,
-                    basePrice: products.basePrice,
-                })
+                const [product] = await tx
+                    .select({
+                        name: products.name,
+                        basePrice: products.basePrice,
+                    })
                     .from(products)
                     .where(eq(products.id, variant.productId!));
 
@@ -89,17 +116,20 @@ export class DrizzleOrderRepository implements IOrderRepository {
             // 3. Create order
             const orderNumber = `ORD-${Date.now().toString(36).toUpperCase()}`;
 
-            const [order] = await tx.insert(orders).values({
-                orderNumber,
-                customerId,
-                status: 'PENDING',
-                paymentStatus: 'UNPAID',
-                subtotal: subtotal.toFixed(2),
-                taxTotal: '0',
-                shippingCost: '0',
-                totalAmount: subtotal.toFixed(2),
-                shippingAddress,
-            }).returning();
+            const [order] = await tx
+                .insert(orders)
+                .values({
+                    orderNumber,
+                    customerId,
+                    status: 'PENDING',
+                    paymentStatus: 'UNPAID',
+                    subtotal: subtotal.toFixed(2),
+                    taxTotal: '0',
+                    shippingCost: '0',
+                    totalAmount: subtotal.toFixed(2),
+                    shippingAddress,
+                })
+                .returning();
 
             // 4. Create order items
             for (const itemData of orderItemsData) {
@@ -109,24 +139,13 @@ export class DrizzleOrderRepository implements IOrderRepository {
                 });
             }
 
-            // 5. Deduct stock (commit the sale) - using variant ID from lookup
-            for (const itemData of orderItemsData) {
-                await tx.execute(sql`
-          UPDATE inventory_stock 
-          SET quantity_on_hand = quantity_on_hand - ${itemData.quantity},
-              quantity_reserved = GREATEST(quantity_reserved - ${itemData.quantity}, 0),
-              version = version + 1,
-              last_updated_at = NOW()
-          WHERE variant_id = ${itemData.variantId}
-        `);
-            }
-
             return String(order.id);
         });
     }
 
     async findById(orderId: string): Promise<Order | null> {
-        const result = await db.select()
+        const result = await this.database
+            .select()
             .from(orders)
             .where(eq(orders.id, parseInt(orderId)))
             .limit(1);
@@ -136,13 +155,14 @@ export class DrizzleOrderRepository implements IOrderRepository {
         const order = result[0];
 
         // Get order items
-        const items = await db.select()
+        const items = await this.database
+            .select()
             .from(orderItems)
             .where(eq(orderItems.orderId, order.id));
 
-        const cartItems: CartItem[] = items.map(item => ({
+        const cartItems: CartItem[] = items.map((item) => ({
             productId: String(item.variantId),
-            variantId: String(item.variantId),
+            variantId: String(item.variantId), // Mapped to varaintId properly? Check schema
             productName: item.productName,
             variantSku: item.sku,
             quantity: item.quantity,
@@ -167,7 +187,8 @@ export class DrizzleOrderRepository implements IOrderRepository {
     }
 
     async findByOrderNumber(orderNumber: string): Promise<Order | null> {
-        const result = await db.select()
+        const result = await this.database
+            .select()
             .from(orders)
             .where(eq(orders.orderNumber, orderNumber))
             .limit(1);
@@ -178,7 +199,8 @@ export class DrizzleOrderRepository implements IOrderRepository {
     }
 
     async updateStatus(orderId: string, status: string): Promise<void> {
-        await db.update(orders)
+        await this.database
+            .update(orders)
             .set({ status, updatedAt: new Date() })
             .where(eq(orders.id, parseInt(orderId)));
     }

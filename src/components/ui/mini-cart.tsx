@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { X, ShoppingBag, Trash2, Plus, Minus } from 'lucide-react';
+import { X, ShoppingBag, Trash2 } from 'lucide-react';
 import { useCart } from '@/context/cart-context';
 
 export function MiniCart(): React.JSX.Element {
@@ -28,7 +28,10 @@ export function MiniCart(): React.JSX.Element {
             />
 
             {/* Sidebar */}
-            <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-xl z-50 flex flex-col">
+            <div
+                data-testid="mini-cart"
+                className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-xl z-50 flex flex-col"
+            >
                 {/* Header */}
                 <div className="flex items-center justify-between p-4 border-b">
                     <div className="flex items-center gap-2">
@@ -74,7 +77,9 @@ export function MiniCart(): React.JSX.Element {
                                         <h3 className="font-medium text-gray-900 text-sm line-clamp-2">
                                             {item.productName}
                                         </h3>
-                                        <p className="text-xs text-gray-500 mt-1">SKU: {item.sku}</p>
+                                        <p className="text-xs text-gray-500 mt-1">
+                                            SKU: {item.sku}
+                                        </p>
                                         <div className="flex items-center justify-between mt-2">
                                             <div className="flex items-center gap-2">
                                                 <span className="text-sm text-gray-600">

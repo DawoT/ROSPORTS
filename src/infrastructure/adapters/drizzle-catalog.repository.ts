@@ -1,13 +1,22 @@
 import { db } from '../database/connection';
 import { products, productVariants, inventoryStock } from '../database/schema';
 import { eq, like, and, sql } from 'drizzle-orm';
-import { ICatalogRepository, ProductSearchResult, StockStatus } from '@/core/repositories/catalog.repository';
+import {
+    ICatalogRepository,
+    ProductSearchResult,
+    StockStatus,
+} from '@/core/repositories/catalog.repository';
 import { Product, Variant } from '@/core/domain/types';
 
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+import * as schema from '../database/schema';
+
 export class DrizzleCatalogRepository implements ICatalogRepository {
+    constructor(private readonly database: NodePgDatabase<typeof schema> = db) {}
 
     async findBySlug(slug: string): Promise<Product | null> {
-        const result = await db.select()
+        const result = await this.database
+            .select()
             .from(products)
             .where(eq(products.slug, slug))
             .limit(1);
@@ -17,11 +26,12 @@ export class DrizzleCatalogRepository implements ICatalogRepository {
         const row = result[0];
 
         // Get variants for this product
-        const variantRows = await db.select()
+        const variantRows = await this.database
+            .select()
             .from(productVariants)
             .where(eq(productVariants.productId, row.id));
 
-        const variants: Variant[] = variantRows.map(v => ({
+        const variants: Variant[] = variantRows.map((v) => ({
             id: String(v.id),
             productId: String(v.productId),
             sku: v.sku,
@@ -43,7 +53,11 @@ export class DrizzleCatalogRepository implements ICatalogRepository {
         };
     }
 
-    async searchProducts(query?: string, page?: number, limit?: number): Promise<ProductSearchResult> {
+    async searchProducts(
+        query?: string,
+        page?: number,
+        limit?: number
+    ): Promise<ProductSearchResult> {
         const pageNum = page || 1;
         const limitNum = limit || 20;
         const offset = (pageNum - 1) * limitNum;
@@ -55,14 +69,16 @@ export class DrizzleCatalogRepository implements ICatalogRepository {
         }
 
         // Get total count
-        const countResult = await db.select({ count: sql<number>`count(*)` })
+        const countResult = await this.database
+            .select({ count: sql<number>`count(*)` })
             .from(products)
             .where(and(...conditions));
 
         const total = countResult[0]?.count || 0;
 
         // Get paginated results
-        const rows = await db.select()
+        const rows = await this.database
+            .select()
             .from(products)
             .where(and(...conditions))
             .limit(limitNum)
@@ -71,7 +87,8 @@ export class DrizzleCatalogRepository implements ICatalogRepository {
         // Fetch variants for each product
         const items: Product[] = [];
         for (const row of rows) {
-            const variantRows = await db.select()
+            const variantRows = await this.database
+                .select()
                 .from(productVariants)
                 .where(eq(productVariants.productId, row.id))
                 .limit(1); // Just get first variant for SKU display
@@ -85,14 +102,18 @@ export class DrizzleCatalogRepository implements ICatalogRepository {
                 descriptionShort: row.descriptionShort ?? undefined,
                 basePrice: parseFloat(row.basePrice),
                 status: row.status as 'ACTIVE' | 'DRAFT' | 'ARCHIVED',
-                variants: variant ? [{
-                    id: String(variant.id),
-                    productId: String(variant.productId),
-                    sku: variant.sku,
-                    size: variant.size ?? '',
-                    color: variant.color ?? '',
-                    isActive: variant.isActive ?? true,
-                }] : [],
+                variants: variant
+                    ? [
+                          {
+                              id: String(variant.id),
+                              productId: String(variant.productId),
+                              sku: variant.sku,
+                              size: variant.size ?? '',
+                              color: variant.color ?? '',
+                              isActive: variant.isActive ?? true,
+                          },
+                      ]
+                    : [],
             });
         }
 
@@ -105,10 +126,11 @@ export class DrizzleCatalogRepository implements ICatalogRepository {
     }
 
     async getStockStatus(variantId: string): Promise<StockStatus> {
-        const result = await db.select({
-            onHand: sql<number>`sum(${inventoryStock.quantityOnHand})`,
-            reserved: sql<number>`sum(${inventoryStock.quantityReserved})`,
-        })
+        const result = await this.database
+            .select({
+                onHand: sql<number>`sum(${inventoryStock.quantityOnHand})`,
+                reserved: sql<number>`sum(${inventoryStock.quantityReserved})`,
+            })
             .from(inventoryStock)
             .where(eq(inventoryStock.variantId, parseInt(variantId)));
 

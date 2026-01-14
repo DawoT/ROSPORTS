@@ -1,4 +1,8 @@
-import { IOrderRepository, CustomerInput, OrderItemInput } from '@/core/repositories/order.repository';
+import {
+    IOrderRepository,
+    CustomerInput,
+    OrderItemInput,
+} from '@/core/repositories/order.repository';
 import { IInventoryRepository } from '@/core/repositories/inventory.repository';
 import { StockInsufficientError } from '@/lib/errors';
 
@@ -18,7 +22,7 @@ export class PlaceOrderUseCase {
     constructor(
         private readonly orderRepo: IOrderRepository,
         private readonly inventoryRepo: IInventoryRepository
-    ) { }
+    ) {}
 
     /**
      * Execute the order placement logic.
@@ -34,28 +38,16 @@ export class PlaceOrderUseCase {
             const available = await this.inventoryRepo.getQuantityOnHand(item.variantId);
 
             if (available < item.quantity) {
-                throw new StockInsufficientError(
-                    item.variantId,
-                    item.quantity,
-                    available
-                );
+                throw new StockInsufficientError(item.variantId, item.quantity, available);
             }
         }
 
         // 2. Create the order (this will also create customer if needed)
-        const orderId = await this.orderRepo.createOrder(
-            customer,
-            items,
-            shippingAddress
-        );
+        const orderId = await this.orderRepo.createOrder(customer, items, shippingAddress);
 
         // 3. Commit reservations (convert reserved to sold)
         for (const item of items) {
-            await this.inventoryRepo.commitReservation(
-                item.variantId,
-                item.quantity,
-                sessionId
-            );
+            await this.inventoryRepo.commitReservation(item.variantId, item.quantity, sessionId);
         }
 
         // Generate order number (simple format for now)

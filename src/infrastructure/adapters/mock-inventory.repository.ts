@@ -37,7 +37,7 @@ export class MockInventoryRepository implements IInventoryRepository {
         const key = `${sku}-${sessionId}`;
         const reserved = this.reservations.get(key) || 0;
 
-        // If we have reservations, we just clear them as "sold". 
+        // If we have reservations, we just clear them as "sold".
         // Since we already deducted from stockMap in reserveStock, we just cleanup the map.
         if (reserved >= quantity) {
             this.reservations.set(key, reserved - quantity);

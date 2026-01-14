@@ -9,11 +9,7 @@ export const metadata: Metadata = {
     description: 'Productos deportivos de alta calidad para atletas exigentes.',
 };
 
-export default function RootLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}): React.JSX.Element {
+export default function RootLayout({ children }: { children: React.ReactNode }): React.JSX.Element {
     return (
         <html lang="es" suppressHydrationWarning>
             <body className="min-h-screen bg-gray-50 antialiased" suppressHydrationWarning>

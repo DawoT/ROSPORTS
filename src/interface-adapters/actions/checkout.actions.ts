@@ -1,7 +1,6 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import { checkoutSchema, CheckoutCartItem } from '@/interface-adapters/dtos/checkout.dto';
 import { PlaceOrderUseCase } from '@/core/use-cases/orders/place-order.use-case';
 import { getOrderRepository, getInventoryRepository } from '@/lib/di';
@@ -26,13 +25,13 @@ export async function placeOrderAction(
 ): Promise<CheckoutActionState> {
     // 1. Parse and Validate Customer Data
     const rawData = {
-        firstName: formData.get('firstName'),
-        lastName: formData.get('lastName'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        address: formData.get('address'),
-        city: formData.get('city'),
-        notes: formData.get('notes'),
+        firstName: formData.get('firstName') || undefined,
+        lastName: formData.get('lastName') || undefined,
+        email: formData.get('email') || undefined,
+        phone: formData.get('phone') || undefined,
+        address: formData.get('address') || undefined,
+        city: formData.get('city') || undefined,
+        notes: formData.get('notes') || undefined,
     };
 
     const validationResult = checkoutSchema.safeParse(rawData);
@@ -88,7 +87,7 @@ export async function placeOrderAction(
                 address: customerData.address,
                 city: customerData.city,
             },
-            items: cartItems.map(item => ({
+            items: cartItems.map((item) => ({
                 variantId: item.variantId,
                 quantity: item.quantity,
             })),
@@ -99,15 +98,13 @@ export async function placeOrderAction(
         // Clear cart session after successful order
         cookieStore.delete('cart_session');
 
-        // Redirect to success page
-        redirect(`/checkout/success/${result.orderId}`);
-
+        // Return success state with orderId so client can redirect
+        return {
+            success: true,
+            orderId: result.orderId,
+            message: 'Orden procesada correctamente',
+        };
     } catch (error) {
-        // IMPORTANT: Next.js redirect() throws a special error that must be re-thrown
-        if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
-            throw error;
-        }
-
         if (error instanceof StockInsufficientError) {
             return {
                 success: false,
@@ -116,7 +113,7 @@ export async function placeOrderAction(
         }
 
         // Log unexpected errors (in production, use a proper logger)
-        // eslint-disable-next-line no-console
+
         console.error('Checkout Error:', error);
 
         return {
