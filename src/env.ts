@@ -21,7 +21,7 @@ if (!parsed.success) {
 export const env = parsed.success
     ? parsed.data
     : {
-        DATABASE_URL: undefined,
-        NODE_ENV: 'test' as const,
-        USE_MOCK: 'false' as const,
-    };
+          DATABASE_URL: undefined,
+          NODE_ENV: 'test' as const,
+          USE_MOCK: 'false' as const,
+      };

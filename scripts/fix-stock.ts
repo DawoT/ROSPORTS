@@ -1,9 +1,7 @@
 import 'dotenv/config';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import pg from 'pg';
-import {
-    inventoryStock,
-} from '../src/infrastructure/database/schema';
+import { inventoryStock } from '../src/infrastructure/database/schema';
 
 const { Pool } = pg;
 
@@ -20,7 +18,7 @@ async function fixStock(): Promise<void> {
         // Update all stock to 50 for simplicity
         await db.update(inventoryStock).set({
             quantityOnHand: 50,
-            quantityReserved: 0
+            quantityReserved: 0,
         });
 
         console.log('✅ Stock fixed for all variants.');

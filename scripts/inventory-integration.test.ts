@@ -15,7 +15,9 @@ if (fs.existsSync(LOG_FILE)) fs.unlinkSync(LOG_FILE);
 
 function log(msg: unknown): void {
     const text =
-        typeof msg === 'string' ? msg : JSON.stringify(msg, Object.getOwnPropertyNames(msg as object));
+        typeof msg === 'string'
+            ? msg
+            : JSON.stringify(msg, Object.getOwnPropertyNames(msg as object));
     fs.appendFileSync(LOG_FILE, text + '\n');
     process.stderr.write(text + '\n');
 }

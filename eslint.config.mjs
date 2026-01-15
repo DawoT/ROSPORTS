@@ -6,7 +6,17 @@ import importPlugin from 'eslint-plugin-import';
 import globals from 'globals';
 
 export default tseslint.config(
-    { ignores: ['legacy_backup/', '.next/', 'out/', 'dist/', 'node_modules/', 'playwright-report/', 'test-results/'] },
+    {
+        ignores: [
+            'legacy_backup/',
+            '.next/',
+            'out/',
+            'dist/',
+            'node_modules/',
+            'playwright-report/',
+            'test-results/',
+        ],
+    },
     {
         files: ['**/*.{ts,tsx,js,jsx}'],
         extends: [js.configs.recommended, ...tseslint.configs.recommended],

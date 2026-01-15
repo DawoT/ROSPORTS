@@ -7,7 +7,7 @@ import {
     locations,
     inventoryStock,
     orders,
-    orderItems
+    orderItems,
 } from '../src/infrastructure/database/schema';
 import { sql } from 'drizzle-orm';
 
