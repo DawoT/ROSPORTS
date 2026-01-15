@@ -36,8 +36,9 @@ test-output*.log
 .env.test
 .env.production
 
-# drizzle
-/drizzle
+# audit/lint output files (may have encoding issues)
+audit-security*.json
+lint-results*.json
 
 # vercel
 .vercel

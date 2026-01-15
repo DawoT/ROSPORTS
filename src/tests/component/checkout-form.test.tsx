@@ -100,13 +100,13 @@ describe('CheckoutForm', (): void => {
 
             const submitBtn = screen.getByRole('button', { name: /confirmar compra/i });
 
-            fireEvent.click(submitBtn);
-
-            // Mock success return
+            // Configure mock BEFORE triggering form submission
             mockPlaceOrderAction.mockResolvedValue({
                 success: true,
                 orderId: 'test-order-id',
             });
+
+            fireEvent.click(submitBtn);
 
             await waitFor(
                 (): void => {

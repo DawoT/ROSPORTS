@@ -59,7 +59,7 @@ async function main(): Promise<void> {
             })
             .returning();
 
-        await runTest('createOrder should create order, items and deduct stock', async () => {
+        await runTest('createOrder should create order and items', async () => {
             log('Seeding Product and Variant...');
             const [product] = await db
                 .insert(products)
@@ -81,7 +81,7 @@ async function main(): Promise<void> {
                 })
                 .returning();
 
-            // Initial Stock: 10
+            // Initial Stock: 10 (note: createOrder doesn't deduct stock - that's done by ReserveStockUseCase)
             await db.insert(inventoryStock).values({
                 variantId: variant.id,
                 locationId: location.id,
@@ -118,13 +118,8 @@ async function main(): Promise<void> {
             assertStrictEqual(order.totalAmount, '110.00', 'Total amount should be 2 * 55.00'); // 110.00
             assertStrictEqual(order.status, 'PENDING');
 
-            // Verify Stock (Deducted 2)
-            const [stock] = await db
-                .select()
-                .from(inventoryStock)
-                .where(eq(inventoryStock.variantId, variant.id));
-            // Expect 8
-            assertStrictEqual(stock.quantityOnHand, 8, 'Stock should be deducted by 2');
+            // NOTE: Stock deduction is NOT done by createOrder - it's handled by ReserveStockUseCase
+            // The repository only records the order; inventory management is separate concern
         });
 
         await runTest('findById should return order with items', async () => {
