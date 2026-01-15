@@ -22,12 +22,12 @@ vi.mock('@/context/cart-context', () => ({
     }),
 }));
 
-vi.mock('@/interface-adapters/actions/checkout.actions', (): unknown => ({
+vi.mock('@/interface-adapters/actions/checkout.actions', () => ({
     placeOrderAction: mockPlaceOrderAction,
 }));
 
 // Mock useRouter
-vi.mock('next/navigation', (): unknown => ({
+vi.mock('next/navigation', () => ({
     useRouter: (): { push: Mock } => ({
         push: mockPush,
     }),
