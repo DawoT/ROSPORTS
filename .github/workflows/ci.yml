@@ -73,6 +73,11 @@ jobs:
             - name: Install Playwright Browsers
               run: npx playwright install --with-deps chromium
 
+            - name: Apply Drizzle Schema to Test DB
+              # This ensures test DB schema stays in sync with Drizzle migrations
+              # Mitigates risk of schema/seed drift when schema changes
+              run: npx drizzle-kit push
+
             - name: Run Integration Tests
               run: npm run test:integration
 

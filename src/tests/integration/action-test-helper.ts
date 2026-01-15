@@ -47,3 +47,49 @@ export function setupCookieMock(initialCookies: Record<string, string> = {}): {
 
     return mockStore;
 }
+
+/**
+ * Auth Bypass Helper for Test Environments
+ *
+ * IMPORTANT: This helper prepares tests for the upcoming Auth phase.
+ * Current checkout works with "guest" users. When auth is added:
+ * 1. Use this helper to simulate authenticated sessions in tests
+ * 2. Set TEST_AUTH_BYPASS=true in test environment
+ * 3. Server actions should check for this flag to skip auth validation in tests
+ *
+ * Usage:
+ *   const authCookies = setupAuthBypass({ userId: 'test-user-123' });
+ *   mockCookieStore.get.mockImplementation(authCookies.get);
+ */
+export function setupAuthBypass(userData: {
+    userId?: string;
+    email?: string;
+    role?: 'guest' | 'customer' | 'admin';
+} = {}): {
+    get: (name: string) => { value: string } | undefined;
+    isAuthenticated: boolean;
+    userId: string;
+} {
+    const defaults = {
+        userId: userData.userId || 'test-user-guest',
+        email: userData.email || 'test@example.com',
+        role: userData.role || 'guest',
+    };
+
+    // Simulate auth session cookie
+    const sessionToken = Buffer.from(JSON.stringify(defaults)).toString('base64');
+
+    return {
+        get: (name: string): { value: string } | undefined => {
+            if (name === 'auth_session') {
+                return { value: sessionToken };
+            }
+            if (name === 'user_id') {
+                return { value: defaults.userId };
+            }
+            return undefined;
+        },
+        isAuthenticated: defaults.role !== 'guest',
+        userId: defaults.userId,
+    };
+}
