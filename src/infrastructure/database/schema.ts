@@ -8,8 +8,111 @@ import {
     bigint,
     integer,
     bigserial,
+    uuid,
+    primaryKey,
 } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
+
+// ============================================
+// AUTHENTICATION TABLES (NextAuth.js V5 Compatible)
+// ============================================
+
+/**
+ * Users Table - Core identity table
+ * Compatible with NextAuth.js V5 / Auth.js
+ */
+export const users = pgTable('users', {
+    id: uuid('id').defaultRandom().primaryKey(),
+    name: text('name'),
+    email: text('email').notNull().unique(),
+    emailVerified: timestamp('email_verified', { mode: 'date' }),
+    image: text('image'),
+    passwordHash: text('password_hash'), // For credentials provider
+    role: text('role').notNull().default('CUSTOMER'), // 'ADMIN' | 'CUSTOMER'
+    createdAt: timestamp('created_at').defaultNow(),
+    updatedAt: timestamp('updated_at').defaultNow(),
+});
+
+/**
+ * Accounts Table - OAuth provider accounts
+ * Links external OAuth providers (Google, GitHub, etc.) to users
+ */
+export const accounts = pgTable(
+    'accounts',
+    {
+        userId: uuid('user_id')
+            .notNull()
+            .references(() => users.id, { onDelete: 'cascade' }),
+        type: text('type').notNull(), // 'oauth' | 'oidc' | 'credentials'
+        provider: text('provider').notNull(),
+        providerAccountId: text('provider_account_id').notNull(),
+        refresh_token: text('refresh_token'),
+        access_token: text('access_token'),
+        expires_at: integer('expires_at'),
+        token_type: text('token_type'),
+        scope: text('scope'),
+        id_token: text('id_token'),
+        session_state: text('session_state'),
+    },
+    (account) => ({
+        compoundKey: primaryKey({ columns: [account.provider, account.providerAccountId] }),
+    })
+);
+
+/**
+ * Sessions Table - Database sessions
+ * For server-side session management
+ */
+export const sessions = pgTable('sessions', {
+    sessionToken: text('session_token').primaryKey(),
+    userId: uuid('user_id')
+        .notNull()
+        .references(() => users.id, { onDelete: 'cascade' }),
+    expires: timestamp('expires', { mode: 'date' }).notNull(),
+});
+
+/**
+ * Verification Tokens Table - Email verification & magic links
+ */
+export const verificationTokens = pgTable(
+    'verification_tokens',
+    {
+        identifier: text('identifier').notNull(), // email
+        token: text('token').notNull(),
+        expires: timestamp('expires', { mode: 'date' }).notNull(),
+    },
+    (vt) => ({
+        compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
+    })
+);
+
+// ============================================
+// AUTH RELATIONS
+// ============================================
+
+export const usersRelations = relations(users, ({ many }) => ({
+    accounts: many(accounts),
+    sessions: many(sessions),
+}));
+
+export const accountsRelations = relations(accounts, ({ one }) => ({
+    user: one(users, {
+        fields: [accounts.userId],
+        references: [users.id],
+    }),
+}));
+
+export const sessionsRelations = relations(sessions, ({ one }) => ({
+    user: one(users, {
+        fields: [sessions.userId],
+        references: [users.id],
+    }),
+}));
+
+// ============================================
+// E-COMMERCE TABLES
+// ============================================
+
 
 /**
  * Products Table
