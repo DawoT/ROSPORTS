@@ -1,22 +1,21 @@
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { eq } from 'drizzle-orm';
+import bcrypt from 'bcryptjs';
 import { IUserRepository } from '@/core/repositories/user.repository';
 import { User, CreateUserInput, UpdateUserInput } from '@/core/domain/user.types';
 import * as schema from '@/infrastructure/database/schema';
 
+const SALT_ROUNDS = 12; // Enterprise-grade security
+
 /**
  * Drizzle User Repository
- *
  * Implements IUserRepository using Drizzle ORM with PostgreSQL.
- *
- * NOTE: This is a shell implementation for TDD "Red" stage.
- * Methods will be fully implemented in the "Green" stage.
+ * Handles password hashing with bcrypt.
  */
 export class DrizzleUserRepository implements IUserRepository {
     constructor(private readonly db: NodePgDatabase<typeof schema>) { }
 
     async findById(id: string): Promise<User | null> {
-        // TODO: Implement in Green stage
         const result = await this.db
             .select()
             .from(schema.users)
@@ -29,7 +28,6 @@ export class DrizzleUserRepository implements IUserRepository {
     }
 
     async findByEmail(email: string): Promise<User | null> {
-        // TODO: Implement in Green stage
         const result = await this.db
             .select()
             .from(schema.users)
@@ -42,7 +40,6 @@ export class DrizzleUserRepository implements IUserRepository {
     }
 
     async create(input: CreateUserInput & { passwordHash: string }): Promise<User> {
-        // TODO: Implement in Green stage
         const [result] = await this.db
             .insert(schema.users)
             .values({
@@ -56,8 +53,29 @@ export class DrizzleUserRepository implements IUserRepository {
         return this.mapToUser(result);
     }
 
+    /**
+     * Creates a new user with password hashing
+     * Use this method when you have a plain text password
+     */
+    async createWithPassword(
+        input: Omit<CreateUserInput, 'password'> & { password: string }
+    ): Promise<User> {
+        const passwordHash = await bcrypt.hash(input.password, SALT_ROUNDS);
+
+        const [result] = await this.db
+            .insert(schema.users)
+            .values({
+                name: input.name,
+                email: input.email.toLowerCase(),
+                passwordHash,
+                role: input.role || 'CUSTOMER',
+            })
+            .returning();
+
+        return this.mapToUser(result);
+    }
+
     async update(id: string, input: UpdateUserInput): Promise<User | null> {
-        // TODO: Implement in Green stage
         const [result] = await this.db
             .update(schema.users)
             .set({
@@ -73,7 +91,6 @@ export class DrizzleUserRepository implements IUserRepository {
     }
 
     async delete(id: string): Promise<boolean> {
-        // TODO: Implement in Green stage
         const result = await this.db.delete(schema.users).where(eq(schema.users.id, id));
 
         return (result.rowCount ?? 0) > 0;
@@ -87,6 +104,20 @@ export class DrizzleUserRepository implements IUserRepository {
             .limit(1);
 
         return result.length > 0;
+    }
+
+    /**
+     * Verifies a password against the stored hash
+     * @returns true if password matches
+     */
+    async verifyPassword(email: string, password: string): Promise<User | null> {
+        const user = await this.findByEmail(email);
+        if (!user || !user.passwordHash) return null;
+
+        const isValid = await bcrypt.compare(password, user.passwordHash);
+        if (!isValid) return null;
+
+        return user;
     }
 
     /**
@@ -105,4 +136,18 @@ export class DrizzleUserRepository implements IUserRepository {
             updatedAt: row.updatedAt ?? new Date(),
         };
     }
+}
+
+/**
+ * Helper to hash a password (for use outside repository)
+ */
+export async function hashPassword(password: string): Promise<string> {
+    return bcrypt.hash(password, SALT_ROUNDS);
+}
+
+/**
+ * Helper to verify a password (for use outside repository)
+ */
+export async function verifyPassword(password: string, hash: string): Promise<boolean> {
+    return bcrypt.compare(password, hash);
 }

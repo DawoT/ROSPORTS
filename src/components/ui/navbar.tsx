@@ -3,8 +3,19 @@
 import Link from 'next/link';
 import { ShoppingCart, Menu } from 'lucide-react';
 import { useCart } from '@/context/cart-context';
+import { AuthNavItems } from './auth-nav-items';
 
-export function Navbar(): React.JSX.Element {
+interface NavbarProps {
+    session?: {
+        user: {
+            name?: string | null;
+            email: string;
+            role: string;
+        };
+    } | null;
+}
+
+export function Navbar({ session = null }: NavbarProps): React.JSX.Element {
     const { cartCount, toggleCart } = useCart();
 
     return (
@@ -40,7 +51,10 @@ export function Navbar(): React.JSX.Element {
                 </nav>
 
                 {/* Actions */}
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
+                    {/* Auth Items */}
+                    <AuthNavItems session={session} />
+
                     {/* Cart Button */}
                     <button
                         onClick={toggleCart}
