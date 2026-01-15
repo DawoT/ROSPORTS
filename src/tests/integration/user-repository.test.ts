@@ -1,69 +1,89 @@
-import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest';
-import { getTestDb, closeTestDb, isDbAvailable } from './db-helper';
+import { describe, it, expect, beforeEach, afterAll } from 'vitest';
+import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres';
+import { Client } from 'pg';
+import dotenv from 'dotenv';
 import { DrizzleUserRepository } from '@/infrastructure/adapters/drizzle-user.repository';
-import { users } from '@/infrastructure/database/schema';
+import * as schema from '@/infrastructure/database/schema';
 
-// Check if users table exists in test database
-let usersTableExists = false;
+dotenv.config();
+
+// Use public schema for auth tables (not testing schema)
+const connectionString = process.env.DATABASE_URL?.replace(':6543', ':5432');
+const isDbAvailable = !!connectionString;
+
+let testClient: Client | null = null;
+let testDb: NodePgDatabase<typeof schema> | null = null;
+
+async function getAuthTestDb(): Promise<{ db: NodePgDatabase<typeof schema>; client: Client }> {
+    if (testDb && testClient) {
+        return { db: testDb, client: testClient };
+    }
+
+    const client = new Client({
+        connectionString,
+        connectionTimeoutMillis: 10000,
+    });
+
+    await client.connect();
+    await client.query('BEGIN');
+    // Use public schema where auth tables live
+    await client.query('SET search_path TO public');
+
+    testClient = client;
+    testDb = drizzle(client, { schema });
+
+    return { db: testDb, client };
+}
+
+async function closeAuthTestDb(): Promise<void> {
+    if (testClient) {
+        await testClient.query('ROLLBACK');
+        await testClient.end();
+        testClient = null;
+        testDb = null;
+    }
+}
 
 describe.skipIf(!isDbAvailable)('User Repository Integration', () => {
     let repository: DrizzleUserRepository;
 
-    beforeAll(async () => {
-        // Check if users table exists
-        const { db } = await getTestDb();
-        try {
-            await db.select().from(users).limit(1);
-            usersTableExists = true;
-        } catch {
-            // Table doesn't exist - tests will be skipped
-            usersTableExists = false;
-            console.log('[Test] users table not found - skipping user repository tests');
-        }
-    });
-
     beforeEach(async () => {
-        if (!usersTableExists) return;
-
-        const { db } = await getTestDb();
+        const { db } = await getAuthTestDb();
         repository = new DrizzleUserRepository(db);
 
         // Clean up users table before each test
-        await db.delete(users);
+        await db.delete(schema.users);
     });
 
     afterAll(async () => {
-        await closeTestDb();
+        await closeAuthTestDb();
     });
 
     describe('create', () => {
-        it.skipIf(!usersTableExists)(
-            'should create a new user and return it with generated ID',
-            async () => {
-                const input = {
-                    name: 'Test User',
-                    email: 'test@example.com',
-                    password: 'not-stored',
-                    passwordHash: 'hashed_password_here',
-                    role: 'CUSTOMER' as const,
-                };
+        it('should create a new user and return it with generated ID', async () => {
+            const input = {
+                name: 'Test User',
+                email: 'test@example.com',
+                password: 'not-stored',
+                passwordHash: 'hashed_password_here',
+                role: 'CUSTOMER' as const,
+            };
 
-                const user = await repository.create(input);
+            const user = await repository.create(input);
 
-                expect(user).toBeDefined();
-                expect(user.id).toBeDefined();
-                expect(user.id).toMatch(
-                    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
-                );
-                expect(user.name).toBe('Test User');
-                expect(user.email).toBe('test@example.com');
-                expect(user.role).toBe('CUSTOMER');
-                expect(user.passwordHash).toBe('hashed_password_here');
-                expect(user.createdAt).toBeInstanceOf(Date);
-            }
-        );
+            expect(user).toBeDefined();
+            expect(user.id).toBeDefined();
+            expect(user.id).toMatch(
+                /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+            );
+            expect(user.name).toBe('Test User');
+            expect(user.email).toBe('test@example.com');
+            expect(user.role).toBe('CUSTOMER');
+            expect(user.passwordHash).toBe('hashed_password_here');
+            expect(user.createdAt).toBeInstanceOf(Date);
+        });
 
-        it.skipIf(!usersTableExists)('should normalize email to lowercase', async () => {
+        it('should normalize email to lowercase', async () => {
             const input = {
                 name: 'Upper Email',
                 email: 'UPPER@EXAMPLE.COM',
@@ -76,25 +96,22 @@ describe.skipIf(!isDbAvailable)('User Repository Integration', () => {
             expect(user.email).toBe('upper@example.com');
         });
 
-        it.skipIf(!usersTableExists)(
-            'should default role to CUSTOMER when not specified',
-            async () => {
-                const input = {
-                    name: 'Default Role',
-                    email: 'default@example.com',
-                    password: 'ignored',
-                    passwordHash: 'hash',
-                };
+        it('should default role to CUSTOMER when not specified', async () => {
+            const input = {
+                name: 'Default Role',
+                email: 'default@example.com',
+                password: 'ignored',
+                passwordHash: 'hash',
+            };
 
-                const user = await repository.create(input);
+            const user = await repository.create(input);
 
-                expect(user.role).toBe('CUSTOMER');
-            }
-        );
+            expect(user.role).toBe('CUSTOMER');
+        });
     });
 
     describe('findByEmail', () => {
-        it.skipIf(!usersTableExists)('should find an existing user by email', async () => {
+        it('should find an existing user by email', async () => {
             await repository.create({
                 name: 'Find Me',
                 email: 'findme@example.com',
@@ -109,16 +126,13 @@ describe.skipIf(!isDbAvailable)('User Repository Integration', () => {
             expect(found?.email).toBe('findme@example.com');
         });
 
-        it.skipIf(!usersTableExists)(
-            'should return null for non-existent email',
-            async () => {
-                const found = await repository.findByEmail('nonexistent@example.com');
+        it('should return null for non-existent email', async () => {
+            const found = await repository.findByEmail('nonexistent@example.com');
 
-                expect(found).toBeNull();
-            }
-        );
+            expect(found).toBeNull();
+        });
 
-        it.skipIf(!usersTableExists)('should find user case-insensitively', async () => {
+        it('should find user case-insensitively', async () => {
             await repository.create({
                 name: 'Case Test',
                 email: 'casetest@example.com',
@@ -134,7 +148,7 @@ describe.skipIf(!isDbAvailable)('User Repository Integration', () => {
     });
 
     describe('findById', () => {
-        it.skipIf(!usersTableExists)('should find an existing user by ID', async () => {
+        it('should find an existing user by ID', async () => {
             const created = await repository.create({
                 name: 'Find By ID',
                 email: 'findbyid@example.com',
@@ -149,7 +163,7 @@ describe.skipIf(!isDbAvailable)('User Repository Integration', () => {
             expect(found?.email).toBe('findbyid@example.com');
         });
 
-        it.skipIf(!usersTableExists)('should return null for non-existent ID', async () => {
+        it('should return null for non-existent ID', async () => {
             const found = await repository.findById('00000000-0000-0000-0000-000000000000');
 
             expect(found).toBeNull();
@@ -157,7 +171,7 @@ describe.skipIf(!isDbAvailable)('User Repository Integration', () => {
     });
 
     describe('emailExists', () => {
-        it.skipIf(!usersTableExists)('should return true if email exists', async () => {
+        it('should return true if email exists', async () => {
             await repository.create({
                 name: 'Email Check',
                 email: 'exists@example.com',
@@ -170,16 +184,13 @@ describe.skipIf(!isDbAvailable)('User Repository Integration', () => {
             expect(exists).toBe(true);
         });
 
-        it.skipIf(!usersTableExists)(
-            'should return false if email does not exist',
-            async () => {
-                const exists = await repository.emailExists('nothere@example.com');
+        it('should return false if email does not exist', async () => {
+            const exists = await repository.emailExists('nothere@example.com');
 
-                expect(exists).toBe(false);
-            }
-        );
+            expect(exists).toBe(false);
+        });
 
-        it.skipIf(!usersTableExists)('should check case-insensitively', async () => {
+        it('should check case-insensitively', async () => {
             await repository.create({
                 name: 'Email Case',
                 email: 'emailcase@example.com',
@@ -194,7 +205,7 @@ describe.skipIf(!isDbAvailable)('User Repository Integration', () => {
     });
 
     describe('update', () => {
-        it.skipIf(!usersTableExists)('should update user name', async () => {
+        it('should update user name', async () => {
             const created = await repository.create({
                 name: 'Original Name',
                 email: 'update@example.com',
@@ -209,21 +220,17 @@ describe.skipIf(!isDbAvailable)('User Repository Integration', () => {
             expect(updated?.email).toBe('update@example.com');
         });
 
-        it.skipIf(!usersTableExists)(
-            'should return null when updating non-existent user',
-            async () => {
-                const updated = await repository.update(
-                    '00000000-0000-0000-0000-000000000000',
-                    { name: 'Ghost' }
-                );
+        it('should return null when updating non-existent user', async () => {
+            const updated = await repository.update('00000000-0000-0000-0000-000000000000', {
+                name: 'Ghost',
+            });
 
-                expect(updated).toBeNull();
-            }
-        );
+            expect(updated).toBeNull();
+        });
     });
 
     describe('delete', () => {
-        it.skipIf(!usersTableExists)('should delete an existing user', async () => {
+        it('should delete an existing user', async () => {
             const created = await repository.create({
                 name: 'Delete Me',
                 email: 'deleteme@example.com',
@@ -239,15 +246,10 @@ describe.skipIf(!isDbAvailable)('User Repository Integration', () => {
             expect(found).toBeNull();
         });
 
-        it.skipIf(!usersTableExists)(
-            'should return false when deleting non-existent user',
-            async () => {
-                const deleted = await repository.delete(
-                    '00000000-0000-0000-0000-000000000000'
-                );
+        it('should return false when deleting non-existent user', async () => {
+            const deleted = await repository.delete('00000000-0000-0000-0000-000000000000');
 
-                expect(deleted).toBe(false);
-            }
-        );
+            expect(deleted).toBe(false);
+        });
     });
 });
