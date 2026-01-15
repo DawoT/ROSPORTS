@@ -36,9 +36,15 @@ test-output*.log
 .env.test
 .env.production
 
-# audit/lint output files (may have encoding issues)
+# audit/lint output files
 audit-security*.json
-lint-results*.json
+lint-*.json
+integration-test.log
+order-test-results.txt
+ts-errors.log
+
+# vitest temp files
+vitest.config.mts.timestamp-*
 
 # vercel
 .vercel
