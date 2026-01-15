@@ -7,7 +7,10 @@ dotenv.config();
 
 const connectionString = process.env.DATABASE_URL?.replace(':6543', ':5432');
 
-if (!connectionString) {
+// Allow tests to skip gracefully if no database is configured
+export const isDbAvailable = !!connectionString;
+
+if (!connectionString && process.env.NODE_ENV !== 'test') {
     throw new Error('DATABASE_URL is not defined in environment');
 }
 

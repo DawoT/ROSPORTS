@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi, Mock } from 'vitest';
 import { placeOrderAction } from '@/interface-adapters/actions/checkout.actions';
-import { getTestDb, cleanupTestDb, closeTestDb } from './db-helper';
+import { getTestDb, cleanupTestDb, closeTestDb, isDbAvailable } from './db-helper';
 import { createFormData, setupCookieMock } from './action-test-helper';
 import {
     products,
@@ -29,7 +29,7 @@ vi.mock('next/navigation', () => ({
     }),
 }));
 
-describe('placeOrderAction Integration', (): void => {
+describe.skipIf(!isDbAvailable)('placeOrderAction Integration', (): void => {
     let mockCookieStore: ReturnType<typeof setupCookieMock>;
 
     beforeEach(async (): Promise<void> => {

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import { getTestDb, cleanupTestDb, closeTestDb } from './db-helper';
+import { getTestDb, cleanupTestDb, closeTestDb, isDbAvailable } from './db-helper';
 import { DrizzleCatalogRepository } from '@/infrastructure/adapters/drizzle-catalog.repository';
 import {
     products,
@@ -8,7 +8,7 @@ import {
     locations,
 } from '@/infrastructure/database/schema';
 
-describe('Catalog Repository Integration', () => {
+describe.skipIf(!isDbAvailable)('Catalog Repository Integration', () => {
     let repository: DrizzleCatalogRepository;
 
     beforeEach(async () => {

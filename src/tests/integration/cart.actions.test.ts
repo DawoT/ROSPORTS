@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach, vi, Mock } from 'vitest';
 import { addToCartAction } from '@/interface-adapters/actions/cart.actions';
-import { getTestDb, cleanupTestDb, closeTestDb } from './db-helper';
+import { getTestDb, cleanupTestDb, closeTestDb, isDbAvailable } from './db-helper';
 import { createFormData, setupCookieMock } from './action-test-helper';
 import {
     products,
@@ -17,7 +17,7 @@ vi.mock('next/headers', () => ({
     cookies: vi.fn(),
 }));
 
-describe('addToCartAction Integration', (): void => {
+describe.skipIf(!isDbAvailable)('addToCartAction Integration', (): void => {
     let mockCookieStore: ReturnType<typeof setupCookieMock>;
 
     beforeEach(async (): Promise<void> => {
